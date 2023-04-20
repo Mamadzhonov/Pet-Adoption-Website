@@ -40,9 +40,10 @@
 
                         <div style="text-align: center;">
                             <p class="text-danger">
-                                <c:out value="${loginIssue}"></c:out>
+                                <c:out value="${permitionIssue}"></c:out>
                             </p>
                         </div>
+
                         <form:form action="/login" method="POST" modelAttribute="newLogin">
 
 
