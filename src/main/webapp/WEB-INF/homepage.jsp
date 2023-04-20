@@ -44,7 +44,7 @@ pageEncoding="UTF-8"%>
       class="d-flex flex-wrap justify-content-between align-items-center mb-3 header_row"
       id="header"
     >
-      <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center mb-1">
         <img
           src="/images/animalLogo_solid.png"
           alt=""
@@ -52,17 +52,24 @@ pageEncoding="UTF-8"%>
         />
         <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
       </div>
-      <div class="d-flex">
+      <div class="d-flex align-items-center ms-auto">
         <a href="/about" class="nav-link">Home</a>
+        |
+        <a href="/about" class="nav-link">Pets</a>
+        |
         <a href="/about" class="nav-link">About</a>
+        |
+        <a href="/about" class="nav-link">Upcoming Events</a>
       </div>
       <!-- navbar: end section -->
-      <div class="d-flex trip_row flex-wrap">
+      <div class="d-flex trip_row align-items-center ms-auto">
         <a href="/trip/new" class="nav-link">+ New Pet</a>
+        |
         <a href="#" class="nav-link">
           <i class="bi bi-person-fill me-3"></i>
           {user name here}</a
         >
+        |
         <a href="/logout" class="nav-link logout">Logout</a>
       </div>
     </div>
