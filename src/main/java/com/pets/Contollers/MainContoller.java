@@ -10,4 +10,10 @@ public class MainContoller {
 	public String index() {
 		return "Index.jsp";
 	}
+	
+	// Making a test route for the landing page
+	@GetMapping("/home")
+	public String home() {
+		return "homepage.jsp";
+	}
 }
