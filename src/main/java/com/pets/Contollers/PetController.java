@@ -40,9 +40,13 @@ public class PetController {
 	}
 	
 	@GetMapping("") 
-	public String petPage(Model model, HttpSession session, @RequestParam(name="page") Integer page) {
+	public String petPage(Model model, HttpSession session, @RequestParam(name="page") Integer page, @RequestParam(name="size", required=false) Integer size) {
 		
-		model.addAttribute("petList", petService.getPetPage(page));
+		if(size == null) {
+			model.addAttribute("petList", petService.getPetPage(page));
+		} else {
+			model.addAttribute("petList", petService.getPetPage(page, size));
+		}
 		return "test.jsp";//These are test jsps I created
 	}
 	
