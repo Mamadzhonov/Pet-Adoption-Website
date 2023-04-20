@@ -27,6 +27,16 @@ public class PetService {
 		return null;
 	}
 	
+	public List<Pet> getPetPage(Integer page) {
+		int startIndex = (page - 1) * 6;
+		int lastIndex = startIndex + 6;
+		List<Pet> petList = repo.findAll();
+		
+		if((page - 1) * 6 > petList.size()) return null;
+		
+		return petList.subList(startIndex, (lastIndex > petList.size()) ? petList.size(): lastIndex);
+	}
+	
 	public Pet savePet(Pet newPet) {
 		return repo.save(newPet);
 	}

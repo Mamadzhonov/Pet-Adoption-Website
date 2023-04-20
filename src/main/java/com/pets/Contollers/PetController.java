@@ -40,9 +40,9 @@ public class PetController {
 	}
 	
 	@GetMapping("") 
-	public String petPage(Model model, HttpSession session) {
+	public String petPage(Model model, HttpSession session, @RequestParam(name="page") Integer page) {
 		
-		model.addAttribute("petList", petService.getAll());
+		model.addAttribute("petList", petService.getPetPage(page));
 		return "test.jsp";//These are test jsps I created
 	}
 	
@@ -59,6 +59,6 @@ public class PetController {
 		if(result.hasErrors()) return "/add-pet.jsp";
 		
 		petService.savePet(newPet);
-		return "redirect:/pet";
+		return "redirect:/pet?page=1";
 	}
 }
