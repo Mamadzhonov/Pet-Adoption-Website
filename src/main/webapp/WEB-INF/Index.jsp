@@ -20,6 +20,7 @@
                     crossorigin="anonymous"></script>
                     
 	            <link rel="stylesheet" href="/css/style.css">
+                <script src="/js/app.js" defer></script>
                     
 
                 <!DOCTYPE html>
@@ -33,7 +34,20 @@
                 <body>
 
 
-                    <h1>Hello, people!</h1>
+                    <h1>Hello, <c:out value="${loggedUser.userName}"></c:out></h1>
+
+                    <div>
+
+                        <button onclick="getAJoke()">Click me i will say a joke </button>
+                        <p id="title1"></p>
+
+
+                        <button onclick="getCatImage()">Click me i will show a cat</button> 
+                        <button onclick="getDogImage()">Click me i will show a dog</button> 
+
+
+                    </div>
+
                 </body>
 
                 </html>
