@@ -18,58 +18,59 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="pets")
+@Table(name = "pets")
 public class Pet {
-	
-	////	ATTRIBUTES
-	
+
+	//// ATTRIBUTES
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotEmpty(message="Name is required")
+
+	@NotEmpty(message = "Name is required")
 	private String name;
-	
-	@NotEmpty(message="Species is required")
+
+	@NotEmpty(message = "Species is required")
 	private String species;
-	
-	@NotEmpty(message="Breed is required")
+
+	@NotEmpty(message = "Breed is required")
 	private String breed;
-	
-	@NotEmpty(message="Description is required")
+
+	@NotEmpty(message = "Description is required")
 	private String description;
-	
-	@NotNull(message="Age is required")
-	@Min(value=0, message="Age can't be less than 0")
+
+	@NotNull(message = "Age is required")
+	@Min(value = 0, message = "Age can't be less than 0")
 	private Integer age;
-	
+
 	@NotNull(message="Date of Arrival required")
 	private Date dateOfArrival;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="user_id")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
 	private User user;
-	
-	@Column(updatable=false)
+
+	@Column(updatable = false)
 	private Date createdAt;
 	private Date updatedAt;
-	
+
 	@PrePersist
 	private void onCreate() {
 		this.createdAt = new Date();
 	}
-	
+
 	@PreUpdate
 	private void onUpdate() {
 		this.updatedAt = new Date();
 	}
-	
-	////	CONSTRUCTORS
 
-	public Pet() {}
+	//// CONSTRUCTORS
 
-	////	GETTERS AND SETTERS
-	
+	public Pet() {
+	}
+
+	//// GETTERS AND SETTERS
+
 	public Long getId() {
 		return id;
 	}
@@ -117,13 +118,14 @@ public class Pet {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-
-	public Date getDateOfArrival() {
-		return dateOfArrival;
+	
+	public Date getDateOfArrival() { 
+		return dateOfArrival; 
+		
 	}
-
-	public void setDateOfArrival(Date dateOfArrival) {
-		this.dateOfArrival = dateOfArrival;
+	  
+	public void setDateOfArrival(Date dateOfArrival) { 
+		this.dateOfArrival = dateOfArrival; 
 	}
 
 	public Date getCreatedAt() {
@@ -140,5 +142,13 @@ public class Pet {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

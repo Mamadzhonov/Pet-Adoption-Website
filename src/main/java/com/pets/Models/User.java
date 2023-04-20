@@ -112,4 +112,11 @@ public class User {
         this.updatedAt = new Date();
     }
 
+	public List<Pet> getPetsPosted() {
+		return petsPosted;
+	}
+
+	public void setPetsPosted(List<Pet> petsPosted) {
+		this.petsPosted = petsPosted;
+	}
 }
