@@ -41,17 +41,27 @@ public class MainContoller {
 		User loggedUser = userServ.findById(id);
 		model.addAttribute("loggedUser", loggedUser);
 
-		return "Index.jsp";
+		return "homepage.jsp";
 	}
 
 	
 	// LANDING PAGE
 	// Making a test route for the landing page
-	@GetMapping("/homepage")
-	public String home() {
+	@GetMapping("/api")
+	public String homepage(HttpSession session, Model model, RedirectAttributes redirect) {
 		// leaving room for model attributes + redirectAttribute error return (if user is not logged in)
-		
-		return "homepage.jsp";
+		model.addAttribute("newLogin", new LoginUser());
+
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/login";
+		}
+
+		Long id = (Long) session.getAttribute("loggedUser");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
+
+		return "Index.jsp";
 	}
 	
 	
