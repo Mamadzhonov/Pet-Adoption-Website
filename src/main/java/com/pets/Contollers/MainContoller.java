@@ -38,6 +38,13 @@ public class MainContoller {
 		return "Index.jsp";
 	}
 
+	
+	// Making a test route for the landing page
+	@GetMapping("/homepage")
+	public String home() {
+		return "homepage.jsp";
+}
+
 	@GetMapping("/register")
 	public String registration(Model model) {
 		model.addAttribute("newUser", new User());
