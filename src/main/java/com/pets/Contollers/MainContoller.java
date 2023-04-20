@@ -45,12 +45,16 @@ public class MainContoller {
 	}
 
 	
+	// LANDING PAGE
 	// Making a test route for the landing page
 	@GetMapping("/homepage")
 	public String home() {
+		// leaving room for model attributes + redirectAttribute error return (if user is not logged in)
+		
 		return "homepage.jsp";
-}
-
+	}
+	
+	
 	@GetMapping("/register")
 	public String registration(Model model, HttpSession session, RedirectAttributes redirect) {
 		model.addAttribute("newUser", new User());
