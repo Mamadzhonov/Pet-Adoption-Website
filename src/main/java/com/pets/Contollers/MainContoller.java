@@ -29,11 +29,17 @@ public class MainContoller {
 
 	// Making a test route for the landing page
 	@GetMapping("/home")
-	public String home(HttpSession session, Model model) {
-		Long id = (Long) session.getAttribute("userId");
+	public String home(HttpSession session, Model model, RedirectAttributes redirect) {
+		model.addAttribute("newLogin", new LoginUser());
+
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/login";
+		}
+
+		Long id = (Long) session.getAttribute("loggedUser");
 		User loggedUser = userServ.findById(id);
 		model.addAttribute("loggedUser", loggedUser);
-
 
 		return "Index.jsp";
 	}
@@ -46,7 +52,7 @@ public class MainContoller {
 }
 
 	@GetMapping("/register")
-	public String registration(Model model) {
+	public String registration(Model model, HttpSession session, RedirectAttributes redirect) {
 		model.addAttribute("newUser", new User());
 		return "Registration.jsp";
 	}
@@ -71,9 +77,9 @@ public class MainContoller {
 		User newUser = userServ.register(user, result);
 		if (newUser == null) {
 			model.addAttribute("newLogin", new LoginUser());
-			return "Index.jsp";
+			return "Registration.jsp";
 		}
-		session.setAttribute("userId", user.getId());
+		session.setAttribute("loggedUser", user.getId());
 
 		return "redirect:/home";
 	}
@@ -94,7 +100,13 @@ public class MainContoller {
 			redirect.addFlashAttribute("loginIssue", "Login or Password is invalid!");
 			return "redirect:/login";
 		}
-		session.setAttribute("userId", user.getId());
+		session.setAttribute("loggedUser", user.getId());
 		return "redirect:/home";
+	}
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.setAttribute("loggedUser", null);
+		return "redirect:/";
 	}
 }
