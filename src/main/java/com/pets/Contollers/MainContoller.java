@@ -39,13 +39,15 @@ public class MainContoller {
 	}
 
 	
-	// Making a test route for the landing page
-	@GetMapping("/home")
+	// LANDING PAGE
+	@GetMapping("/homepage")
 	public String home() {
+		// leaving room for model attributes + redirectAttribute error return (if user is not logged in)
+		
 		return "homepage.jsp";
-}
-
-
+	}
+	
+	
 	@GetMapping("/register")
 	public String registration(Model model) {
 		model.addAttribute("newUser", new User());
@@ -97,6 +99,5 @@ public class MainContoller {
 		}
 		session.setAttribute("userId", user.getId());
 		return "redirect:/home";
->>>>>>> d23efb567043513840bfffea10acb013e5572c57
 	}
 }
