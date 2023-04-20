@@ -26,11 +26,16 @@ public class MainContoller {
 	public String index() {
 		return "redirect:/register";
 	}
-	
+
 	// Making a test route for the landing page
 	@GetMapping("/home")
-	public String home() {
-		return "homepage.jsp";
+	public String home(HttpSession session, Model model) {
+		Long id = (Long) session.getAttribute("userId");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
+
+
+		return "Index.jsp";
 	}
 
 	@GetMapping("/register")
@@ -63,7 +68,7 @@ public class MainContoller {
 		}
 		session.setAttribute("userId", user.getId());
 
-		return "redirect:/Index.jsp";
+		return "redirect:/home";
 	}
 
 	@GetMapping("/login")
@@ -83,6 +88,6 @@ public class MainContoller {
 			return "redirect:/login";
 		}
 		session.setAttribute("userId", user.getId());
-		return "redirect:/Index.jsp";
+		return "redirect:/home";
 	}
 }
