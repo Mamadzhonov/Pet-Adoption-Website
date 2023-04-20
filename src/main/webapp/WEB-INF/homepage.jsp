@@ -20,15 +20,18 @@ pageEncoding="UTF-8"%>
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/css/style.css" />
-    <!-- change to match your file/naming structure -->
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <!-- change to match your file/naming structure -->
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;400;500;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;800&display=swap"
       rel="stylesheet"
     />
     <!--  -->
@@ -40,39 +43,267 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <!-- NAV BAR -->
-    <div
-      class="d-flex flex-wrap justify-content-between align-items-center mb-3 header_row"
-      id="header"
-    >
-      <div class="d-flex align-items-center mb-1">
-        <img
-          src="/images/animalLogo_solid.png"
-          alt=""
-          style="height: 30px; padding-right: 10px; padding-bottom: 3px"
-        />
-        <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
+    <div class="top-half p-3">
+      <div
+        class="d-flex flex-wrap justify-content-between align-items-center mb-3"
+      >
+        <div class="d-flex align-items-center mb-1 nav-links">
+          <img
+            src="/images/animalLogo_solid.png"
+            alt=""
+            style="height: 30px; padding-right: 10px; padding-bottom: 3px"
+          />
+          <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
+        </div>
+        <div class="d-flex align-items-center ms-auto">
+          <a href="/about" class="nav-link">Home</a>
+          |
+          <a href="/about" class="nav-link">Pets</a>
+          |
+          <a href="/about" class="nav-link">About</a>
+          |
+          <a href="/about" class="nav-link">Upcoming Events</a>
+        </div>
+        <!-- navbar: end section -->
+        <div class="dropdown" id="dropdown">
+          <a
+            class="btn dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <!-- user icon -->
+            <i class="bi bi-person-fill me-3"></i>
+            <!-- will be replacing with {user.name} -->
+            <c:out value="${loggedUser.userName}"></c:out>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
+            <li><a class="dropdown-item" href="/pet/new">+ New Pet</a></li>
+            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          </ul>
+        </div>
+        <!--  -->
       </div>
-      <div class="d-flex align-items-center ms-auto">
-        <a href="/about" class="nav-link">Home</a>
-        |
-        <a href="/about" class="nav-link">Pets</a>
-        |
-        <a href="/about" class="nav-link">About</a>
-        |
-        <a href="/about" class="nav-link">Upcoming Events</a>
-      </div>
-      <!-- navbar: end section -->
-      <div class="d-flex trip_row align-items-center ms-auto">
-        <a href="/trip/new" class="nav-link">+ New Pet</a>
-        |
-        <a href="#" class="nav-link">
-          <i class="bi bi-person-fill me-3"></i>
-          {user name here}</a
-        >
-        |
-        <a href="/logout" class="nav-link logout">Logout</a>
+      <!--  ADOPTION BLOCK -->
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="col-4">
+          <h3>Adopt and five a pet a second chance.</h3>
+          <a href="" class="btn">Adopt a pet today!</a>
+        </div>
+        <div class="mb-3 col-8 p-3 text-center">
+          <img src="/images/pet_shelter.png" alt="" style="width: 700px" />
+        </div>
       </div>
     </div>
     <!--  -->
+    <!-- EVENT CAROUSEL  -->
+    <!-- will be adding more event info later on once I research more on carousel -->
+    <div class="event-row p-3">
+      <div
+        id="carouselExampleControls"
+        class="carousel slide px-4"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active d-flex">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">
+                  Card subtitle
+                </h6>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">
+                  Card subtitle
+                </h6>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">
+                  Card subtitle
+                </h6>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="carousel-item">
+                  <img src="..." class="d-block w-100" alt="..." />
+                </div>
+                <div class="carousel-item">
+                  <img src="..." class="d-block w-100" alt="..." />
+                </div> -->
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <!-- BOTTOM HALF CONTAINER AFTER CAROUSEL -->
+    <div class="bottom-half p-3">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="mb-3 col-7 p-3">
+          <img src="/images/pet_shelter2.png" alt="" style="width: 500px" />
+        </div>
+        <div class="col-5">
+          <h3>Fostering can bring more love into your home today!</h3>
+          <a href="" class="btn">Interested in fostering?</a>
+        </div>
+      </div>
+      <div class="footer">
+        <footer class="py-5">
+          <div class="row">
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">Home</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">Features</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">Pricing</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">FAQs</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">About</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">Home</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">Features</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">Pricing</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">FAQs</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">About</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">Home</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">Features</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">Pricing</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">FAQs</a>
+                </li>
+                <li class="nav-item mb-2">
+                  <a href="#" class="nav-link p-0 text-muted">About</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-md-5 offset-md-1 mb-3">
+              <form>
+                <h5>Subscribe to our newsletter</h5>
+                <p>Monthly digest of what's new and exciting from us.</p>
+                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                  <label for="newsletter1" class="visually-hidden"
+                    >Email address</label
+                  >
+                  <input
+                    id="newsletter1"
+                    type="text"
+                    class="form-control"
+                    placeholder="Email address"
+                  />
+                  <button class="btn btn-primary" type="button">
+                    Subscribe
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div
+            class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top"
+          >
+            <p>© 2022 Company, Inc. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+              <li class="ms-3">
+                <a class="link-dark" href="#"
+                  ><svg class="bi" width="24" height="24">
+                    <use xlink:href="#twitter"></use></svg
+                ></a>
+              </li>
+              <li class="ms-3">
+                <a class="link-dark" href="#"
+                  ><svg class="bi" width="24" height="24">
+                    <use xlink:href="#instagram"></use></svg
+                ></a>
+              </li>
+              <li class="ms-3">
+                <a class="link-dark" href="#"
+                  ><svg class="bi" width="24" height="24">
+                    <use xlink:href="#facebook"></use></svg
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+    </div>
   </body>
 </html>
