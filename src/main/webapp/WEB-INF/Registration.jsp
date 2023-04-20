@@ -40,6 +40,10 @@
                         <p class="text-danger">
                             <c:out value="${emailExist}"></c:out>
                         </p>
+                        
+                        <p class="text-danger">
+                            <c:out value="${permitionIssue}"></c:out>
+                        </p>
                     </div>
                     <form:form action="/register" method="POST" modelAttribute="newUser">
 
