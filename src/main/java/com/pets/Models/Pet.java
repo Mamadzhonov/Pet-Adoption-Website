@@ -156,4 +156,20 @@ public class Pet {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getApiUrlOfPicture() {
+		return apiUrlOfPicture;
+	}
+
+	public void setApiUrlOfPicture(String apiUrlOfPicture) {
+		this.apiUrlOfPicture = apiUrlOfPicture;
+	}
 }

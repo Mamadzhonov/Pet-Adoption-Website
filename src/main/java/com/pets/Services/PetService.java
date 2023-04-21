@@ -86,6 +86,7 @@ public class PetService {
 			if(filterString.contains("sex")) {
 				String filterSex = filterString.substring(filterString.indexOf(":") + 1);
 				filteredPetIdList.addAll(getIdListFromPetList(repo.findBySexIs(filterSex)));
+				filterCount++;
 			}
 		}
 		
