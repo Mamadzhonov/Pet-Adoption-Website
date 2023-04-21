@@ -3,6 +3,18 @@
 body {
 	font-family: 'Unbounded', cursive;
 	background-color: #f7f5ea;
+	display:flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+main {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	justify-content: space-bewteen;
+}
+.card{
+	background-color:#f7f5ea;
 }
 .btn {
 	background-color:#FFA400;
@@ -33,6 +45,7 @@ body {
 }
 .dropdown-item {
 	font-weight: 300;
+	font-size: 10pt;
 }
 .carousel-control-prev{
 	background-color:#e1e1e1;
@@ -57,4 +70,14 @@ body {
 }
 .event-row{
 	background-color: #FFC494;
+}
+.row-gapping{
+	gap:15px;
+}
+ul, li {
+	list-style-type: none;
+}
+.footer {
+    bottom: 0;
+    width: 100%;
 }
