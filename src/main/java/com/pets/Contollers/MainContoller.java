@@ -123,4 +123,21 @@ public class MainContoller {
 		session.setAttribute("loggedUser", null);
 		return "redirect:/";
 	}
+	
+//	about page
+	@GetMapping("/about")
+	public String about(HttpSession session, Model model, RedirectAttributes redirect) {
+		model.addAttribute("newLogin", new LoginUser());
+
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/login";
+		}
+
+		Long id = (Long) session.getAttribute("loggedUser");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
+
+		return "about.jsp";
+	}
 }
