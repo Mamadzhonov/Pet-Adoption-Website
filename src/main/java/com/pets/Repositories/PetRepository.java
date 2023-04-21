@@ -10,4 +10,7 @@ import com.pets.Models.Pet;
 @Repository
 public interface PetRepository extends CrudRepository<Pet, Long>{
 	public List<Pet> findAll();
+	public List<Pet> findBySpecies(String species);
+	public List<Pet> findByAgeGreaterThan(Integer age);
+	public List<Pet> findByAgeLessThan(Integer age);
 }
