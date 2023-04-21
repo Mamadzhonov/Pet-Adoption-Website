@@ -120,7 +120,7 @@ public class PetController {
 	 * 	Needs to be reworked to have the form's inputs persist since they refresh at every redirection, but it still works otherwise
 	 * 	The name attribute of the @RequestParam()s below need to match the names on the form input fields
 	 * 	The form I was testing with was formatted like so
-	 * 		-Species filters are checkboxes
+	 * 		-Species filters are checkboxes (No need for checkboxes to have values)
 	 * 		-Age filters are number inputs
 	 * 		-Sex filter is a select
 	 * 
