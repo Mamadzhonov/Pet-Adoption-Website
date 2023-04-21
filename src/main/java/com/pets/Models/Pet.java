@@ -42,6 +42,11 @@ public class Pet {
 	@NotNull(message = "Age is required")
 	@Min(value = 0, message = "Age can't be less than 0")
 	private Integer age;
+	
+	@NotEmpty(message = "Gender is required")
+	private String sex;
+	
+	private String apiUrlOfPicture;  //Just gonna leave this here with no validations until we figure it out entirely
 
 	@NotNull(message="Date of Arrival required")
 	private Date dateOfArrival;

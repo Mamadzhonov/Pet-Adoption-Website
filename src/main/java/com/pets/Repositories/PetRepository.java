@@ -13,4 +13,5 @@ public interface PetRepository extends CrudRepository<Pet, Long>{
 	public List<Pet> findBySpecies(String species);
 	public List<Pet> findByAgeGreaterThan(Integer age);
 	public List<Pet> findByAgeLessThan(Integer age);
+	public List<Pet> findBySexIs(String sex);
 }

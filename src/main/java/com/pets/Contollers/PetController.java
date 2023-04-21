@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import com.pets.Models.Pet;
 import com.pets.Services.PetService;
 
@@ -75,7 +74,8 @@ public class PetController {
 	@PostMapping("/filter")
 	public String filterPets(@RequestParam Map<String, String> allParams, 
 			@RequestParam(name="low-age", required=false) Integer lowAge,
-			@RequestParam(name="high-age", required=false) Integer highAge) {
+			@RequestParam(name="high-age", required=false) Integer highAge,
+			@RequestParam(name="sex", required=false) String sex) {
 		
 		String filter = "";
 		for(String key : allParams.keySet()) {
@@ -89,8 +89,10 @@ public class PetController {
 		if(highAge != null) {
 			filter = filter.concat("&filter=highAge:" + highAge);
 		}
+		if(sex != null) {
+			filter = filter.concat("&filter=sex:" + sex);
+		}
 		System.out.println("Filter: " + filter);
-		filter = filter.substring(0, filter.length());
 		return "redirect:/pet?page=1".concat(filter);
 	}
 }

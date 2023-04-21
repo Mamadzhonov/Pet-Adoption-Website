@@ -76,18 +76,18 @@ public class PetService {
 			if(filterString.contains("lowAge")) {
 				int lowAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
 				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeGreaterThan(lowAge)));
-				System.out.println("Low age: " + lowAge);
 				filterCount++;
 			}
 			if(filterString.contains("highAge")) {
 				int highAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
 				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeLessThan(highAge)));
-				System.out.println("High age: " + highAge);
 				filterCount++;
 			}
+			if(filterString.contains("sex")) {
+				String filterSex = filterString.substring(filterString.indexOf(":") + 1);
+				filteredPetIdList.addAll(getIdListFromPetList(repo.findBySexIs(filterSex)));
+			}
 		}
-		
-		System.out.println("Filter Count: " + filterCount);
 		
 		return combineFilteredLists(filteredPetIdList, filterCount);		
 	}
