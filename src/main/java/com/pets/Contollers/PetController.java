@@ -90,7 +90,9 @@ public class PetController {
 			filter = filter.concat("&filter=highAge:" + highAge);
 		}
 		if(sex != null) {
-			filter = filter.concat("&filter=sex:" + sex);
+			if(!sex.equals("None")) {
+				filter = filter.concat("&filter=sex:" + sex);
+			}
 		}
 		System.out.println("Filter: " + filter);
 		return "redirect:/pet?page=1".concat(filter);
