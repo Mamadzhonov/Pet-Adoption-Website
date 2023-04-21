@@ -19,16 +19,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pets.Models.Pet;
+import com.pets.Models.User;
 import com.pets.Services.PetService;
+import com.pets.Services.UserService;
 
 @Controller
 @RequestMapping("/pet")
 public class PetController {
 	
 	////	SERVICES	
-	
+	@Autowired
+	private UserService userServ;
 	@Autowired
 	PetService petService;
 	
@@ -51,10 +55,18 @@ public class PetController {
 	}
 	
 	@GetMapping("/add")
-	public String addPet(Model model, HttpSession session) {
-		
+	public String addPet(Model model, HttpSession session, RedirectAttributes redirect) {
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/login";
+		}
+
+		Long id = (Long) session.getAttribute("loggedUser");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("newPet", new Pet());
-		return "add-pet.jsp";
+//		return "add-pet.jsp";
+		return "addPet.jsp";
 	}
 	
 	@PostMapping("/add") 
