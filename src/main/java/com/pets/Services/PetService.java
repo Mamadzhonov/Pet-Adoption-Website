@@ -123,6 +123,7 @@ public class PetService {
 	 * 		If for every filter you store every pet id that passes it, then the pets that pass all of the filters should have an id for every filter.
 	 * 		-	4 filters = 4 ids. If there is less than 4 ids for a pet, then it doesn't pass. There should never be more
 	 * 		-	2 filters = 2 ids.
+	 * 		- 	4 filters and 2 pet ids means that pet doesn't pass
 	 */
 	private List<Pet> combineFilteredLists(List<Long> idList, int filterCount) {
 		Long currentId;
