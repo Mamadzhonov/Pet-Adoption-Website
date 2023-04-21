@@ -1,6 +1,9 @@
 HELP.md
+<<<<<<< HEAD
 .gitignore
-*/application.properties
+=======
+>>>>>>> 1f14d57f21a05f41c84252e9a211204ebd3a8447
+**/application.properties
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
