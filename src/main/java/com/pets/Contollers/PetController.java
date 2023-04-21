@@ -3,6 +3,8 @@ package com.pets.Contollers;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -40,12 +42,15 @@ public class PetController {
 	}
 	
 	@GetMapping("") 
-	public String petPage(Model model, HttpSession session, @RequestParam(name="page") Integer page, @RequestParam(name="size", required=false) Integer size) {
+	public String petPage(Model model, HttpSession session, 
+			@RequestParam(name="page") Integer page, 
+			@RequestParam(name="size", required=false) Integer size, 
+			@RequestParam(name="filter", required=false) List<String> filter) {
 		
 		if(size == null) {
-			model.addAttribute("petList", petService.getPetPage(page));
+			model.addAttribute("petList", petService.getPetPage(page, filter));
 		} else {
-			model.addAttribute("petList", petService.getPetPage(page, size));
+			model.addAttribute("petList", petService.getPetPage(page, size, filter));
 		}
 		return "test.jsp";//These are test jsps I created
 	}
@@ -64,5 +69,30 @@ public class PetController {
 		
 		petService.savePet(newPet);
 		return "redirect:/pet?page=1";
+	}
+	
+	@PostMapping("/filter")
+	public String filterPets(@RequestParam Map<String, String> allParams, 
+			@RequestParam(name="low-age", required=false) Integer lowAge,
+			@RequestParam(name="high-age", required=false) Integer highAge,
+			@RequestParam(name="sex", required=false) String sex) {
+		
+		String filter = "";
+		for(String key : allParams.keySet()) {
+			if(allParams.get(key).equals("on")) {
+				filter = filter.concat("&filter="+key);
+			}
+		}
+		if(lowAge != null) {
+			filter = filter.concat("&filter=lowAge:" + lowAge);
+		}
+		if(highAge != null) {
+			filter = filter.concat("&filter=highAge:" + highAge);
+		}
+		if(sex != null) {
+			filter = filter.concat("&filter=sex:" + sex);
+		}
+		System.out.println("Filter: " + filter);
+		return "redirect:/pet?page=1".concat(filter);
 	}
 }
