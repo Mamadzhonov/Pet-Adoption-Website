@@ -28,6 +28,12 @@ public class PetService {
 		return null;
 	}
 	
+	/*	This is the function called by the Pet Adoption Get Routing for retrieving the necessary page
+	 * 	It uses the page number and size to determine the indices that reference the specific page from the list
+	 * 	If there are filters applied, then it will use a filtered list (see getFilteredPets() below), otherwise it uses a list of all pets
+	 * 	If the page that is requested is out of the bounds of the list, the function returns null
+	 * 	It then returns a sublist of the source list
+	 */
 	public List<Pet> getPetPage(Integer page, Integer size, List<String> filter) {
 		int startIndex = (page - 1) * size;
 		int lastIndex = startIndex + size;
@@ -39,6 +45,7 @@ public class PetService {
 		return petList.subList(startIndex, (lastIndex > petList.size()) ? petList.size(): lastIndex);
 	}
 	
+	//Overloaded function that doesn't accept size input, so it defaults to 6
 	public List<Pet> getPetPage(Integer page, List<String> filter) {
 		return getPetPage(page, 6, filter);
 	}
@@ -59,6 +66,13 @@ public class PetService {
 		repo.deleteById(id);
 	}
 	
+	
+	/*	This is my headache
+	 * 	JK...ish. This function returns a list of pets with the filters applied
+	 * 	It loops through each filter and parses it to determine what kind of filter it is
+	 * 	Then, for each filter, it adds all of the pet ids that pass that filter to a list of ids
+	 * 	Then that list of ids is consolidated by the combineFilteredLists() function below
+	 */
 	private List<Pet> getFilteredPets(List<String> filter) {
 		int filterCount = 0;
 		boolean isFilteredBySpecies = false;
@@ -93,6 +107,8 @@ public class PetService {
 		return combineFilteredLists(filteredPetIdList, filterCount);		
 	}
 	
+	//This function just takes a list of pets and returns a list of all of their ids
+	//I couldn't figure out how to get the repo to return just the ids and not the entire row of data
 	private List<Long> getIdListFromPetList(List<Pet> petList) {
 		List<Long> idList = new ArrayList<Long>();
 		for(Pet pet : petList) {
@@ -102,6 +118,12 @@ public class PetService {
 		return idList;
 	}
 	
+	/*	This function takes a list of ids as well as a count of filters being applied and returns a consolidated list of pet ids
+	 * 	It essentially works like this
+	 * 		If for every filter you store every pet id that passes it, then the pets that pass all of the filters should have an id for every filter.
+	 * 		-	4 filters = 4 ids. If there is less than 4 ids for a pet, then it doesn't pass. There should never be more
+	 * 		-	2 filters = 2 ids.
+	 */
 	private List<Pet> combineFilteredLists(List<Long> idList, int filterCount) {
 		Long currentId;
 		int count = 0;
@@ -124,6 +146,8 @@ public class PetService {
 		return petList;
 	}
 	
+	//Idk what species we are going to have exactly
+	//This can be easily adjusted to account for more or different species
 	private boolean isSpecies(String filterString) {
 		if(filterString.equals("Dog") ||
 			filterString.equals("Cat") ||
