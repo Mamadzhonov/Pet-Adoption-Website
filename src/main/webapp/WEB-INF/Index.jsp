@@ -35,17 +35,21 @@
 
 
                     <h1>Hello, <c:out value="${loggedUser.userName}"></c:out></h1>
-
+                    <div style="text-align: center;">
+                        <p class="text-danger">
+                            <c:out value="${permitionIssue}"></c:out>
+                        </p>
+                    </div>
                     <div>
 
                         <button onclick="getAJoke()">Click me i will say a joke </button>
                         <p id="title1"></p>
-
+                        
 
                         <button onclick="getCatImage()">Click me i will show a cat</button> 
                         <button onclick="getDogImage()">Click me i will show a dog</button> 
 
-
+                        <a class="btn btn-danger" href="/logout">Logout</a>
                     </div>
 
                 </body>

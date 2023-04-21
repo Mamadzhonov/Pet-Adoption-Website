@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+body {
+	font-family: 'Unbounded', cursive;
+	background-color: #f7f5ea;
+}
+.btn {
+	background-color:#FFA400;
+	color: #263238;
+}
+.btn:hover {
+	color: #f7f5ea;
+}
+.nav-link{
+	font-family: 'Unbounded', cursive;
+	font-weight:	300;
+	color: #263238;
+}
+.nav-link:hover{
+	color: #FFA400;
+}
+#logo {
+	font-family: 'Unbounded', cursive;
+	font-weight: 500;
+}
+.dropdown-toggle {
+	font-family: 'Unbounded', cursive;
+	font-weight: 300;
+	color: #263238;
+}
+.dropdown-toggle:hover{
+	color:white;
+}
+.dropdown-item {
+	font-weight: 300;
+}
+.carousel-control-prev{
+	background-color:#e1e1e1;
+	width:3vh;
+	height:3vh;
+	border-radius:50%;
+	top:50%;
+	transform: translateY(-50%);
+	margin-left:-10px;
+}
+.carousel-control-next{
+	background-color:#e1e1e1;
+	width:3vh;
+	height:3vh;
+	border-radius:50%;
+	top:50%;
+	transform: translateY(-50%);
+	margin-right:-10px;
+}
+.carousel-item{
+	gap:20px;
+}
+.event-row{
+	background-color: #FFC494;
+}
