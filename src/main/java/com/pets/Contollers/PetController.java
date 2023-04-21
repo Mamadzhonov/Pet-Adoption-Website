@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pets.Models.Pet;
+import com.pets.Models.User;
 import com.pets.Services.PetService;
+import com.pets.Services.UserService;
 
 @Controller
 @RequestMapping("/pet")
@@ -34,6 +36,13 @@ public class PetController {
 	@Autowired
 	PetService petService;
 	
+	@Autowired
+	UserService userService;
+	
+	//This allows the "Date of Arrival" attribute to be bound to the Pet object
+	//Otherwise Spring JPA doesn't know how to convert it to a Java Date object
+	//I definitely did not figure this out I found it on StackOverflow
+	//https://stackoverflow.com/questions/43786382/submit-input-type-date-in-spring-mvc-application
 	@InitBinder
 	public void dateBinder(WebDataBinder binder) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-d");
@@ -41,11 +50,36 @@ public class PetController {
 		binder.registerCustomEditor(Date.class, dateEditor);
 	}
 	
+	/*	This is the Pet Adoption Page "Get" Route
+	*	It receives URL parameters and adds a list of pets, and the loggedUser to the model
+	*			---URL Parameters---
+	*		-Page-
+	*	This parameter is used so the service knows which page to return in regards to pagination
+	*	There is protection against choosing a page higher than what's available, but it simply returns a null list
+	*	URL: http://localhost:8080/pet?page=1		--Returns the 1st page with a default of 6 pets
+	*
+	*		-Size-
+	*	This parameter is optional, so it can be omitted in the URL
+	*	If used it will determine how many pets show up on each page
+	*	If omitted it defaults to a size of 6
+	*	URL: http://localhost:8080/pet?page=1&size=4     --Return the 1st page with 4 pets
+	*
+	*		-Filter-
+	*	This parameter is also optional, and when omitted returns all of the pets in the db
+	*	These parameters are added when the "filter form" is submitted from this page (see @PostMapping('/filter') below)
+	*	URL: http://localhost:8080/pet?page=2&filter=Dog&filter=lowAge:3&filter=highAge:8&filter=sex:Male	--Returns the 2nd page of male dogs that are between the ages of 3 and 8	
+	*/
 	@GetMapping("") 
 	public String petPage(Model model, HttpSession session, 
 			@RequestParam(name="page") Integer page, 
 			@RequestParam(name="size", required=false) Integer size, 
 			@RequestParam(name="filter", required=false) List<String> filter) {
+		
+		if(session.getAttribute("loggedUser") == null) return "redirect:/login";
+		
+		User loggedUser = userService.findById((Long) session.getAttribute("loggedUser"));
+		
+		model.addAttribute("loggedUser", loggedUser);
 		
 		if(size == null) {
 			model.addAttribute("petList", petService.getPetPage(page, filter));
@@ -71,6 +105,17 @@ public class PetController {
 		return "redirect:/pet?page=1";
 	}
 	
+	/*	This is the post mapping for the "filter form" from the Pet Adoption page
+	 * 	It reads the form inputs and adds the filter parameters the Pet Adoption page URL before redirecting back there
+	 * 	Needs to be reworked to have the form's inputs persist since they refresh at every redirection, but it still works otherwise
+	 * 	The name attribute of the @RequestParam()s below need to match the names on the form input fields
+	 * 	The form I was testing with was formatted like so
+	 * 		-Species filters are checkboxes
+	 * 		-Age filters are number inputs
+	 * 		-Sex filter is a select
+	 * 
+	 * 	This function just parses the form data and concatenates it to the URL before redirecting to the pet adoption page
+	 */
 	@PostMapping("/filter")
 	public String filterPets(@RequestParam Map<String, String> allParams, 
 			@RequestParam(name="low-age", required=false) Integer lowAge,
