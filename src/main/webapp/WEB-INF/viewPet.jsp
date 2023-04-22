@@ -99,6 +99,7 @@ pageEncoding="UTF-8"%>
           <!-- might be a nice touch to add the species icon next to the name -->
           <div class="card p-4 form-card mb-3">
             <div class="d-flex align-items-center mb-2">
+              <!-- will need a c:if for icon options -->
               <img src="/images/cat_icon.png" alt="" style="height: 45px" />
               <h1 class="mx-2">{Pet Name}</h1>
             </div>

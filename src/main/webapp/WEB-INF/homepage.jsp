@@ -95,13 +95,19 @@ pageEncoding="UTF-8"%>
         <!--  -->
       </div>
       <!--  ADOPTION BLOCK -->
-      <div class="d-flex align-items-center justify-content-between">
+      <div
+        class="d-flex align-items-center justify-content-between px-3 pb-3 pt-0"
+      >
         <div class="col-4">
           <h3 class="mb-2">Adopt and five a pet a second chance.</h3>
-          <a href="" class="btn">Adopt a pet today!</a>
+          <a href="/pet" class="btn">Adopt a pet today!</a>
         </div>
-        <div class="mb-3 col-8 p-4 text-center">
-          <img src="/images/pet_shelter.png" alt="" style="width: 100%" />
+        <div class="mb-3 col-8 p-2 text-center">
+          <img
+            src="/images/pet_shelter_withPerson.png"
+            alt=""
+            style="width: 100%"
+          />
         </div>
       </div>
     </div>
@@ -186,13 +192,17 @@ pageEncoding="UTF-8"%>
     </div>
     <!-- BOTTOM HALF CONTAINER AFTER CAROUSEL -->
     <div class="bottom-half pt-3 pb-0 mb-0">
-      <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="d-flex align-items-center justify-content-between mb-4 pb-4">
         <div class="col-7 p-3">
-          <img src="/images/pet_shelter2.png" alt="" style="width: 100%" />
+          <img
+            src="/images/foster_landingPage.png"
+            alt=""
+            style="width: 100%"
+          />
         </div>
         <div class="col-5">
           <h3>Fostering can bring more love into your home today!</h3>
-          <a href="" class="btn">Interested in fostering?</a>
+          <a href="/pet" class="btn">Interested in fostering?</a>
         </div>
       </div>
       <div class="footer px-4 mt-3">

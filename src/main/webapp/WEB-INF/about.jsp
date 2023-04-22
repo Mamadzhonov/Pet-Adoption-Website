@@ -97,8 +97,9 @@ pageEncoding="UTF-8"%>
           <div class="p-3">
             <h1>About This Project</h1>
             <hr />
-            <div class="d-flex flex-wrap mb-3 row-gapping">
-              <div class="card col-sm p-3">
+            <div class="d-flex flex-wrap mb-3 row-gapping flex-wrap">
+              <div class="card form-card col-sm p-3">
+                <!-- LEFT COLUMN -->
                 <h4>Project summary</h4>
                 <p>
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -106,8 +107,20 @@ pageEncoding="UTF-8"%>
                   perspiciatis rem labore ex et officia adipisci libero nostrum
                   eos a accusantium nisi, vitae doloribus sed.
                 </p>
+                <div class="d-flex align-items-center">
+                  <!-- GITHUB REPO LINK -->
+                  <a
+                    href="https://github.com/Mamadzhonov/Pet-Adoption-Website"
+                    class="p-0 nav-link"
+                    style="font-size: 40px"
+                    ><i class="bi bi-github"></i
+                  ></a>
+                  <i class="bi bi-arrow-left pl-2 pr-1"></i>
+                  <h4 class="my-0">Come checkout our code!</h4>
+                </div>
               </div>
-              <div class="card p-3">
+              <!-- RIGHT COL -->
+              <div class="card form-card p-3">
                 <h4>Members:</h4>
                 <p class="text-center p-0 m-0">{member name here}</p>
                 <p class="text-center p-0 m-0">{member name here}</p>
@@ -115,6 +128,18 @@ pageEncoding="UTF-8"%>
                 <p class="text-center p-0 m-0">{member name here}</p>
                 <p class="text-center p-0 m-0">{member name here}</p>
               </div>
+            </div>
+            <div class="card form-card p-3">
+              <h4>Credits and resources</h4>
+              <p>
+                Images and image decoration assets resourced from
+                <a href="canva.com">Canva</a>
+              </p>
+              <p>
+                Icons and logo resourced from
+                <a href="https://www.flaticon.com/">FlatIcon</a> and
+                <a href="https://icons.getbootstrap.com/">Bootstrap</a>
+              </p>
             </div>
           </div>
         </div>
