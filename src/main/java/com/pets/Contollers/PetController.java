@@ -38,8 +38,6 @@ public class PetController {
 	@Autowired
 	PetService petService;
 	
-	@Autowired
-	UserService userService;
 	
 	//This allows the "Date of Arrival" attribute to be bound to the Pet object
 	//Otherwise Spring JPA doesn't know how to convert it to a Java Date object
@@ -72,14 +70,17 @@ public class PetController {
 	*	URL: http://localhost:8080/pet?page=2&filter=Dog&filter=lowAge:3&filter=highAge:8&filter=sex:Male	--Returns the 2nd page of male dogs that are between the ages of 3 and 8	
 	*/
 	@GetMapping("") 
-	public String petPage(Model model, HttpSession session, 
+	public String petPage(Model model, HttpSession session, RedirectAttributes redirect,
 			@RequestParam(name="page") Integer page, 
 			@RequestParam(name="size", required=false) Integer size, 
 			@RequestParam(name="filter", required=false) List<String> filter) {
 		
-		if(session.getAttribute("loggedUser") == null) return "redirect:/login";
+		if(session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/login";
+		}
 		
-		User loggedUser = userService.findById((Long) session.getAttribute("loggedUser"));
+		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
 		
 		model.addAttribute("loggedUser", loggedUser);
 		
@@ -88,7 +89,7 @@ public class PetController {
 		} else {
 			model.addAttribute("petList", petService.getPetPage(page, size, filter));
 		}
-		return "test.jsp";//These are test jsps I created
+		return "";//Replace this with the availablePets.jsp when it's added
 	}
 	
 	
@@ -188,4 +189,21 @@ public class PetController {
 //		model.addAttribute("pet", petService.findById(id));
 		return "viewPet.jsp";
 	}
+	
+	
+	//----------		Inquiry Mappings		----------//
+	
+	@GetMapping("/inquire/{id}")
+	public String showInquiryDetails(Model model, HttpSession session, RedirectAttributes redirect) {
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/login";
+		}
+		
+		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
+		model.addAttribute("loggedUser", loggedUser);
+		
+		return "";//Put the jsp file here when complete.
+	}
+	
 }
