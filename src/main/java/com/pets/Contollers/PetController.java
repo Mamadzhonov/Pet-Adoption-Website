@@ -109,10 +109,13 @@ public class PetController {
 	}
 	
 	@PostMapping("/add") 
-	public String savePet(@Valid @ModelAttribute("newPet") Pet newPet, BindingResult result) {		
-		
-
-		if(result.hasErrors()) return "/add-pet.jsp";
+	public String savePet(@Valid @ModelAttribute("newPet") Pet newPet, BindingResult result, HttpSession session, RedirectAttributes redirect, Model model) {		
+		if(result.hasErrors()) {
+			Long id = (Long) session.getAttribute("loggedUser");
+			User loggedUser = userServ.findById(id);
+			model.addAttribute("loggedUser", loggedUser);
+			return "addPet.jsp";
+		} 
 		// we need to set the pet.user = session.userId
 
 		petService.savePet(newPet);

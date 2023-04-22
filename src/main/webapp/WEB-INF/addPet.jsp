@@ -128,10 +128,12 @@ pageEncoding="UTF-8"%>
                   />
                 </div>
                 <!-- ERROR: NAME -->
-                <form:errors
-                  path="name"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
+                <div class="mb-3">
+                  <form:errors
+                    path="name"
+                    class="py-1 alert alert-danger"
+                  ></form:errors>
+                </div>
                 <!-- AGE -->
                 <div class="mb-3">
                   <form:label path="age" class="form-label">Age:</form:label>
@@ -143,10 +145,12 @@ pageEncoding="UTF-8"%>
                   />
                 </div>
                 <!-- ERROR: AGE -->
-                <form:errors
-                  path="name"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
+                <div class="mb-3">
+                  <form:errors
+                    path="age"
+                    class="py-1 mb-3 alert alert-danger"
+                  ></form:errors>
+                </div>
                 <!-- GENDER -->
                 <form:label path="sex" class="form-label">Gender:</form:label>
                 <div class="mb-3">
@@ -157,10 +161,12 @@ pageEncoding="UTF-8"%>
                   </select>
                 </div>
                 <!-- ERROR: sex -->
-                <form:errors
-                  path="name"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
+                <div class="mb-3">
+                  <form:errors
+                    path="sex"
+                    class="py-1 alert alert-danger"
+                  ></form:errors>
+                </div>
                 <!-- DATE OF ARRIVAL -->
                 <div class="mb-3">
                   <form:label path="dateOfArrival" class="form-label"
@@ -173,10 +179,12 @@ pageEncoding="UTF-8"%>
                   />
                 </div>
                 <!-- ERROR: date of arrival -->
-                <form:errors
-                  path="dateOfArrival"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
+                <div class="mb-3">
+                  <form:errors
+                    path="dateOfArrival"
+                    class="py-1 alert alert-danger"
+                  ></form:errors>
+                </div>
                 <!-- SPECIES -->
                 <form:label path="species" class="form-label"
                   >Species</form:label
@@ -190,10 +198,12 @@ pageEncoding="UTF-8"%>
                     <option value="reptile">reptile</option>
                   </select>
                 </div>
-                <form:errors
-                  path="species"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
+                <div class="mb-3">
+                  <form:errors
+                    path="species"
+                    class="py-1 alert alert-danger"
+                  ></form:errors>
+                </div>
                 <!-- BREED -->
                 <div class="mb-3">
                   <form:label path="breed" class="form-label"
@@ -207,10 +217,12 @@ pageEncoding="UTF-8"%>
                   />
                 </div>
                 <!-- ERROR: BREED -->
-                <form:errors
-                  path="breed"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
+                <div class="mb-3">
+                  <form:errors
+                    path="breed"
+                    class="py-1 mb-3 alert alert-danger"
+                  ></form:errors>
+                </div>
                 <!-- DESCRIPTION -->
                 <div class="mb-3">
                   <form:label path="description" class="form-label"
@@ -223,12 +235,16 @@ pageEncoding="UTF-8"%>
                     placeholder="In what condition did your pet arrive? Did they use to live with another family or did they arrive alone? Let us know..."
                   ></form:textarea>
                 </div>
-                <form:errors
-                  path="description"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
+                <div class="mb-3">
+                  <form:errors
+                    path="description"
+                    class="py-1 mb-3 alert alert-danger"
+                  ></form:errors>
+                </div>
                 <form:input type="hidden" path="petStatus" value="Available" />
-                <button class="btn">Create Pet</button>
+                <div class="">
+                  <button class="btn">Create Pet</button>
+                </div>
               </form:form>
             </div>
           </div>
