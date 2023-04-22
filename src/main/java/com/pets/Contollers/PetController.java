@@ -173,4 +173,19 @@ public class PetController {
 		return "redirect:/pet?page=1".concat(filter);
 	}
 	
+	// VIEW PET PAGE 
+	// will be changing "view" to "{id}" once jsp is halfway done
+	@GetMapping("/view")
+	public String viewPet(Model model, HttpSession session, RedirectAttributes redirect) {
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/login";
+		}
+
+		Long id = (Long) session.getAttribute("loggedUser");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
+//		model.addAttribute("pet", petService.findById(id));
+		return "viewPet.jsp";
+	}
 }
