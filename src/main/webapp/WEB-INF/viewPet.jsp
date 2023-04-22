@@ -112,6 +112,7 @@ pageEncoding="UTF-8"%>
             <h6>breed: {breed}</h6>
             <h6>Gender: {sex}</h6>
             <h6>Status: {status}</h6>
+            <c:if test="${loggedUser.userType == 'admin'}"></c:if>
             <div>
               <hr />
               <h6>Admin Actions:</h6>
