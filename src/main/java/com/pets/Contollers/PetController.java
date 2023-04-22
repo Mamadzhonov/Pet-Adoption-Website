@@ -111,8 +111,10 @@ public class PetController {
 	@PostMapping("/add") 
 	public String savePet(@Valid @ModelAttribute("newPet") Pet newPet, BindingResult result) {		
 		
-		if(result.hasErrors()) return "addPet.jsp";
-		
+
+		if(result.hasErrors()) return "/add-pet.jsp";
+		// we need to set the pet.user = session.userId
+
 		petService.savePet(newPet);
 		return "redirect:/pet?page=1";
 	}
@@ -129,6 +131,8 @@ public class PetController {
 		Long id = (Long) session.getAttribute("loggedUser");
 		User loggedUser = userServ.findById(id);
 		model.addAttribute("loggedUser", loggedUser);
+//		temp model attribute
+		model.addAttribute("pet", new Pet());
 		// will un comment this once I add in the form
 //		model.addAttribute("pet", petService.findById(id));
 		return "editPet.jsp";

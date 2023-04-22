@@ -52,6 +52,8 @@ public class Pet {
 	@NotNull(message="Date of Arrival required")
 	private Date dateOfArrival;
 
+	private String petStatus;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -169,6 +171,15 @@ public class Pet {
 		this.sex = sex;
 	}
 	
+	
+	public String getPetStatus() {
+		return petStatus;
+	}
+
+	public void setPetStatus(String petStatus) {
+		this.petStatus = petStatus;
+	}
+
 	public List<Inquiry> getInquiries() {
 		return inquiries;
 	}
@@ -176,4 +187,6 @@ public class Pet {
 	public void setInquiries(List<Inquiry> inquiries) {
 		this.inquiries = inquiries;
 	}
+	
+	
 }
