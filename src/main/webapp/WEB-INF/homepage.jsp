@@ -104,7 +104,7 @@ pageEncoding="UTF-8"%>
         class="d-flex align-items-center justify-content-between px-3 pb-3 pt-0"
       >
         <div class="col-4">
-          <h3 class="mb-2">Adopt and five a pet a second chance.</h3>
+          <h3 class="mb-2">Adopt and give a pet a second chance.</h3>
           <a href="/pet" class="btn">Adopt a pet today!</a>
         </div>
         <div class="mb-3 col-8 p-2 text-center">
