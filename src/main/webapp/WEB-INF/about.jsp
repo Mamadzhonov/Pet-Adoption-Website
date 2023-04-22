@@ -43,6 +43,7 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div class="d-flex flex-column justify-content-between p-3">
+      <!-- NAVBAR -->
       <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >

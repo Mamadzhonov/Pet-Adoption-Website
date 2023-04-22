@@ -4,7 +4,7 @@ uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ taglib prefix="fmt"
 uri="http://java.sun.com/jsp/jstl/fmt" %> <%@ taglib prefix="form"
 uri="http://www.springframework.org/tags/form" %>
 
-<link
+<!-- <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -26,7 +26,7 @@ uri="http://www.springframework.org/tags/form" %>
   crossorigin="anonymous"
 ></script>
 
-<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" href="/css/style.css" /> -->
 
 <!-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,7 +43,7 @@ uri="http://www.springframework.org/tags/form" %>
     <title>Sign in</title>
   </head>
 
-  <body>
+  <body class>
     <h1 class="text-primary">Log in</h1>
 
     <div style="text-align: center">

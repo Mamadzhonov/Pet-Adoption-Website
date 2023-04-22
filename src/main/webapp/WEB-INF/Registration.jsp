@@ -66,7 +66,7 @@ uri="http://www.springframework.org/tags/form" %>
       </div>
 
       <div class="col-md-5 mb-3">
-        <form:label path="email">Emails</form:label>
+        <form:label path="email">Email</form:label>
         <form:input
           path="email"
           class="form-control"

@@ -22,10 +22,10 @@ public class MainContoller {
 	@Autowired
 	private UserService userServ;
 
-	@GetMapping("/")
-	public String index() {
-		return "redirect:/register";
-	}
+//	@GetMapping("/")
+//	public String index() {
+//		return "redirect:/register";
+//	}
 
 	// Making a test route for the landing page
 	@GetMapping("/home")
@@ -64,59 +64,65 @@ public class MainContoller {
 		return "Index.jsp";
 	}
 	
-	
-	@GetMapping("/register")
-	public String registration(Model model, HttpSession session, RedirectAttributes redirect) {
+	@GetMapping("/")
+	public String userRegLogin(Model model, HttpSession session, RedirectAttributes redirect) {
 		model.addAttribute("newUser", new User());
-		return "Registration.jsp";
-	}
-
-	@PostMapping("/register")
-	public String register(@Valid @ModelAttribute("newUser") User user, BindingResult result, HttpSession session,
-			Model model, RedirectAttributes redirect) {
 		model.addAttribute("newLogin", new LoginUser());
-
-		// Checks if data in frontend maches with BD requirments
-		if (result.hasErrors()) {
-			return "Registration.jsp";
-		}
-
-		// Check if email already used!
-		if (userServ.findByEmail(user.getEmail())) {
-			redirect.addFlashAttribute("emailExist", "Email is already used!");
-			return "redirect:/register";
-		}
-
-		// Storing logged User's id
-		User newUser = userServ.register(user, result);
-		if (newUser == null) {
-			model.addAttribute("newLogin", new LoginUser());
-			return "Registration.jsp";
-		}
-		session.setAttribute("loggedUser", user.getId());
-
-		return "redirect:/home";
+		return "userRegLogin.jsp";
 	}
-
-	@GetMapping("/login")
-	public String getLoginPage(Model model) {
-		model.addAttribute("newLogin", new LoginUser());
-		return "Login.jsp";
-	}
-
-	@PostMapping("/login")
-	public String login(@Valid @ModelAttribute("newLogin") LoginUser usrLogin, HttpSession session, Model model,
-			BindingResult result, RedirectAttributes redirect) {
-
-		User user = userServ.login(usrLogin, result);
-		if (user == null) {
-			model.addAttribute("newUser", new User());
-			redirect.addFlashAttribute("loginIssue", "Login or Password is invalid!");
-			return "redirect:/login";
-		}
-		session.setAttribute("loggedUser", user.getId());
-		return "redirect:/home";
-	}
+	
+//	@GetMapping("/register")
+//	public String registration(Model model, HttpSession session, RedirectAttributes redirect) {
+//		model.addAttribute("newUser", new User());
+//		return "Registration.jsp";
+//	}
+//
+//	@PostMapping("/register")
+//	public String register(@Valid @ModelAttribute("newUser") User user, BindingResult result, HttpSession session,
+//			Model model, RedirectAttributes redirect) {
+//		model.addAttribute("newLogin", new LoginUser());
+//
+//		// Checks if data in frontend maches with BD requirments
+//		if (result.hasErrors()) {
+//			return "Registration.jsp";
+//		}
+//
+//		// Check if email already used!
+//		if (userServ.findByEmail(user.getEmail())) {
+//			redirect.addFlashAttribute("emailExist", "Email is already used!");
+//			return "redirect:/register";
+//		}
+//
+//		// Storing logged User's id
+//		User newUser = userServ.register(user, result);
+//		if (newUser == null) {
+//			model.addAttribute("newLogin", new LoginUser());
+//			return "Registration.jsp";
+//		}
+//		session.setAttribute("loggedUser", user.getId());
+//
+//		return "redirect:/home";
+//	}
+//
+//	@GetMapping("/login")
+//	public String getLoginPage(Model model) {
+//		model.addAttribute("newLogin", new LoginUser());
+//		return "Login.jsp";
+//	}
+//
+//	@PostMapping("/login")
+//	public String login(@Valid @ModelAttribute("newLogin") LoginUser usrLogin, HttpSession session, Model model,
+//			BindingResult result, RedirectAttributes redirect) {
+//
+//		User user = userServ.login(usrLogin, result);
+//		if (user == null) {
+//			model.addAttribute("newUser", new User());
+//			redirect.addFlashAttribute("loginIssue", "Login or Password is invalid!");
+//			return "redirect:/login";
+//		}
+//		session.setAttribute("loggedUser", user.getId());
+//		return "redirect:/home";
+//	}
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
