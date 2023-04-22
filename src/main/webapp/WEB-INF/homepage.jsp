@@ -25,7 +25,7 @@ pageEncoding="UTF-8"%>
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <!-- <script src="/webjars/bootstrap/js/bootstrap.min.js"></script> -->
     <script type="text/javascript" src="/js/app.js"></script>
     <!-- change to match your file/naming structure -->
     <!-- FONTS -->

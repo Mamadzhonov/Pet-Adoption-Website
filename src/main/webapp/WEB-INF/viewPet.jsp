@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Create New Pet</title>
+    <title>View Pet</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -34,7 +34,6 @@ pageEncoding="UTF-8"%>
       href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;800&display=swap"
       rel="stylesheet"
     />
-    <!--  -->
     <!-- BOOTSTRAP ICONS -->
     <link
       rel="stylesheet"
@@ -42,9 +41,7 @@ pageEncoding="UTF-8"%>
     />
   </head>
   <body>
-    <!-- PAGE CONTAINER -->
     <div class="p-3">
-      <!-- NAV BAR -->
       <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-4"
       >
@@ -93,148 +90,49 @@ pageEncoding="UTF-8"%>
         </div>
         <!--  -->
       </div>
-      <main class="p-3 mb-5">
-        <div class="d-flex align-items-center">
-          <!-- LEFT COLUMN -->
-          <div class="p-2 flex-fill">
-            <!-- <div class="card"> -->
-            <img
-              src="/images/new_pet.png"
-              alt=""
-              style="height: auto; width: 375px"
-            />
-            <!-- </div> -->
-          </div>
-          <div class="p-2 col-sm">
-            <div class="card p-4 form-card">
-              <h2>Create a New Pet</h2>
-              <hr />
-              <form:form
-                action="/pet/add"
-                class="mt-2"
-                method="POST"
-                modelAttribute="newPet"
-              >
-                <!-- NAME -->
-                <div class="mb-3">
-                  <form:label path="name" class="form-label"
-                    >Pet Name:</form:label
-                  >
-                  <form:input
-                    path="name"
-                    type="text"
-                    class="form-control"
-                    placeholder="Pet name here..."
-                  />
-                </div>
-                <!-- ERROR: NAME -->
-                <form:errors
-                  path="name"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
-                <!-- AGE -->
-                <div class="mb-3">
-                  <form:label path="age" class="form-label">Age:</form:label>
-                  <form:input
-                    path="age"
-                    type="number"
-                    class="form-control"
-                    placeholder="Pet age here..."
-                  />
-                </div>
-                <!-- ERROR: AGE -->
-                <form:errors
-                  path="name"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
-                <!-- GENDER -->
-                <form:label path="sex" class="form-label">Gender:</form:label>
-                <div class="mb-3">
-                  <select class="select p-2" path="sex">
-                    <option>Pick a gender...</option>
-                    <option value="female">Female</option>
-                    <option value="male">Male</option>
-                  </select>
-                </div>
-                <!-- ERROR: sex -->
-                <form:errors
-                  path="name"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
-                <!-- DATE OF ARRIVAL -->
-                <div class="mb-3">
-                  <form:label path="dateOfArrival" class="form-label"
-                    >Date of Arrival:</form:label
-                  >
-                  <form:input
-                    type="date"
-                    class="form-control"
-                    path="dateOfArrival"
-                  />
-                </div>
-                <!-- ERROR: date of arrival -->
-                <form:errors
-                  path="dateOfArrival"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
-                <!-- SPECIES -->
-                <form:label path="species" class="form-label"
-                  >Species</form:label
-                >
-                <div class="mb-3">
-                  <select class="select p-2" path="species">
-                    <option>Add a species...</option>
-                    <option value="cat">cat</option>
-                    <option value="dog">dog</option>
-                    <option value="bird">bird</option>
-                    <option value="reptile">reptile</option>
-                  </select>
-                </div>
-                <form:errors
-                  path="species"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
-                <!-- BREED -->
-                <div class="mb-3">
-                  <form:label path="breed" class="form-label"
-                    >Breed:</form:label
-                  >
-                  <form:input
-                    path="breed"
-                    type="text"
-                    class="form-control"
-                    placeholder="Pet breed here..."
-                  />
-                </div>
-                <!-- ERROR: BREED -->
-                <form:errors
-                  path="breed"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
-                <!-- DESCRIPTION -->
-                <div class="mb-3">
-                  <form:label path="description" class="form-label"
-                    >Tell us about your pet!</form:label
-                  >
-                  <form:textarea
-                    path="description"
-                    class="form-control"
-                    style="height: 100px"
-                    placeholder="In what condition did your pet arrive? Did they use to live with another family or did they arrive alone? Let us know..."
-                  ></form:textarea>
-                </div>
-                <form:errors
-                  path="description"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
-
-                <button class="btn">Create Pet</button>
-              </form:form>
+    </div>
+    <!-- MAIN CONTENT -->
+    <main class="p-3 mb-5">
+      <div class="d-flex align-items-stretch">
+        <!-- LEFT COLUMN -->
+        <div class="p-2 col-sm">
+          <!-- might be a nice touch to add the species icon next to the name -->
+          <div class="card p-4 form-card mb-3">
+            <div class="d-flex align-items-center mb-2">
+              <img src="/images/cat_icon.png" alt="" style="height: 45px" />
+              <h1 class="mx-2">{Pet Name}</h1>
             </div>
+            <h6>Species: {species}</h6>
+            <h6>breed: {breed}</h6>
+            <h6>Gender: {sex}</h6>
+            <h6>Status: {status}</h6>
+          </div>
+          <div class="card p-4 form-card">
+            <h3>About this pet:</h3>
+            <hr />
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Veritatis, unde quod, amet, et praesentium natus aut alias
+              voluptatum quisquam omnis suscipit odio. Cupiditate voluptatem
+              soluta delectus possimus! Eaque, qui atque!
+            </p>
           </div>
         </div>
-      </main>
-    </div>
+        <!-- RIGHT COLUMN -->
+        <div class="p-2 col-sm">
+          <img
+            src="/images/cat_profile2.png"
+            class="img-thumbnail pet-profile mb-3"
+            alt="..."
+          />
+          <div class="card p-4 form-card">
+            <h3>Location</h3>
+            <!-- leaving space for location, if we need it -->
+            <!-- can always take this out if we need to -->
+          </div>
+        </div>
+      </div>
+    </main>
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-3">

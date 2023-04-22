@@ -82,11 +82,12 @@ select {
 ul, li {
 	list-style-type: none;
 }
+
 .footer {
     bottom: 0;
     width: 100%;
 }
-.form-control{
+.form-control, select{
 	font-family: 'Unbounded', cursive;
 	font-weight: 300;
 	font-size: 13px;
@@ -94,4 +95,12 @@ ul, li {
 .form-card{
 	border: 2.5px solid #FFA400;
 	border-radius:10px;
+}
+.pet-profile{
+	border: 2.5px solid #FFA400;
+	border-radius: 10px;
+	padding: 0px;
+  object-fit: cover;
+  width: auto;
+  height: auto;
 }

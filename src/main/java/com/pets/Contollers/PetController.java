@@ -91,6 +91,8 @@ public class PetController {
 		return "test.jsp";//These are test jsps I created
 	}
 	
+	
+	// CREATE NEW PET FORM
 	@GetMapping("/add")
 	public String addPet(Model model, HttpSession session, RedirectAttributes redirect) {
 		if (session.getAttribute("loggedUser") == null) {
@@ -102,7 +104,6 @@ public class PetController {
 		User loggedUser = userServ.findById(id);
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("newPet", new Pet());
-//		return "add-pet.jsp";
 		return "addPet.jsp";
 	}
 	
@@ -114,6 +115,25 @@ public class PetController {
 		petService.savePet(newPet);
 		return "redirect:/pet?page=1";
 	}
+	
+	// EDIT PET FORM
+	// eventually going to add the pet.id in the route
+	@GetMapping("/edit")
+	public String editPet(Model model, HttpSession session, RedirectAttributes redirect){
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/login";
+		}
+
+		Long id = (Long) session.getAttribute("loggedUser");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
+		// will un comment this once I add in the form
+//		model.addAttribute("pet", petService.findById(id));
+		return "editPet.jsp";
+	}
+	
+	
 	
 	/*	This is the post mapping for the "filter form" from the Pet Adoption page
 	 * 	It reads the form inputs and adds the filter parameters the Pet Adoption page URL before redirecting back there
@@ -151,5 +171,21 @@ public class PetController {
 		}
 		System.out.println("Filter: " + filter);
 		return "redirect:/pet?page=1".concat(filter);
+	}
+	
+	// VIEW PET PAGE 
+	// will be changing "view" to "{id}" once jsp is halfway done
+	@GetMapping("/view")
+	public String viewPet(Model model, HttpSession session, RedirectAttributes redirect) {
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/login";
+		}
+
+		Long id = (Long) session.getAttribute("loggedUser");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
+//		model.addAttribute("pet", petService.findById(id));
+		return "viewPet.jsp";
 	}
 }
