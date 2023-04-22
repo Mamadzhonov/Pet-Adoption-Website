@@ -89,7 +89,7 @@ public class PetController {
 		} else {
 			model.addAttribute("petList", petService.getPetPage(page, size, filter));
 		}
-		return "";//Replace this with the availablePets.jsp when it's added
+		return "availablePets.jsp";//Replace this with the availablePets.jsp when it's added
 	}
 	
 	

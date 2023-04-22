@@ -56,7 +56,7 @@ pageEncoding="UTF-8"%>
         <div class="d-flex align-items-center ms-auto">
           <a href="/home" class="nav-link">Home</a>
           |
-          <a href="/pet" class="nav-link">Pets</a>
+          <a href="/pet?page=1" class="nav-link">Pets</a>
           |
           <a href="/about" class="nav-link">About</a>
           |
