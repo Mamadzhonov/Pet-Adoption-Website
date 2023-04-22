@@ -89,7 +89,7 @@ public class PetController {
 		} else {
 			model.addAttribute("petList", petService.getPetPage(page, size, filter));
 		}
-		return "";//Replace this with the availablePets.jsp when it's added
+		return "availablePets.jsp";//Replace this with the availablePets.jsp when it's added
 	}
 	
 	
@@ -112,7 +112,7 @@ public class PetController {
 	public String savePet(@Valid @ModelAttribute("newPet") Pet newPet, BindingResult result) {		
 		
 
-		if(result.hasErrors()) return "/add-pet.jsp";
+		if(result.hasErrors()) return "/addPet.jsp";
 		// we need to set the pet.user = session.userId
 
 		petService.savePet(newPet);
