@@ -47,7 +47,7 @@
                                 <div class="d-flex align-items-center ms-auto">
                                     <a href="/about" class="nav-link">Home</a>
                                     |
-                                    <a href="/about" class="nav-link">Pets</a>
+                                    <a href="/pet?page=1" class="nav-link">Pets</a>
                                     |
                                     <a href="/about" class="nav-link">About</a>
                                     |
