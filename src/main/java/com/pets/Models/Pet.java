@@ -3,6 +3,7 @@ package com.pets.Models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -55,7 +56,7 @@ public class Pet {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToMany(mappedBy="pet", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="pet", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Inquiry> inquiries;
 
 	@Column(updatable = false)
