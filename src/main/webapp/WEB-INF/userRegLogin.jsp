@@ -119,7 +119,13 @@ uri="http://www.springframework.org/tags/form" %>
             </div>
             <!-- error: confirmPW -->
             <form:errors class="text-danger" path="confirmPW"></form:errors>
-            <button class="btn">Submit</button>
+            <form:input type="hidden" path="userType" value="user"></form:input>
+            <div class="d-flex justify-content-between flex-wrap">
+              <button class="btn">Register</button>
+              <a href="/admin/register-login" class="btn admin-btn"
+                >Registering as an Admin?</a
+              >
+            </div>
           </form:form>
         </div>
       </div>

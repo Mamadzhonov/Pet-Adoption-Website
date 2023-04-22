@@ -79,14 +79,19 @@ pageEncoding="UTF-8"%>
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu dropdown-menu-end">
             <li>
-              <a class="dropdown-item" href="/api">Temp: API testing</a>
+              <h6 class="dropdown-header">
+                User Type: <c:out value="${loggedUser.userType}"></c:out>
+              </h6>
             </li>
-            <li><a class="dropdown-item" href="/pet/new">+ New Pet</a></li>
-            <li>
-              <a class="dropdown-item" href="/user/edit">Edit Profile</a>
-            </li>
+            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
+            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><h6 class="dropdown-header">Admin Actions:</h6></li>
+            <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
+            <li><a class="dropdown-item" href="/event/add">+ New Event</a></li>
+            <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
