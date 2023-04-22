@@ -86,7 +86,7 @@ ul, li {
     bottom: 0;
     width: 100%;
 }
-.form-control{
+.form-control, select{
 	font-family: 'Unbounded', cursive;
 	font-weight: 300;
 	font-size: 13px;

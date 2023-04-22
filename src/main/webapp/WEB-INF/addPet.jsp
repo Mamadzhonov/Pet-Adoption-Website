@@ -107,64 +107,129 @@ pageEncoding="UTF-8"%>
           </div>
           <div class="p-2 col-sm">
             <div class="card p-4 form-card">
-              <h1>Create a New Pet</h1>
+              <h2>Create a New Pet</h2>
               <hr />
-              <form action="/">
+              <form:form
+                action="/pet/add"
+                class="mt-2"
+                method="POST"
+                modelAttribute="newPet"
+              >
+                <!-- NAME -->
                 <div class="mb-3">
-                  <label for="" class="form-label">Pet Name:</label>
-                  <input
+                  <form:label path="name" class="form-label"
+                    >Pet Name:</form:label
+                  >
+                  <form:input
+                    path="name"
                     type="text"
                     class="form-control"
                     placeholder="Pet name here..."
                   />
                 </div>
+                <!-- ERROR: NAME -->
+                <form:errors
+                  path="name"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+                <!-- AGE -->
                 <div class="mb-3">
-                  <label for="" class="form-label">Age:</label>
-                  <input
+                  <form:label path="age" class="form-label">Age:</form:label>
+                  <form:input
+                    path="age"
                     type="number"
                     class="form-control"
                     placeholder="Pet age here..."
                   />
                 </div>
+                <!-- ERROR: AGE -->
+                <form:errors
+                  path="name"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+                <!-- GENDER -->
+                <form:label path="sex" class="form-label">Gender:</form:label>
                 <div class="mb-3">
-                  <label for="" class="form-label">Date of Arrival:</label>
-                  <input type="date" class="form-control" />
-                </div>
-                <label for="" class="form-label">Species</label>
-                <div class="mb-3">
-                  <select class="select p-2">
-                    <option>Add a species...</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
-                    <option value="5">Five</option>
-                    <option value="6">Six</option>
-                    <option value="7">Seven</option>
-                    <option value="8">Eight</option>
+                  <select class="select p-2" path="sex">
+                    <option>Pick a gender...</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
                   </select>
                 </div>
+                <!-- ERROR: sex -->
+                <form:errors
+                  path="name"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+                <!-- DATE OF ARRIVAL -->
                 <div class="mb-3">
-                  <label for="" class="form-label">Breed:</label>
-                  <input
+                  <form:label path="dateOfArrival" class="form-label"
+                    >Date of Arrival:</form:label
+                  >
+                  <form:input
+                    type="date"
+                    class="form-control"
+                    path="dateOfArrival"
+                  />
+                </div>
+                <!-- ERROR: date of arrival -->
+                <form:errors
+                  path="dateOfArrival"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+                <!-- SPECIES -->
+                <form:label path="species" class="form-label"
+                  >Species</form:label
+                >
+                <div class="mb-3">
+                  <select class="select p-2" path="species">
+                    <option>Add a species...</option>
+                    <option value="cat">cat</option>
+                    <option value="dog">dog</option>
+                    <option value="bird">bird</option>
+                    <option value="reptile">reptile</option>
+                  </select>
+                </div>
+                <form:errors
+                  path="species"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+                <!-- BREED -->
+                <div class="mb-3">
+                  <form:label path="breed" class="form-label"
+                    >Breed:</form:label
+                  >
+                  <form:input
+                    path="breed"
                     type="text"
                     class="form-control"
                     placeholder="Pet breed here..."
                   />
                 </div>
+                <!-- ERROR: BREED -->
+                <form:errors
+                  path="breed"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+                <!-- DESCRIPTION -->
                 <div class="mb-3">
-                  <label for="" class="form-label"
-                    >Tell us about your pet!</label
+                  <form:label path="description" class="form-label"
+                    >Tell us about your pet!</form:label
                   >
-                  <textarea
-                    name=""
-                    id=""
+                  <form:textarea
+                    path="description"
                     class="form-control"
                     style="height: 100px"
                     placeholder="In what condition did your pet arrive? Did they use to live with another family or did they arrive alone? Let us know..."
-                  ></textarea>
+                  ></form:textarea>
                 </div>
+                <form:errors
+                  path="description"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+
                 <button class="btn">Create Pet</button>
-              </form>
+              </form:form>
             </div>
           </div>
         </div>
