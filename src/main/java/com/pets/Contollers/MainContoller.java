@@ -150,7 +150,7 @@ public class MainContoller {
 //		return "Registration.jsp";
 //	}
 //	
-	// ME: still need to fix redirects to new jsp
+	
 //	@GetMapping("/login")
 //	public String getLoginPage(Model model) {
 //		model.addAttribute("newLogin", new LoginUser());
