@@ -40,7 +40,6 @@
 <title>Current Available Pets</title>
 </head>
 <body>
-<h1>Testing for commit and pull request!</h1>
     <!-- NAV BAR -->
     <div class="top-half p-3">
       <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
