@@ -77,7 +77,7 @@ public class PetController {
 		
 		if(session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 		
 		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
@@ -98,7 +98,7 @@ public class PetController {
 	public String addPet(Model model, HttpSession session, RedirectAttributes redirect) {
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		Long id = (Long) session.getAttribute("loggedUser");
@@ -111,7 +111,7 @@ public class PetController {
 	@PostMapping("/add") 
 	public String savePet(@Valid @ModelAttribute("newPet") Pet newPet, BindingResult result) {		
 		
-		if(result.hasErrors()) return "/add-pet.jsp";
+		if(result.hasErrors()) return "addPet.jsp";
 		
 		petService.savePet(newPet);
 		return "redirect:/pet?page=1";
@@ -123,7 +123,7 @@ public class PetController {
 	public String editPet(Model model, HttpSession session, RedirectAttributes redirect){
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		Long id = (Long) session.getAttribute("loggedUser");
@@ -180,7 +180,7 @@ public class PetController {
 	public String viewPet(Model model, HttpSession session, RedirectAttributes redirect) {
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		Long id = (Long) session.getAttribute("loggedUser");
@@ -197,7 +197,7 @@ public class PetController {
 	public String showInquiryDetails(Model model, HttpSession session, RedirectAttributes redirect) {
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 		
 		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));

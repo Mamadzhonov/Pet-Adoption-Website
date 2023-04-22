@@ -34,7 +34,7 @@ public class MainContoller {
 
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		Long id = (Long) session.getAttribute("loggedUser");
@@ -54,7 +54,7 @@ public class MainContoller {
 
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		Long id = (Long) session.getAttribute("loggedUser");
@@ -171,7 +171,7 @@ public class MainContoller {
 
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		Long id = (Long) session.getAttribute("loggedUser");
