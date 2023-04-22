@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Create New Pet</title>
+    <title>Edit Pet</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -107,15 +107,16 @@ pageEncoding="UTF-8"%>
           </div>
           <div class="p-2 col-sm">
             <div class="card p-4 form-card">
-              <h2>Create a New Pet</h2>
+              <h2>Edit Pet</h2>
               <hr />
               <form:form
-                action="/pet/add"
+                action="/pet/edit"
                 class="mt-2"
                 method="POST"
-                modelAttribute="newPet"
+                modelAttribute="pet"
               >
                 <!-- NAME -->
+                <input type="hidden" name="_method" value="PUT" />
                 <div class="mb-3">
                   <form:label path="name" class="form-label"
                     >Pet Name:</form:label
@@ -227,8 +228,27 @@ pageEncoding="UTF-8"%>
                   path="description"
                   class="py-1 alert alert-danger"
                 ></form:errors>
-                <form:input type="hidden" path="petStatus" value="Available" />
-                <button class="btn">Create Pet</button>
+                <div class="d-flex align-items-end justify-content-between">
+                  <div class="">
+                    <form:label path="species" class="form-label"
+                      >Pet Status</form:label
+                    >
+                    <div>
+                      <select class="select p-2" path="species">
+                        <option>Set a status...</option>
+                        <option value="In process of adoption">
+                          In process of adoption
+                        </option>
+                        <option value="In process of fostering">
+                          In process of fostering
+                        </option>
+                        <option value="Available">Available</option>
+                        <option value="Not Available">Not Available</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button class="btn my-0">Create Pet</button>
+                </div>
               </form:form>
             </div>
           </div>
