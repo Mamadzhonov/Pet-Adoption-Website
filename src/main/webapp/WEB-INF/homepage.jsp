@@ -62,7 +62,7 @@ pageEncoding="UTF-8"%>
           |
           <a href="/about" class="nav-link">About</a>
           |
-          <a href="/about" class="nav-link">Upcoming Events</a>
+          <a href="/events" class="nav-link">Upcoming Events</a>
         </div>
         <!-- navbar: end section -->
         <div class="dropdown" id="dropdown">

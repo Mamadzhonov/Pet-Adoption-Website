@@ -44,12 +44,12 @@ public class MainContoller {
 		return "homepage.jsp";
 	}
 
-	
 	// LANDING PAGE
 	// Making a test route for the landing page
 	@GetMapping("/api")
 	public String homepage(HttpSession session, Model model, RedirectAttributes redirect) {
-		// leaving room for model attributes + redirectAttribute error return (if user is not logged in)
+		// leaving room for model attributes + redirectAttribute error return (if user
+		// is not logged in)
 		model.addAttribute("newLogin", new LoginUser());
 
 		if (session.getAttribute("loggedUser") == null) {
