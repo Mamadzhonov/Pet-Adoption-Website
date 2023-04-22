@@ -99,30 +99,47 @@ pageEncoding="UTF-8"%>
           <!-- might be a nice touch to add the species icon next to the name -->
           <div class="card p-4 form-card mb-3">
             <div class="d-flex align-items-center mb-2">
-              <!-- will need a c:if for icon options -->
-              <img src="/images/cat_icon.png" alt="" style="height: 45px" />
-              <h1 class="mx-2">{Pet Name}</h1>
+              <!-- PET IMAGE -->
+              <img
+                src="/images/${pet.species}_icon.png"
+                alt=""
+                style="height: 35px"
+              />
+              <h1 class="mx-2 mb-0"><c:out value="${pet.name}"></c:out></h1>
             </div>
-            <h6>Species: {species}</h6>
+            <hr />
+            <h6>Species: <c:out value="${pet.species}"></c:out></h6>
             <h6>breed: {breed}</h6>
             <h6>Gender: {sex}</h6>
             <h6>Status: {status}</h6>
+            <div>
+              <hr />
+              <h6>Admin Actions:</h6>
+              <div class="d-flex">
+                <a
+                  href="/pet/edit/${pet.id}"
+                  class="btn"
+                  style="margin-right: 15px"
+                  >Edit Pet</a
+                >
+                <a href="/" class="btn admin-btn">Delete Pet</a>
+              </div>
+            </div>
           </div>
           <div class="card p-4 form-card">
             <h3>About this pet:</h3>
             <hr />
+            <!-- <a href="https://www.flaticon.com/free-icons/dog" title="dog icons">Dog icons created by Freepik - Flaticon</a> -->
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Veritatis, unde quod, amet, et praesentium natus aut alias
-              voluptatum quisquam omnis suscipit odio. Cupiditate voluptatem
-              soluta delectus possimus! Eaque, qui atque!
+              <c:out value="${pet.description}"></c:out>
             </p>
           </div>
         </div>
         <!-- RIGHT COLUMN -->
         <div class="p-2 col-sm">
+          <!-- instead of a c:if, we can pass through what species to find the image -->
           <img
-            src="/images/cat_profile2.png"
+            src="/images/${pet.species}.png"
             class="img-thumbnail pet-profile mb-3"
             alt="..."
           />

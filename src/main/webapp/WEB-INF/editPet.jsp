@@ -97,13 +97,11 @@ pageEncoding="UTF-8"%>
         <div class="d-flex align-items-center">
           <!-- LEFT COLUMN -->
           <div class="p-2 flex-fill">
-            <!-- <div class="card"> -->
             <img
               src="/images/new_pet.png"
               alt=""
               style="height: auto; width: 375px"
             />
-            <!-- </div> -->
           </div>
           <div class="p-2 col-sm">
             <div class="card p-4 form-card">
@@ -114,11 +112,12 @@ pageEncoding="UTF-8"%>
               </div>
               <hr />
               <form:form
-                action="/pet/edit"
+                action="/pet/edit/${petId}"
                 class="mt-2"
                 method="POST"
                 modelAttribute="pet"
               >
+                <input type="hidden" name="_method" value="PUT" />
                 <!-- NAME -->
                 <div class="mb-3">
                   <form:label path="name" class="form-label"
@@ -158,11 +157,11 @@ pageEncoding="UTF-8"%>
                 <!-- GENDER -->
                 <form:label path="sex" class="form-label">Gender:</form:label>
                 <div class="mb-3">
-                  <select class="select p-2" path="sex">
-                    <option>Pick a gender...</option>
-                    <option value="female">Female</option>
-                    <option value="male">Male</option>
-                  </select>
+                  <form:select class="select p-2" path="sex">
+                    <form:option value="">Pick a gender...</form:option>
+                    <form:option value="female">Female</form:option>
+                    <form:option value="male">Male</form:option>
+                  </form:select>
                 </div>
                 <!-- ERROR: sex -->
                 <div class="mb-3">
@@ -194,13 +193,13 @@ pageEncoding="UTF-8"%>
                   >Species</form:label
                 >
                 <div class="mb-3">
-                  <select class="select p-2" path="species">
-                    <option>Add a species...</option>
-                    <option value="cat">cat</option>
-                    <option value="dog">dog</option>
-                    <option value="bird">bird</option>
-                    <option value="reptile">reptile</option>
-                  </select>
+                  <form:select class="select p-2" path="species">
+                    <form:option value="">Add a species...</form:option>
+                    <form:option value="cat">cat</form:option>
+                    <form:option value="dog">dog</form:option>
+                    <form:option value="bird">bird</form:option>
+                    <form:option value="reptile">reptile</form:option>
+                  </form:select>
                 </div>
                 <div class="mb-3">
                   <form:errors
@@ -251,20 +250,22 @@ pageEncoding="UTF-8"%>
                       >Pet Status</form:label
                     >
                     <div>
-                      <select class="select p-2" path="species">
-                        <option>Set a status...</option>
-                        <option value="In process of adoption">
+                      <form:select class="select p-2" path="petStatus">
+                        <form:option value="">Set a status...</form:option>
+                        <form:option value="In process of adoption">
                           In process of adoption
-                        </option>
-                        <option value="In process of fostering">
+                        </form:option>
+                        <form:option value="In process of fostering">
                           In process of fostering
-                        </option>
-                        <option value="Available">Available</option>
-                        <option value="Not Available">Not Available</option>
-                      </select>
+                        </form:option>
+                        <form:option value="Available">Available</form:option>
+                        <form:option value="Not Available"
+                          >Not Available</form:option
+                        >
+                      </form:select>
                     </div>
                   </div>
-                  <button class="btn my-0">Create Pet</button>
+                  <button class="btn my-0">Edit Pet</button>
                 </div>
               </form:form>
             </div>
@@ -272,6 +273,7 @@ pageEncoding="UTF-8"%>
         </div>
       </main>
     </div>
+    <!-- FOOTER -->
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-3">
@@ -280,7 +282,7 @@ pageEncoding="UTF-8"%>
               src="/images/animalLogo_solid.png"
               alt=""
               style="height: 30px; padding-right: 10px; padding-bottom: 3px"
-            />Pet Adoption
+            />Pet Adform:option
           </h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2">

@@ -154,11 +154,11 @@ pageEncoding="UTF-8"%>
                 <!-- GENDER -->
                 <form:label path="sex" class="form-label">Gender:</form:label>
                 <div class="mb-3">
-                  <select class="select p-2" path="sex">
-                    <option>Pick a gender...</option>
-                    <option value="female">Female</option>
-                    <option value="male">Male</option>
-                  </select>
+                  <form:select class="select p-2" path="sex">
+                    <form:option value="">Pick a gender...</form:option>
+                    <form:option value="female">Female</form:option>
+                    <form:option value="male">Male</form:option>
+                  </form:select>
                 </div>
                 <!-- ERROR: sex -->
                 <div class="mb-3">
@@ -190,13 +190,13 @@ pageEncoding="UTF-8"%>
                   >Species</form:label
                 >
                 <div class="mb-3">
-                  <select class="select p-2" path="species">
-                    <option>Add a species...</option>
-                    <option value="cat">cat</option>
-                    <option value="dog">dog</option>
-                    <option value="bird">bird</option>
-                    <option value="reptile">reptile</option>
-                  </select>
+                  <form:select class="select p-2" path="species">
+                    <form:option value="">Add a species...</form:option>
+                    <form:option value="cat">cat</form:option>
+                    <form:option value="dog">dog</form:option>
+                    <form:option value="bird">bird</form:option>
+                    <form:option value="reptile">reptile</form:option>
+                  </form:select>
                 </div>
                 <div class="mb-3">
                   <form:errors
