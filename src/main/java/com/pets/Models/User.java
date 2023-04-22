@@ -37,6 +37,8 @@ public class User {
     private String password;
     @Transient
     private String confirmPW;
+    // admin + user signifier
+    private String userType;
     
     @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
     private List<Pet> petsPosted;
@@ -119,4 +121,14 @@ public class User {
 	public void setPetsPosted(List<Pet> petsPosted) {
 		this.petsPosted = petsPosted;
 	}
+	// adding this so we can signify who is an admin + who isn't 
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+	
+	
 }
