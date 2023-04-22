@@ -113,21 +113,22 @@
 		  				<ul class="list-group list-group-flush ">
 		  					<li class="text-start ">Filter Categories</li>
 		  					<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="catCheckboxFilter">
+						    	<input class="form-check-input me-1" type="checkbox" value="" id="catCheckboxFilter" name="cat">
 						    	<label class="form-check-label stretched-link" for="catCheckboxFilter"><small>Cats</small></label>
 						  	</li>
 						  	<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="dogCheckboxFilter">
+						    	<input class="form-check-input me-1" type="checkbox" value="" id="dogCheckboxFilter" name="dog">
 						    	<label class="form-check-label stretched-link" for="dogCheckboxFilter"><small>Dogs</small></label>
 						  	</li>
 						  	<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="birdCheckboxFilter">
+						    	<input class="form-check-input me-1" type="checkbox" value="" id="birdCheckboxFilter" name="bird">
 						    	<label class="form-check-label stretched-link" for="birdCheckboxFilter"><small>Birds</small></label>
 						  	</li>
 						  	<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="reptileCheckboxFilter">
+						    	<input class="form-check-input me-1" type="checkbox" value="" id="reptileCheckboxFilter" name="reptile">
 						    	<label class="form-check-label stretched-link" for="reptileCheckboxFilter"><small>Reptiles</small></label>
 						  	</li>
+						  	<!-- change to select -->
 						  	<li class="list-group-item list-group-item-action">
 						    	<input class="form-check-input me-1" type="checkbox" value="" id="maleCheckboxFilter">
 						    	<label class="form-check-label stretched-link" for="maleCheckboxFilter"><small>Male</small></label>
