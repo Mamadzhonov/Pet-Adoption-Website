@@ -211,10 +211,11 @@
 	
 	<!-- Pagination -->
 	<div class="text-center">
-	<a href="/pet?page=1${filterURL}">1</a>
-	<a href="/pet?page=2${filterURL}">2</a>
-	<a href="/pet?page=3${filterURL}">3</a>
-	<a href="/pet?page=4${filterURL}">4</a>
+	<a href="/pet?page=1${filterURL}">First</a>
+	<a href="/pet?page=${currentPage-1}${filterURL}">Previous</a>
+
+	<a href="/pet?page=${currentPage+1}${filterURL}">Next</a>
+	<a href="/pet?page=${lastPage}${filterURL}">Last</a>
 	
 	</div>
 
