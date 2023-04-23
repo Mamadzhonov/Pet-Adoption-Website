@@ -210,15 +210,20 @@
 	</div>
 	
 	<!-- Pagination -->
-	<div class="text-center">
-	<a href="/pet?page=1${filterURL}">First</a>
-	<a href="/pet?page=${currentPage-1}${filterURL}">Previous</a>
-
-	<a href="/pet?page=${currentPage+1}${filterURL}">Next</a>
-	<a href="/pet?page=${lastPage}${filterURL}">Last</a>
+	<c:if test="${lastPage > 1}">
+		<div class="text-center">
+		<a href="/pet?page=1${filterURL}">First</a>
+		<c:if test="${currentPage != 1}">
+			<a href="/pet?page=${currentPage-1}${filterURL}">Previous</a>
+		</c:if>
 	
-	</div>
-
+		<c:if test="${currentPage != lastPage}">
+			<a href="/pet?page=${currentPage+1}${filterURL}">Next</a>
+		</c:if>
+		<a href="/pet?page=${lastPage}${filterURL}">Last</a>
+		
+		</div>
+	</c:if>
 
 </body>
 </html>
