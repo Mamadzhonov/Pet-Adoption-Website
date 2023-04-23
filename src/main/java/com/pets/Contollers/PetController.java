@@ -25,10 +25,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pets.Models.Inquiry;
 import com.pets.Models.Pet;
 import com.pets.Models.User;
+import com.pets.Services.InquiryService;
 import com.pets.Services.PetService;
 import com.pets.Services.UserService;
+
 
 @Controller
 @RequestMapping("/pet")
@@ -39,7 +42,9 @@ public class PetController {
 	private UserService userServ;
 	@Autowired
 	PetService petService;
-	
+	@Autowired
+	InquiryService inquiryServ;
+		
 	
 	//This allows the "Date of Arrival" attribute to be bound to the Pet object
 	//Otherwise Spring JPA doesn't know how to convert it to a Java Date object
@@ -257,9 +262,42 @@ public class PetController {
 	
 	
 	//----------		Inquiry Mappings		----------//
+
+	// SHOW THE INQUIRY ADD PAGE 
+	@GetMapping("/add/inquiry/{petId}")
+	public String addInquiry(Model model,@PathVariable("petId") Long petId, 
+							HttpSession session, RedirectAttributes redirect) {
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/login";
+		}
+
+		Long id = (Long) session.getAttribute("loggedUser");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
+		model.addAttribute("newInquiry", new Inquiry());
+
+		Pet pet = petService.findById(petId);
+		model.addAttribute("pet", pet);
+		model.addAttribute("petId", petId);
+
+		return "addInquiry.jsp";
+	}
+
+	//POST TO THE ADD INQUIRY
+	@PostMapping("/add/inquiry") 
+	public String saveInquiry(@Valid @ModelAttribute("newInquiry") Inquiry newInquiry, BindingResult result) {		
+		
+		if(result.hasErrors()) return "/addInquiry.jsp";
+		
+		inquiryServ.save(newInquiry);
+		return "redirect:/pet?page=1";
+	}
 	
-	@GetMapping("/inquire/{id}")
-	public String showInquiryDetails(Model model, HttpSession session, RedirectAttributes redirect) {
+	
+	//SHOW THE INQUIRY DETAIL 
+	@GetMapping("/inquire/{inquiryId}")
+	public String showInquiryDetails(Model model, HttpSession session, @PathVariable("inquiryId")  Long inquiryId, RedirectAttributes redirect) {
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
 			return "redirect:/";
@@ -267,10 +305,12 @@ public class PetController {
 		
 		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
 		model.addAttribute("loggedUser", loggedUser);
-		
-		return "";//Put the jsp file here when complete.
+		Inquiry inquiry = inquiryServ.findById(inquiryId); 
+		model.addAttribute("inquiry", inquiry);
+		return "respondInquiry.jsp";//Put the jsp file here when complete.
 	}
-	
+
+	// SHOW THE INQUIRY DASHBOARD
 	@GetMapping("/inquire/dashboard")
 	public String inquiryDashboard(Model model, HttpSession session, RedirectAttributes redirect) {
 		if (session.getAttribute("loggedUser") == null) {
@@ -280,7 +320,36 @@ public class PetController {
 		
 		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
 		model.addAttribute("loggedUser", loggedUser);
-		
+		List<Inquiry> inquiries = inquiryServ.findAll();
+		model.addAttribute("inquiries",inquiries);
 		return "dashboardInquiry.jsp";//Put the jsp file here when complete.
 	}
+	
+	// UPDATE THE INQUIRY WITH THE RESPONSE
+	@PutMapping("/edit/inquiry/{inquiryId}")
+	public String updateInquiry(@Valid @ModelAttribute("inquiry") Inquiry inquiry, BindingResult result, 
+								HttpSession session, Model model, @PathVariable("inquiryId") Long inquiryId) {
+		if (result.hasErrors()) {
+//			get user
+			Long id = (Long) session.getAttribute("loggedUser");
+			User loggedUser = userServ.findById(id);
+			model.addAttribute("loggedUser", loggedUser);
+			// get inquiry
+			model.addAttribute("inquiryId", inquiryId);
+			return "respondInquiry.jsp";
+		} else {
+			// making sure that this updated inquiry has the same id
+			inquiry.setId(inquiryId);
+			// also making sure pet.user stays the same as before
+			Inquiry thisInquiry = inquiryServ.findById(inquiryId);
+//			inquiry.setUser(thisInquiry.getUser());
+			// saving inquiry into db
+			inquiryServ.save(inquiry);
+			return "redirect:/inquire/dashboard";
+		}
+	}
+
+
+	
+
 }

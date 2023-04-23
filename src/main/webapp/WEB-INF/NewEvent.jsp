@@ -118,12 +118,13 @@ pageEncoding="UTF-8"%>
         <main class="p-3 mb-5">
             <div class="d-flex align-items-center justify-content-between">
                   
-                <!-- NEW EVENT FORM -->
+                <!-- NEW EVENT FORM column -->
                 <div class="p-2 col-sm">
       
                      <div class="card p-4 form-card">
                       <h2>Create a New Event</h2>
                       <hr>
+                      <!--  NEW EVENT form -->
                       <form:form action="/event/new" method="POST" modelAttribute="newEvent">
                         <!-- event name -->
                           <div class="mb-3">

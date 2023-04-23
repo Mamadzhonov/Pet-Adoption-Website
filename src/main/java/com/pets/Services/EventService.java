@@ -35,14 +35,6 @@ public class EventService {
         return eventRepo.findAll();
     }
 
-    public Event findById(Long id) {
-        Optional<Event> optEvent = eventRepo.findById(id);
-        if (optEvent.isPresent()) {
-            return optEvent.get();
-        }
-        return null;
-    }
-
     public void deleteById(Long id){
         eventRepo.deleteById(id);
     }
