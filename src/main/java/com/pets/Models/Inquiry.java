@@ -34,7 +34,13 @@ public class Inquiry {
 	private Date dateOfPickup;
 	
 	private Date dateOfDropoff;
+	
+	private String responded;
+	
+	private String notes;
 		
+	private String response;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="pet_id")
 	private Pet pet;
@@ -42,9 +48,6 @@ public class Inquiry {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="inquirer_id")
 	private User inquirer;
-	
-	@OneToMany(mappedBy="inquiry", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	private List<Message> chat;
 	
 	@Column(updatable=false)
 	private Date createdAt;
@@ -68,6 +71,14 @@ public class Inquiry {
 	
 	public Long getId() {
 		return id;
+	}
+
+	public String getResponded() {
+		return responded;
+	}
+
+	public void setResponded(String responded) {
+		this.responded = responded;
 	}
 
 	public String getInquiryType() {
@@ -114,20 +125,31 @@ public class Inquiry {
 		this.inquirer = inquirer;
 	}
 
-	public List<Message> getChat() {
-		return chat;
-	}
-
-	public void setChat(List<Message> chat) {
-		this.chat = chat;
-	}
-
+	
 	public Date getCreatedAt() {
 		return createdAt;
 	}
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+	public String getResponse() {
+		return response;
+	}
+
+	public void setResponse(String response) {
+		this.response = response;
 	}
 
 	public Date getUpdatedAt() {
