@@ -97,6 +97,29 @@
         <!-- NAV BAR END -->
 	</div>
 <!-- Body -->
+<!-- Filter Box -->
+	<div class="d-flex row row-cols-3 g-3">
+		<div class="col">
+			<div class="card h-100" style="width: 18rem;">
+  				<img src="..." class="card-img-top" alt="Pet Image">
+  				<div class="card-body">
+  					<input type="checkbox">
+  					<label for="">Filter</label>
+  					
+  					<input type="checkbox">
+  					<label for="">Filter</label>
+  					
+  					<input type="checkbox">
+  					<label for="">Filter</label>
+  					
+  					<input type="checkbox">
+  					<label for="">Filter</label>
+  				</div>
+			</div>
+		</div>
+	</div>
+=======
+>>>>>>> cc9691250ec470bee1a58a2b07d252d8f2977405
 
 <div>
 <h1>Our Available Pets:</h1>

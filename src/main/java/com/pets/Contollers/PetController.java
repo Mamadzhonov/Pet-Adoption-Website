@@ -200,7 +200,7 @@ public class PetController {
 		if(highAge != null) {
 			filter = filter.concat("&filter=highAge:" + highAge);
 		}
-		if(sex != null) {
+		if(sex != null || sex != "") {
 			if(!sex.equals("None")) {
 				filter = filter.concat("&filter=sex:" + sex);
 			}
