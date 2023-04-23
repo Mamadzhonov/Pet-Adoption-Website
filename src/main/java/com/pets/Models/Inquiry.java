@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="inquiries")
@@ -26,7 +27,14 @@ public class Inquiry {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+
+	@NotNull(message="Inquiry type required")
+	private String inquiryType;
 	
+	private Date dateOfPickup;
+	
+	private Date dateOfDropoff;
+		
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="pet_id")
 	private Pet pet;
@@ -60,6 +68,30 @@ public class Inquiry {
 	
 	public Long getId() {
 		return id;
+	}
+
+	public String getInquiryType() {
+		return inquiryType;
+	}
+
+	public void setInquiryType(String inquiryType) {
+		this.inquiryType = inquiryType;
+	}
+
+	public Date getDateOfPickup() {
+		return dateOfPickup;
+	}
+
+	public void setDateOfPickup(Date dateOfPickup) {
+		this.dateOfPickup = dateOfPickup;
+	}
+
+	public Date getDateOfDropoff() {
+		return dateOfDropoff;
+	}
+
+	public void setDateOfDropoff(Date dateOfDropoff) {
+		this.dateOfDropoff = dateOfDropoff;
 	}
 
 	public void setId(Long id) {
