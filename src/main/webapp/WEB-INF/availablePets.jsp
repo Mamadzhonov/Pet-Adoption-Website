@@ -202,7 +202,6 @@
 			</div>
 		</c:forEach>
 	</div>
-	<!-- Row of Pets -->
 	</div>
 	</div>
 	</main>
