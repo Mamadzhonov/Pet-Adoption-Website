@@ -178,6 +178,7 @@ pageEncoding="UTF-8"%>
                     <form:option value="male">Male</form:option>
                   </form:select>
                 </div>
+                <!-- test test test -->
                 <!-- ERROR: sex -->
                 <div class="mb-3">
                   <form:errors
