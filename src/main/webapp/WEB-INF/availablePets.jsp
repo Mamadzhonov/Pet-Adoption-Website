@@ -118,8 +118,6 @@
 			</div>
 		</div>
 	</div>
-=======
->>>>>>> cc9691250ec470bee1a58a2b07d252d8f2977405
 
 <div>
 <h1>Our Available Pets:</h1>
