@@ -88,7 +88,7 @@ public class PetController {
 		model.addAttribute("loggedUser", loggedUser);
 		
 		model.addAttribute("currentPage", page);
-		model.addAttribute("lastPage", petService.getNumLastPage(size, filter));
+		model.addAttribute("lastPage", petService.getNumLastPage(filter));
 		
 		model.addAttribute("filterList", filter);
 		
@@ -114,11 +114,7 @@ public class PetController {
 		
 		List<Pet> petPage;
 		
-		if(size == null) {
-			petPage = petService.getPetPage(page, filter);
-		} else {
-			petPage = petService.getPetPage(page, size, filter);
-		}
+		petPage = petService.getPetPage(page, filter);
 		
 		model.addAttribute("petList", petPage);
 		
