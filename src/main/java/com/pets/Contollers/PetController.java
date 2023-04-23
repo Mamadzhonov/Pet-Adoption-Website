@@ -84,7 +84,10 @@ public class PetController {
 		
 		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
 		
+		
+		
 		model.addAttribute("loggedUser", loggedUser);
+		model.addAttribute("filterList", filter);
 		
 		if(size == null) {
 			model.addAttribute("petList", petService.getPetPage(page, filter));
@@ -200,7 +203,7 @@ public class PetController {
 		if(highAge != null) {
 			filter = filter.concat("&filter=highAge:" + highAge);
 		}
-		if(sex != null || sex != "") {
+		if(sex != null && sex != "") {
 			if(!sex.equals("None")) {
 				filter = filter.concat("&filter=sex:" + sex);
 			}

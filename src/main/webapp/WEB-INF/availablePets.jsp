@@ -127,25 +127,25 @@
 		    <div class="">
 		    <!-- Species Filter -->
 		      <div class="">
-		        <input class="" type="checkbox" name="cat" id="catCheckboxFilter" value="">
+		        <input class="" type="checkbox" name="cat" id="catCheckboxFilter">
 		        <label class="form-label" for="catCheckboxFilter">
 		          Cats
 		        </label>
 		      </div>
 		      <div class="">
-		        <input class="" type="checkbox" name="dog" id="dogCheckboxFilter" value="">
+		        <input class="" type="checkbox" name="dog" id="dogCheckboxFilter">
 		        <label class="form-label" for="dogCheckboxFilter">
 		          Dogs
 		        </label>
 		      </div>
 		      <div class="">
-		        <input class="" type="checkbox" name="bird" id="birdCheckboxFilter" value="">
+		        <input class="" type="checkbox" name="bird" id="birdCheckboxFilter">
 		        <label class="form-label" for="birdCheckboxFilter">
 		          Birds
 		        </label>
 		      </div>
 		      <div class="">
-		        <input class="" type="checkbox" name="reptile" id="reptileCheckboxFilter" value="">
+		        <input class="" type="checkbox" name="reptile" id="reptileCheckboxFilter">
 		        <label class="form-label" for="reptileCheckboxFilter">
 		          Reptiles
 		        </label>
