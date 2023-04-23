@@ -47,7 +47,7 @@ public class PetService {
 	
 	//Overloaded function that doesn't accept size input, so it defaults to 6
 	public List<Pet> getPetPage(Integer page, List<String> filter) {
-		return getPetPage(page, 6, filter);
+		return getPetPage(page, 3, filter);
 	}
 	
 	public Pet savePet(Pet newPet) {
@@ -89,12 +89,12 @@ public class PetService {
 			}
 			if(filterString.contains("lowAge")) {
 				int lowAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
-				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeGreaterThan(lowAge)));
+				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeGreaterThanEqual(lowAge)));
 				filterCount++;
 			}
 			if(filterString.contains("highAge")) {
 				int highAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
-				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeLessThan(highAge)));
+				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeLessThanEqual(highAge)));
 				filterCount++;
 			}
 			if(filterString.contains("sex")) {

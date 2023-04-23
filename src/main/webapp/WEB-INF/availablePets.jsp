@@ -127,25 +127,25 @@
 		    <div class="">
 		    <!-- Species Filter -->
 		      <div class="">
-		        <input class="" type="checkbox" name="cat" id="catCheckboxFilter" value="">
+		        <input class="" type="checkbox" name="cat" id="catCheckboxFilter" <c:if test="${filterList.remove('cat')}">checked</c:if>>
 		        <label class="form-label" for="catCheckboxFilter">
 		          Cats
 		        </label>
 		      </div>
 		      <div class="">
-		        <input class="" type="checkbox" name="dog" id="dogCheckboxFilter" value="">
+		        <input class="" type="checkbox" name="dog" id="dogCheckboxFilter" <c:if test="${filterList.remove('dog')}">checked</c:if>>
 		        <label class="form-label" for="dogCheckboxFilter">
 		          Dogs
 		        </label>
 		      </div>
 		      <div class="">
-		        <input class="" type="checkbox" name="bird" id="birdCheckboxFilter" value="">
+		        <input class="" type="checkbox" name="bird" id="birdCheckboxFilter" <c:if test="${filterList.remove('bird')}">checked</c:if>>
 		        <label class="form-label" for="birdCheckboxFilter">
 		          Birds
 		        </label>
 		      </div>
 		      <div class="">
-		        <input class="" type="checkbox" name="reptile" id="reptileCheckboxFilter" value="">
+		        <input class="" type="checkbox" name="reptile" id="reptileCheckboxFilter" <c:if test="${filterList.remove('reptile')}">checked</c:if>>
 		        <label class="form-label" for="reptileCheckboxFilter">
 		          Reptiles
 		        </label>
@@ -154,10 +154,10 @@
 			  <label class="form-label">Age Range:</label>
 		      <div class="row g-3">
 			      <div class="col-sm">
-			        <input class="" type="number" name="low-age" id="lowAgeFilter" placeholder="0">
+			        <input class="" type="number" name="low-age" id="lowAgeFilter" placeholder="0" value="${lowAge}">
 			      </div>
 			      <div class="col-sm">
-			        <input class="" type="number" name="high-age" id="highAgeFilter" placeholder="10">
+			        <input class="" type="number" name="high-age" id="highAgeFilter" placeholder="10" value="${highAge}">
 			      </div>
 		      </div>
 			<!-- Gender Filter -->
@@ -165,8 +165,8 @@
 				<select class="form-select" id="sexFilter" name="sex">
 		
 					<option value="">Pick a gender...</option>
-					<option value="Female">Female</option>
-					<option value="Male">Male</option>
+					<option value="Female" <c:if test="${sexFilter == 'Female'}">selected</c:if>>Female</option>
+					<option value="Male" <c:if test="${sexFilter == 'Male'}">selected</c:if>>Male</option>
 				</select>
 		      </div>
 		    </div>	      
@@ -209,10 +209,10 @@
 	
 	<!-- Pagination -->
 	<div class="text-center">
-	<a href="/pet?page=1">1</a>
-	<a href="/pet?page=2">2</a>
-	<a href="/pet?page=3">3</a>
-	<a href="/pet?page=4">4</a>
+	<a href="/pet?page=1${filterURL}">1</a>
+	<a href="/pet?page=2${filterURL}">2</a>
+	<a href="/pet?page=3${filterURL}">3</a>
+	<a href="/pet?page=4${filterURL}">4</a>
 	
 	</div>
 
