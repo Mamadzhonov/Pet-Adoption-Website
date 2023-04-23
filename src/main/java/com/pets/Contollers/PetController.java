@@ -91,7 +91,7 @@ public class PetController {
 		} else {
 			model.addAttribute("petList", petService.getPetPage(page, size, filter));
 		}
-		return "";//Replace this with the availablePets.jsp when it's added
+		return "availablePets.jsp";//Replace this with the availablePets.jsp when it's added
 	}
 	
 	
@@ -200,7 +200,7 @@ public class PetController {
 		if(highAge != null) {
 			filter = filter.concat("&filter=highAge:" + highAge);
 		}
-		if(sex != null) {
+		if(sex != null || sex != "") {
 			if(!sex.equals("None")) {
 				filter = filter.concat("&filter=sex:" + sex);
 			}

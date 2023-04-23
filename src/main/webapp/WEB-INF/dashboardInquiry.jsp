@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Create New Pet</title>
+    <title>Inquiry Dashboard</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -59,7 +59,7 @@ pageEncoding="UTF-8"%>
         <div class="d-flex align-items-center ms-auto">
           <a href="/home" class="nav-link">Home</a>
           |
-          <a href="/pet?page=1" class="nav-link">Pets</a>
+          <a href="/pet" class="nav-link">Pets</a>
           |
           <a href="/about" class="nav-link">About</a>
           |
@@ -105,151 +105,35 @@ pageEncoding="UTF-8"%>
             />
             <!-- </div> -->
           </div>
-          <div class="p-2 col-sm">
-            <div class="card p-4 form-card">
-              <h2>Create a New Pet</h2>
-              <hr />
-              <form:form
-                action="/pet/add"
-                class="mt-2"
-                method="POST"
-                modelAttribute="newPet"
-              >
-                <!-- NAME -->
-                <div class="mb-3">
-                  <form:label path="name" class="form-label"
-                    >Pet Name:</form:label
-                  >
-                  <form:input
-                    path="name"
-                    type="text"
-                    class="form-control"
-                    placeholder="Pet name here..."
-                  />
-                </div>
-                <!-- ERROR: NAME -->
-                <div class="mb-3">
-                  <form:errors
-                    path="name"
-                    class="py-1 alert alert-danger"
-                  ></form:errors>
-                </div>
-                <!-- AGE -->
-                <div class="mb-3">
-                  <form:label path="age" class="form-label">Age:</form:label>
-                  <form:input
-                    path="age"
-                    type="number"
-                    class="form-control"
-                    placeholder="Pet age here..."
-                  />
-                </div>
-                <!-- ERROR: AGE -->
-                <div class="mb-3">
-                  <form:errors
-                    path="age"
-                    class="py-1 mb-3 alert alert-danger"
-                  ></form:errors>
-                </div>
-                <!-- GENDER -->
-                <form:label path="sex" class="form-label">Gender:</form:label>
-                <div class="mb-3">
-                  <form:select class="select p-2" path="sex">
-                    <form:option value="">Pick a gender...</form:option>
-                    <form:option value="female">Female</form:option>
-                    <form:option value="male">Male</form:option>
-                  </form:select>
-                </div>
-                <!-- ERROR: sex -->
-                <div class="mb-3">
-                  <form:errors
-                    path="sex"
-                    class="py-1 alert alert-danger"
-                  ></form:errors>
-                </div>
-                <!-- DATE OF ARRIVAL -->
-                <div class="mb-3">
-                  <form:label path="dateOfArrival" class="form-label"
-                    >Date of Arrival:</form:label
-                  >
-                  <form:input
-                    type="date"
-                    class="form-control"
-                    path="dateOfArrival"
-                  />
-                </div>
-                <!-- ERROR: date of arrival -->
-                <div class="mb-3">
-                  <form:errors
-                    path="dateOfArrival"
-                    class="py-1 alert alert-danger"
-                  ></form:errors>
-                </div>
-                <!-- SPECIES -->
-                <form:label path="species" class="form-label"
-                  >Species</form:label
-                >
-                <div class="mb-3">
-                  <form:select class="select p-2" path="species">
-                    <form:option value="">Add a species...</form:option>
-                    <form:option value="cat">cat</form:option>
-                    <form:option value="dog">dog</form:option>
-                    <form:option value="bird">bird</form:option>
-                    <form:option value="reptile">reptile</form:option>
-                  </form:select>
-                </div>
-                <div class="mb-3">
-                  <form:errors
-                    path="species"
-                    class="py-1 alert alert-danger"
-                  ></form:errors>
-                </div>
-                <!-- BREED -->
-                <div class="mb-3">
-                  <form:label path="breed" class="form-label"
-                    >Breed:</form:label
-                  >
-                  <form:input
-                    path="breed"
-                    type="text"
-                    class="form-control"
-                    placeholder="Pet breed here..."
-                  />
-                </div>
-                <!-- ERROR: BREED -->
-                <div class="mb-3">
-                  <form:errors
-                    path="breed"
-                    class="py-1 mb-3 alert alert-danger"
-                  ></form:errors>
-                </div>
-                <!-- DESCRIPTION -->
-                <div class="mb-3">
-                  <form:label path="description" class="form-label"
-                    >Tell us about your pet!</form:label
-                  >
-                  <form:textarea
-                    path="description"
-                    class="form-control"
-                    style="height: 100px"
-                    placeholder="In what condition did your pet arrive? Did they use to live with another family or did they arrive alone? Let us know..."
-                  ></form:textarea>
-                </div>
-                <div class="mb-3">
-                  <form:errors
-                    path="description"
-                    class="py-1 mb-3 alert alert-danger"
-                  ></form:errors>
-                </div>
-                <form:input type="hidden" path="petStatus" value="Available" />
-                <div class="">
-                  <button class="btn">Create Pet</button>
-                </div>
-              </form:form>
-            </div>
-          </div>
-        </div>
-      </main>
+          <div class="p-2 col-sm-10">
+            
+            	<h2>Pet Inquiry Dashboard</h2>
+              	<table class="table table-striped">
+				<thead class="table-secondary">
+					<tr>
+						<th>User Name</th>
+						<th>Pet Name</th>
+						<th>Adoption/Foster</th>
+						<th>Pickup</th>
+						<th>Dropoff</th>
+						<th>Responded</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="inquiry" items="${inquiries}">
+					<tr>
+        				<td><c:out value="${inquiry.user.name}"></c:out></td>
+        				<td><a href="/items/${inquiry.pet.id}" class="text-success"><c:out value="${inquiry.pet.name}"></c:out></a></td>
+        				<td><c:out value="${inquiry.inquiryType}"></c:out></td>
+        				<td><c:out value="${inquiry.dateOfPickup}"></c:out></td>
+        				<td><c:out value="${inquiry.dateOfDropoff}"></c:out></td>
+        				<td><c:out value="${inquiry.responded}"></c:out></td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+              
+       </main>
     </div>
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
