@@ -46,9 +46,9 @@ public class Events {
         
         if (session.getAttribute("loggedUser") == null) {
             redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-            return "redirect:/login";
+            return "redirect:/";
         }
-
+        
         Long id = (Long) session.getAttribute("loggedUser");
         User loggedUser = userServ.findById(id);
         model.addAttribute("loggedUser", loggedUser);
@@ -57,16 +57,20 @@ public class Events {
     }
 
     @PostMapping("/event/new")
-    public String createEvent(@ModelAttribute("newEvent") Event eventNew, BindingResult result) {
+    public String createEvent(@ModelAttribute("newEvent") Event eventNew, BindingResult result, HttpSession session, Model model) {
         if (result.hasErrors()) {
+        	 Long id = (Long) session.getAttribute("loggedUser");
+             User loggedUser = userServ.findById(id);
+             model.addAttribute("loggedUser", loggedUser);
+
             System.out.println(result);
-            return "redirect:/event/new";
+            return "NewEvent.jsp";
         }
 
         
         eventServ.create(eventNew);
         
-        return "redirect:events";
+        return "redirect:/events";
     }
 
 }

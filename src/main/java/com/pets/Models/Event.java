@@ -11,6 +11,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,7 +26,7 @@ public class Event {
     @NotEmpty(message = "Name is required")
     private String eventName;
 
-    @NotEmpty
+    @NotNull(message="Date of event required")
     private Date date;
 
     @NotEmpty
