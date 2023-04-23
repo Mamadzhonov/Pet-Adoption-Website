@@ -107,8 +107,8 @@ pageEncoding="UTF-8"%>
             <div class="card p-4 form-card">
               <div class="d-flex align-items-center justify-content-between">
                 <h2>Edit Pet</h2>
-                <!-- need to update route so that it redirects back to available pets -->
-                <a href="/pet" class="btn admin-btn">Cancel</a>
+                <!-- need to update route so that it redirects back to pet view page -->
+                <a href="/pet/${petId}" class="btn admin-btn">Cancel</a>
               </div>
               <hr />
               <form:form
