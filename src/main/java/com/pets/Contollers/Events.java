@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,10 +20,8 @@ import com.pets.Services.UserService;
 
 @Controller
 public class Events {
-
     @Autowired
     private UserService userServ;
-
     @Autowired
     private EventService eventServ;
 
@@ -37,6 +36,7 @@ public class Events {
         Long id = (Long) session.getAttribute("loggedUser");
         User loggedUser = userServ.findById(id);
         model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("events", eventServ.all());
 
         return "Events.jsp";
     }
@@ -70,6 +70,24 @@ public class Events {
         eventServ.create(eventNew);
         
         return "redirect:/events";
+    }
+    
+//	VIEW EVENT PAGE
+    @GetMapping("/events/{id}")
+    public String eventDetails(Model model, @PathVariable("eventId") Long eventId, HttpSession session, RedirectAttributes redirect) {
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/";
+		}
+		
+		Long id = (Long) session.getAttribute("loggedUser");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
+		
+		Event event = eventServ.findById(eventId);
+		model.addAttribute("event", event);
+		return ""; 
+			// ^^^ Add Event Details jsp when available
     }
 
 }
