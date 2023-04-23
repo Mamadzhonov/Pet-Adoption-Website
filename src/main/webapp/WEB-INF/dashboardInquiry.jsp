@@ -45,8 +45,8 @@ pageEncoding="UTF-8"%>
     <!-- PAGE CONTAINER -->
     <div class="p-3">
       <!-- NAV BAR -->
-      <div
-        class="d-flex flex-wrap justify-content-between align-items-center mb-4"
+     <div
+        class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
           <img
@@ -59,7 +59,7 @@ pageEncoding="UTF-8"%>
         <div class="d-flex align-items-center ms-auto">
           <a href="/home" class="nav-link">Home</a>
           |
-          <a href="/pet" class="nav-link">Pets</a>
+          <a href="/pet?page=1" class="nav-link">Pets</a>
           |
           <a href="/about" class="nav-link">About</a>
           |
@@ -67,13 +67,23 @@ pageEncoding="UTF-8"%>
         </div>
         <!-- navbar: end section -->
         <div class="dropdown" id="dropdown">
-          <a
+          <c:if test="${loggedUser.userType == 'user'}">
+          <a 
             class="btn dropdown-toggle"
             href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+          ></c:if>
+          <c:if test="${loggedUser.userType == 'admin'}">
+             <a
+            class="btn admin-btn dropdown-toggle dropdown-toggle-admin"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
+          </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
             <!-- will be replacing with {user.name} -->
@@ -81,27 +91,35 @@ pageEncoding="UTF-8"%>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <h6 class="dropdown-header">
+                User Type: <c:out value="${loggedUser.userType}"></c:out>
+              </h6>
+            </li>
             <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
             <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
             <li><hr class="dropdown-divider" /></li>
-            <li><h6 class="dropdown-header">Admin Actions:</h6></li>
-            <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
-            <li><a class="dropdown-item" href="/event/add">+ New Event</a></li>
-            <li><hr class="dropdown-divider" /></li>
+            <c:if test="${loggedUser.userType == 'admin'}">
+              <li><h6 class="dropdown-header">Admin Actions:</h6></li>
+              <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
+              <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
+              <li>
+                <a class="dropdown-item" href="/event/new">+ New Event</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+            </c:if>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-        <!--  -->
-      </div>
       <main class="p-3 mb-5">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-start">
           <!-- LEFT COLUMN -->
           <div class="p-2 flex-fill">
             <!-- <div class="card"> -->
             <img
-              src="/images/new_pet.png"
+              src="/images/inquiry_dashboard.png"
               alt=""
-              style="height: auto; width: 375px"
+              style="height: auto; width: 275px"
             />
             <!-- </div> -->
           </div>
@@ -122,8 +140,8 @@ pageEncoding="UTF-8"%>
 				<tbody>
 					<c:forEach var="inquiry" items="${inquiries}">
 					<tr>
-        				<td><c:out value="${inquiry.user.name}"></c:out></td>
-        				<td><a href="/items/${inquiry.pet.id}" class="text-success"><c:out value="${inquiry.pet.name}"></c:out></a></td>
+						<td><c:out value="${inquiry.inquirer.userName}"></c:out></td>
+        				<td><a href="/pet/inquire/${inquiry.id}" class="text-success"><c:out value="${inquiry.pet.name}"></c:out></a></td>
         				<td><c:out value="${inquiry.inquiryType}"></c:out></td>
         				<td><c:out value="${inquiry.dateOfPickup}"></c:out></td>
         				<td><c:out value="${inquiry.dateOfDropoff}"></c:out></td>

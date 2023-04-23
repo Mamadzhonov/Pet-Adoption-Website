@@ -46,7 +46,7 @@ pageEncoding="UTF-8"%>
     <div class="p-3">
       <!-- NAV BAR -->
       <div
-        class="d-flex flex-wrap justify-content-between align-items-center mb-4"
+        class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
           <img
@@ -59,7 +59,7 @@ pageEncoding="UTF-8"%>
         <div class="d-flex align-items-center ms-auto">
           <a href="/home" class="nav-link">Home</a>
           |
-          <a href="/pet" class="nav-link">Pets</a>
+          <a href="/pet?page=1" class="nav-link">Pets</a>
           |
           <a href="/about" class="nav-link">About</a>
           |
@@ -67,13 +67,23 @@ pageEncoding="UTF-8"%>
         </div>
         <!-- navbar: end section -->
         <div class="dropdown" id="dropdown">
-          <a
+          <c:if test="${loggedUser.userType == 'user'}">
+          <a 
             class="btn dropdown-toggle"
             href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+          ></c:if>
+          <c:if test="${loggedUser.userType == 'admin'}">
+             <a
+            class="btn admin-btn dropdown-toggle dropdown-toggle-admin"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
+          </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
             <!-- will be replacing with {user.name} -->
@@ -81,18 +91,26 @@ pageEncoding="UTF-8"%>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <h6 class="dropdown-header">
+                User Type: <c:out value="${loggedUser.userType}"></c:out>
+              </h6>
+            </li>
             <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
             <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
             <li><hr class="dropdown-divider" /></li>
-            <li><h6 class="dropdown-header">Admin Actions:</h6></li>
-            <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
-            <li><a class="dropdown-item" href="/event/add">+ New Event</a></li>
-            <li><hr class="dropdown-divider" /></li>
+            <c:if test="${loggedUser.userType == 'admin'}">
+              <li><h6 class="dropdown-header">Admin Actions:</h6></li>
+              <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
+              <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
+              <li>
+                <a class="dropdown-item" href="/event/new">+ New Event</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+            </c:if>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-        <!--  -->
-      </div>
       <main class="p-3 mb-5">
         <div class="d-flex align-items-center">
           <!-- LEFT COLUMN -->
@@ -112,24 +130,24 @@ pageEncoding="UTF-8"%>
               <hr />
               <p>I am interested in</p>
               <form:form
-                action="/inquiry/add"
+                action="/pet/add/inquiry"
                 class="mt-2"
                 method="POST"
                 modelAttribute="newInquiry">
               <!-- ADOPT/FOSTER -->
                 <div class="mb-3">
-                  <form:label path="name" class="form-label"
-                    >Pet Name:</form:label
-                  >
-                  <input type="radio" id="adopting" name="inquiryType" value="Adopting">
-					<label for="Adopting">Adopting</label><br>
-				  <input type="radio" id="Fostering" name="inquiryType" value="Fostering">
-					<label for="Fostering">Fostering</label><br>                    
+
+                 
+                 
+                 <input type="radio" id="inquiryType"  name="inquiryType" value="Adopting">
+				<label for="inquiryType">Adopting</label><br>
+				<input type="radio" id="inquiryType" name="inquiryType" value="Fostering">
+				<label for="inquiryType">Fostering</label><br>                   
                   
                 </div>
                 <!-- ERROR: INQUIRY TYPE -->
                 <form:errors
-                  path="inquiry_type"
+                  path="inquiryType"
                   class="py-1 alert alert-danger"
                 ></form:errors>
                 <!-- DATE OF PICKUP -->
@@ -182,6 +200,9 @@ pageEncoding="UTF-8"%>
                 ></form:errors>
                 <!-- PET ID OF THE PET BEING FOSTERED OR ADOPTED -->
                 <input type="hidden" id="pet" name="pet" value="${pet.id}">
+                
+                <!-- USER ID OF THE USER THAT IS INQUIRING -->
+                <input type="hidden" id="inquirer_id" name="inquirer_id" value="${loggedUser.id}">
 
                 <!-- DEFAULT THE RESPONDED FLAG TO NO  -->
                 <input type="hidden" id="responded" name="responded" value="No">

@@ -46,7 +46,7 @@ pageEncoding="UTF-8"%>
     <div class="p-3">
       <!-- NAV BAR -->
       <div
-        class="d-flex flex-wrap justify-content-between align-items-center mb-4"
+        class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
           <img
@@ -67,13 +67,23 @@ pageEncoding="UTF-8"%>
         </div>
         <!-- navbar: end section -->
         <div class="dropdown" id="dropdown">
-          <a
+          <c:if test="${loggedUser.userType == 'user'}">
+          <a 
             class="btn dropdown-toggle"
             href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+          ></c:if>
+          <c:if test="${loggedUser.userType == 'admin'}">
+             <a
+            class="btn admin-btn dropdown-toggle dropdown-toggle-admin"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
+          </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
             <!-- will be replacing with {user.name} -->
@@ -81,18 +91,26 @@ pageEncoding="UTF-8"%>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <h6 class="dropdown-header">
+                User Type: <c:out value="${loggedUser.userType}"></c:out>
+              </h6>
+            </li>
             <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
             <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
             <li><hr class="dropdown-divider" /></li>
-            <li><h6 class="dropdown-header">Admin Actions:</h6></li>
-            <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
-            <li><a class="dropdown-item" href="/event/add">+ New Event</a></li>
-            <li><hr class="dropdown-divider" /></li>
+            <c:if test="${loggedUser.userType == 'admin'}">
+              <li><h6 class="dropdown-header">Admin Actions:</h6></li>
+              <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
+              <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
+              <li>
+                <a class="dropdown-item" href="/event/new">+ New Event</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+            </c:if>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-        <!--  -->
-      </div>
       <main class="p-3 mb-5">
         <div class="d-flex align-items-center">
           <!-- LEFT COLUMN -->
@@ -160,6 +178,7 @@ pageEncoding="UTF-8"%>
                     <form:option value="male">Male</form:option>
                   </form:select>
                 </div>
+                <!-- test test test -->
                 <!-- ERROR: sex -->
                 <div class="mb-3">
                   <form:errors
@@ -251,6 +270,7 @@ pageEncoding="UTF-8"%>
         </div>
       </main>
     </div>
+    <!-- FOOTER -->
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-3">

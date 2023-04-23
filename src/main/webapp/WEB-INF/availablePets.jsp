@@ -64,13 +64,23 @@
         </div>
         <!-- navbar: end section -->
         <div class="dropdown" id="dropdown">
-          <a
+          <c:if test="${loggedUser.userType == 'user'}">
+          <a 
             class="btn dropdown-toggle"
             href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+          ></c:if>
+          <c:if test="${loggedUser.userType == 'admin'}">
+             <a
+            class="btn admin-btn dropdown-toggle dropdown-toggle-admin"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
+          </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
             <!-- will be replacing with {user.name} -->
@@ -86,107 +96,124 @@
             <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
             <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
             <li><hr class="dropdown-divider" /></li>
-            <li><h6 class="dropdown-header">Admin Actions:</h6></li>
-            <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
-            <li><a class="dropdown-item" href="/event/add">+ New Event</a></li>
-            <li><hr class="dropdown-divider" /></li>
+            <c:if test="${loggedUser.userType == 'admin'}">
+              <li><h6 class="dropdown-header">Admin Actions:</h6></li>
+              <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
+              <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
+              <li>
+                <a class="dropdown-item" href="/event/new">+ New Event</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+            </c:if>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-      </div>
         <!-- NAV BAR END -->
 	</div>
 <!-- Body -->
+<main class="p-3 mb-5">
+	<div>
+		<h1>Our Available Pets:</h1>
+	</div>
+	<div class="d-flex align-items-stretch">
 
-<div>
-<h1>Our Available Pets:</h1>
-</div>
-
-<!-- Pet Cards -->
-<!-- Row of Pets -->
-	<div class="d-flex row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
 	<!-- Filter Box -->
-		<div class="">
-			<div class="col">
-				<div class="card h-100 opacity-50" style="width: 18rem;">
-	  				<div class="card-body">
-		  				<ul class="list-group list-group-flush ">
-		  					<li class="text-start ">Filter Categories</li>
-		  					<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="catCheckboxFilter" name="cat">
-						    	<label class="form-check-label stretched-link" for="catCheckboxFilter"><small>Cats</small></label>
-						  	</li>
-						  	<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="dogCheckboxFilter" name="dog">
-						    	<label class="form-check-label stretched-link" for="dogCheckboxFilter"><small>Dogs</small></label>
-						  	</li>
-						  	<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="birdCheckboxFilter" name="bird">
-						    	<label class="form-check-label stretched-link" for="birdCheckboxFilter"><small>Birds</small></label>
-						  	</li>
-						  	<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="reptileCheckboxFilter" name="reptile">
-						    	<label class="form-check-label stretched-link" for="reptileCheckboxFilter"><small>Reptiles</small></label>
-						  	</li>
-						  	<!-- change to select -->
-						  	<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="maleCheckboxFilter">
-						    	<label class="form-check-label stretched-link" for="maleCheckboxFilter"><small>Male</small></label>
-						  	</li>
-						  	<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="femaleCheckboxFilter">
-						    	<label class="form-check-label stretched-link" for="femaleCheckboxFilter"><small>Female</small></label>
-						  	</li>
-						</ul>
-	  				</div>
-				</div>
-			</div>
+	<div class="row">
+	<div class="p-2 col-sm" style="">
+		<div class="card form-card">
+		<form action="/pet/filter" method="POST" class="">
+		  <fieldset class="">
+		    <legend class="">Filter Categories</legend>
+		    <div class="">
+		    <!-- Species Filter -->
+		      <div class="">
+		        <input class="" type="checkbox" name="cat" id="catCheckboxFilter" value="">
+		        <label class="form-label" for="catCheckboxFilter">
+		          Cats
+		        </label>
+		      </div>
+		      <div class="">
+		        <input class="" type="checkbox" name="dog" id="dogCheckboxFilter" value="">
+		        <label class="form-label" for="dogCheckboxFilter">
+		          Dogs
+		        </label>
+		      </div>
+		      <div class="">
+		        <input class="" type="checkbox" name="bird" id="birdCheckboxFilter" value="">
+		        <label class="form-label" for="birdCheckboxFilter">
+		          Birds
+		        </label>
+		      </div>
+		      <div class="">
+		        <input class="" type="checkbox" name="reptile" id="reptileCheckboxFilter" value="">
+		        <label class="form-label" for="reptileCheckboxFilter">
+		          Reptiles
+		        </label>
+		      </div>
+		      <!-- Age Filter  -->
+			  <label class="form-label">Age Range:</label>
+		      <div class="row g-3">
+			      <div class="col-sm">
+			        <input class="" type="number" name="low-age" id="lowAgeFilter" placeholder="0">
+			      </div>
+			      <div class="col-sm">
+			        <input class="" type="number" name="high-age" id="highAgeFilter" placeholder="10">
+			      </div>
+		      </div>
+			<!-- Gender Filter -->
+		      <div class="col-auto">
+				<select class="form-select" id="sexFilter" name="sex">
+		
+					<option value="">Pick a gender...</option>
+					<option value="Female">Female</option>
+					<option value="Male">Male</option>
+				</select>
+		      </div>
+		    </div>	      
+		  </fieldset>
+		  <button type="submit" class="btn my-0">Filter</button>
+		</form>
 		</div>
-	
-		<c:forEach var="pet" items="${pets}">
+	</div>
+	<!-- End Filter Box -->
+	<!-- Pet Cards -->
+	<div class="d-flex row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+		<c:forEach var="pet" items="${petList}">
 			<div class="col">
 				<div class="card h-100" style="width: 18rem;">
-	  				<img src="..." class="card-img-top" alt="Pet Image">
+	  				<img
+			            src="/images/${pet.species}.png"
+			            class="img-thumbnail pet-profile mb-3 card-img-top"
+			            alt="Pet Image"
+			          />
 	  				<div class="card-body">
-	  					<h5 class="card-title"><a href=""><c:out value="${pet.name}"/></a></h5>
-	    				<p class="card-text"><c:out value="${pet.age}"/></p>
+	  				<div class="row">
+	  					<img
+			                src="/images/${pet.species}_icon.png"
+			                alt=""
+			                style="height: 35px"
+			              />
+	  					<h5 class="card-title mx-2"><a href="/pet/${pet.id}"><c:out value="${pet.name}"/></a></h5>
+	  				</div>
+	    				<p class="card-text"><c:out value="${pet.age}"/> Years Old</p>
 	    				<p class="card-text"><c:out value="${pet.breed}"/></p>
 	  				</div>
 				</div>
 			</div>
 		</c:forEach>
-		
-		<div class="col">
-			<div class="card h-100" style="width: 18rem;">
-  				<img src="..." class="card-img-top" alt="Pet Image">
-  				<div class="card-body">
-  					<h5 class="card-title">Pet Name</h5>
-    				<p class="card-text">Some Pet Details Here</p>
-    				<p class="card-text">Some Pet Details Here</p>
-  				</div>
-			</div>
-		</div>
-		
-		
-		<div class="col">
-			<div class="card h-100" style="width: 18rem;">
-  				<img src="..." class="card-img-top" alt="Pet Image">
-  				<div class="card-body">
-  					<h5 class="card-title">Pet Name</h5>
-    				<p class="card-text">Some Pet Details Here</p>
-    				<p class="card-text">Some Pet Details Here</p>
-  				</div>
-			</div>
-		</div>
 	</div>
 	<!-- Row of Pets -->
+	</div>
+	</div>
+	</main>
+	</div>
 	
 	<!-- Pagination -->
 	<div class="text-center">
-	<a href="">1</a>
-	<a href="">2</a>
-	<a href="">3</a>
-	<a href="">4</a>
+	<a href="/pet?page=1">1</a>
+	<a href="/pet?page=2">2</a>
+	<a href="/pet?page=3">3</a>
+	<a href="/pet?page=4">4</a>
 	
 	</div>
 
