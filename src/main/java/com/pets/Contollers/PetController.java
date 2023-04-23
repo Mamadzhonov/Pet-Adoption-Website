@@ -83,11 +83,31 @@ public class PetController {
 		}
 		
 		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
-		
-		
+		String filterURL = "";
 		
 		model.addAttribute("loggedUser", loggedUser);
+		
 		model.addAttribute("filterList", filter);
+		
+		if(filter != null) {
+			for(String filterString : filter) {
+				filterURL += "&filter=" + filterString;
+				if(filterString.contains("lowAge")) {
+					int lowAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
+					model.addAttribute("lowAge", lowAge);
+				}
+				if(filterString.contains("highAge")) {
+					int highAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
+					model.addAttribute("highAge", highAge);
+				}
+				if(filterString.contains("sex")) {
+					String filterSex = filterString.substring(filterString.indexOf(":") + 1);
+					model.addAttribute("sexFilter", filterSex);
+				}
+			}
+		}
+		
+		model.addAttribute("filterURL", filterURL);
 		
 		if(size == null) {
 			model.addAttribute("petList", petService.getPetPage(page, filter));
