@@ -3,6 +3,7 @@ package com.pets.Models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,11 +52,13 @@ public class Pet {
 	@NotNull(message="Date of Arrival required")
 	private Date dateOfArrival;
 
+	private String petStatus;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToMany(mappedBy="pet", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="pet", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	private List<Inquiry> inquiries;
 
 	@Column(updatable = false)
@@ -168,6 +171,15 @@ public class Pet {
 		this.sex = sex;
 	}
 	
+	
+	public String getPetStatus() {
+		return petStatus;
+	}
+
+	public void setPetStatus(String petStatus) {
+		this.petStatus = petStatus;
+	}
+
 	public List<Inquiry> getInquiries() {
 		return inquiries;
 	}
@@ -175,4 +187,6 @@ public class Pet {
 	public void setInquiries(List<Inquiry> inquiries) {
 		this.inquiries = inquiries;
 	}
+	
+	
 }

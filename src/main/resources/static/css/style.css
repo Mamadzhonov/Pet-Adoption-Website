@@ -24,9 +24,18 @@ select {
 	font-weight:300;
 	background-color:#FFA400;
 	color: #263238;
+	transition: all 200ms ease;
 }
 .btn:hover {
 	color: #f7f5ea;
+}
+.admin-btn{
+	background-color: #c65a3f;
+	color:#f7f5ea;
+}
+.admin-btn:hover {
+	background-color: #86230B;
+	color:#f7f5ea;
 }
 .nav-link{
 	font-family: 'Unbounded', cursive;
@@ -96,6 +105,9 @@ ul, li {
 	border: 2.5px solid #FFA400;
 	border-radius:10px;
 }
+.admin {
+	border: 2.5px solid #c65a3f;
+}
 .pet-profile{
 	border: 2.5px solid #FFA400;
 	border-radius: 10px;
@@ -103,4 +115,9 @@ ul, li {
   object-fit: cover;
   width: auto;
   height: auto;
+}
+.alert{
+	font-family: 'Unbounded', cursive;
+	font-weight: 300;
+	font-size:12px;
 }

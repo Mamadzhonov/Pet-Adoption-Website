@@ -22,10 +22,10 @@ public class MainContoller {
 	@Autowired
 	private UserService userServ;
 
-	@GetMapping("/")
-	public String index() {
-		return "redirect:/register";
-	}
+//	@GetMapping("/")
+//	public String index() {
+//		return "redirect:/register";
+//	}
 
 	// Making a test route for the landing page
 	@GetMapping("/home")
@@ -34,7 +34,7 @@ public class MainContoller {
 
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		Long id = (Long) session.getAttribute("loggedUser");
@@ -54,7 +54,7 @@ public class MainContoller {
 
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		Long id = (Long) session.getAttribute("loggedUser");
@@ -64,59 +64,99 @@ public class MainContoller {
 		return "Index.jsp";
 	}
 	
-	
-	@GetMapping("/register")
-	public String registration(Model model, HttpSession session, RedirectAttributes redirect) {
+	// USER REGISTER LOGIN
+	@GetMapping("/")
+	public String userRegLogin(Model model, HttpSession session, RedirectAttributes redirect) {
 		model.addAttribute("newUser", new User());
-		return "Registration.jsp";
+		model.addAttribute("newLogin", new LoginUser());
+		return "userRegLogin.jsp";
 	}
-
+	
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute("newUser") User user, BindingResult result, HttpSession session,
 			Model model, RedirectAttributes redirect) {
 		model.addAttribute("newLogin", new LoginUser());
-
+		
 		// Checks if data in frontend maches with BD requirments
 		if (result.hasErrors()) {
-			return "Registration.jsp";
+			// 
+			return "userRegLogin.jsp";
 		}
-
+		
 		// Check if email already used!
 		if (userServ.findByEmail(user.getEmail())) {
 			redirect.addFlashAttribute("emailExist", "Email is already used!");
-			return "redirect:/register";
+			return "redirect:/";
 		}
-
+		
 		// Storing logged User's id
 		User newUser = userServ.register(user, result);
 		if (newUser == null) {
 			model.addAttribute("newLogin", new LoginUser());
-			return "Registration.jsp";
+			return "userRegLogin.jsp";
 		}
 		session.setAttribute("loggedUser", user.getId());
-
+		
 		return "redirect:/home";
 	}
-
-	@GetMapping("/login")
-	public String getLoginPage(Model model) {
-		model.addAttribute("newLogin", new LoginUser());
-		return "Login.jsp";
+	// ADMIN REGISTER LOGIN
+	@GetMapping("/admin/register-login")
+	public String adminRegLogin(Model model, HttpSession session, RedirectAttributes redirect) {
+		model.addAttribute("newUser", new User());
+		return "adminRegLogin.jsp";
 	}
-
+	
+	@PostMapping("/admin/register")
+	public String adminRegister(@Valid @ModelAttribute("newUser") User user, BindingResult result, HttpSession session,
+			Model model, RedirectAttributes redirect) {
+		
+		// Checks if data in frontend maches with BD requirments
+		if (result.hasErrors()) {
+			return "adminRegLogin.jsp";
+		}
+		
+		// Check if email already used!
+		if (userServ.findByEmail(user.getEmail())) {
+			redirect.addFlashAttribute("emailExist", "Email is already used!");
+			return "redirect:/admin/register";
+		}
+		
+		// Storing logged User's id
+		User newUser = userServ.register(user, result);
+		if (newUser == null) {
+			return "adminRegLogin.jsp";
+		}
+		session.setAttribute("loggedUser", user.getId());
+		
+		return "redirect:/home";
+	}
+	
 	@PostMapping("/login")
 	public String login(@Valid @ModelAttribute("newLogin") LoginUser usrLogin, HttpSession session, Model model,
 			BindingResult result, RedirectAttributes redirect) {
-
+		
 		User user = userServ.login(usrLogin, result);
 		if (user == null) {
 			model.addAttribute("newUser", new User());
 			redirect.addFlashAttribute("loginIssue", "Login or Password is invalid!");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 		session.setAttribute("loggedUser", user.getId());
 		return "redirect:/home";
 	}
+//	@GetMapping("/register")
+//	public String registration(Model model, HttpSession session, RedirectAttributes redirect) {
+//		model.addAttribute("newUser", new User());
+//		return "Registration.jsp";
+//	}
+//	
+	
+//	@GetMapping("/login")
+//	public String getLoginPage(Model model) {
+//		model.addAttribute("newLogin", new LoginUser());
+//		return "Login.jsp";
+//	}
+//
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
@@ -131,7 +171,7 @@ public class MainContoller {
 
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		Long id = (Long) session.getAttribute("loggedUser");

@@ -14,8 +14,15 @@ public class MessageService {
 	@Autowired
 	MessageRepository repo;
 	
-	public List<Message> findByInquiryId(Long inquiryId) {
+	public List<Message> getAllByInquiryId(Long inquiryId) {
 		return repo.findByInquiryId(inquiryId);
 	}
 	
+	public Message save(Message newMessage) {
+		return repo.save(newMessage);
+	}
+	
+	public void deleteById(Long id) {
+		repo.deleteById(id);
+	}
 }

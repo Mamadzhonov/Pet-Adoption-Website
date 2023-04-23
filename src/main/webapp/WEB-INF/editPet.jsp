@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Create New Pet</title>
+    <title>Edit Pet</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -97,24 +97,27 @@ pageEncoding="UTF-8"%>
         <div class="d-flex align-items-center">
           <!-- LEFT COLUMN -->
           <div class="p-2 flex-fill">
-            <!-- <div class="card"> -->
             <img
               src="/images/new_pet.png"
               alt=""
               style="height: auto; width: 375px"
             />
-            <!-- </div> -->
           </div>
           <div class="p-2 col-sm">
             <div class="card p-4 form-card">
-              <h2>Create a New Pet</h2>
+              <div class="d-flex align-items-center justify-content-between">
+                <h2>Edit Pet</h2>
+                <!-- need to update route so that it redirects back to available pets -->
+                <a href="/pet" class="btn admin-btn">Cancel</a>
+              </div>
               <hr />
               <form:form
-                action="/pet/add"
+                action="/pet/edit/${petId}"
                 class="mt-2"
                 method="POST"
-                modelAttribute="newPet"
+                modelAttribute="pet"
               >
+                <input type="hidden" name="_method" value="PUT" />
                 <!-- NAME -->
                 <div class="mb-3">
                   <form:label path="name" class="form-label"
@@ -241,9 +244,28 @@ pageEncoding="UTF-8"%>
                     class="py-1 mb-3 alert alert-danger"
                   ></form:errors>
                 </div>
-                <form:input type="hidden" path="petStatus" value="Available" />
-                <div class="">
-                  <button class="btn">Create Pet</button>
+                <div class="d-flex align-items-end justify-content-between">
+                  <div class="">
+                    <form:label path="species" class="form-label"
+                      >Pet Status</form:label
+                    >
+                    <div>
+                      <form:select class="select p-2" path="petStatus">
+                        <form:option value="">Set a status...</form:option>
+                        <form:option value="In process of adoption">
+                          In process of adoption
+                        </form:option>
+                        <form:option value="In process of fostering">
+                          In process of fostering
+                        </form:option>
+                        <form:option value="Available">Available</form:option>
+                        <form:option value="Not Available"
+                          >Not Available</form:option
+                        >
+                      </form:select>
+                    </div>
+                  </div>
+                  <button class="btn my-0">Edit Pet</button>
                 </div>
               </form:form>
             </div>
@@ -251,6 +273,7 @@ pageEncoding="UTF-8"%>
         </div>
       </main>
     </div>
+    <!-- FOOTER -->
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-3">
@@ -259,7 +282,7 @@ pageEncoding="UTF-8"%>
               src="/images/animalLogo_solid.png"
               alt=""
               style="height: 30px; padding-right: 10px; padding-bottom: 3px"
-            />Pet Adoption
+            />Pet Adform:option
           </h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2">
