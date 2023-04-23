@@ -108,114 +108,185 @@
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-        <!-- NAV BAR END -->
+        </div>
 	</div>
-<!-- Body -->
-<main class="p-3 mb-5">
+        <!-- NAV BAR END -->
+	
+	<!-- Body/Main Content -->
+	<!-- Available Pets Header -->
 	<div>
 		<h1>Our Available Pets:</h1>
 	</div>
+	<!-- Header End -->
+	<main class="p-3 mb-5">
 	<div class="d-flex align-items-stretch">
-
-	<!-- Filter Box -->
-	<div class="row">
-	<div class="p-2 col-sm" style="">
-		<div class="card form-card">
-		<form action="/pet/filter" method="POST" class="">
-		  <fieldset class="">
-		    <legend class="">Filter Categories</legend>
-		    <div class="">
-		    <!-- Species Filter -->
-		      <div class="">
-		        <input class="" type="checkbox" name="cat" id="catCheckboxFilter" value="">
-		        <label class="form-label" for="catCheckboxFilter">
-		          Cats
-		        </label>
-		      </div>
-		      <div class="">
-		        <input class="" type="checkbox" name="dog" id="dogCheckboxFilter" value="">
-		        <label class="form-label" for="dogCheckboxFilter">
-		          Dogs
-		        </label>
-		      </div>
-		      <div class="">
-		        <input class="" type="checkbox" name="bird" id="birdCheckboxFilter" value="">
-		        <label class="form-label" for="birdCheckboxFilter">
-		          Birds
-		        </label>
-		      </div>
-		      <div class="">
-		        <input class="" type="checkbox" name="reptile" id="reptileCheckboxFilter" value="">
-		        <label class="form-label" for="reptileCheckboxFilter">
-		          Reptiles
-		        </label>
-		      </div>
-		      <!-- Age Filter  -->
-			  <label class="form-label">Age Range:</label>
-		      <div class="row g-3">
-			      <div class="col-sm">
-			        <input class="" type="number" name="low-age" id="lowAgeFilter" placeholder="0">
+	
+	<!-- Left Column -->
+	<div class="p-2 col-sm-2">
+		<!-- Filter Box -->
+			<div class="card form-card p-4 mb-3">
+			<form action="/pet/filter" method="POST" class="">
+			  <fieldset class="d-flex mb-2">
+			    <legend class="">Filter</legend>
+			    <div class="">
+			    <!-- Species Filter -->
+			      <div class="">
+			        <input class="" type="checkbox" name="cat" id="catCheckboxFilter" <c:if test="${filterList.remove('cat')}">checked</c:if>>
+			        <label class="form-label" for="catCheckboxFilter">
+			          Cats
+			        </label>
 			      </div>
-			      <div class="col-sm">
-			        <input class="" type="number" name="high-age" id="highAgeFilter" placeholder="10">
+			      <div class="">
+			        <input class="" type="checkbox" name="dog" id="dogCheckboxFilter" <c:if test="${filterList.remove('dog')}">checked</c:if>>
+			        <label class="form-label" for="dogCheckboxFilter">
+			          Dogs
+			        </label>
 			      </div>
-		      </div>
-			<!-- Gender Filter -->
-		      <div class="col-auto">
-				<select class="form-select" id="sexFilter" name="sex">
-		
-					<option value="">Pick a gender...</option>
-					<option value="Female">Female</option>
-					<option value="Male">Male</option>
-				</select>
-		      </div>
-		    </div>	      
-		  </fieldset>
-		  <button type="submit" class="btn my-0">Filter</button>
-		</form>
-		</div>
-	</div>
-	<!-- End Filter Box -->
-	<!-- Pet Cards -->
-	<div class="d-flex row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-		<c:forEach var="pet" items="${petList}">
-			<div class="col">
-				<div class="card h-100" style="width: 18rem;">
-	  				<img
-			            src="/images/${pet.species}.png"
-			            class="img-thumbnail pet-profile mb-3 card-img-top"
-			            alt="Pet Image"
-			          />
-	  				<div class="card-body">
-	  				<div class="row">
-	  					<img
-			                src="/images/${pet.species}_icon.png"
-			                alt=""
-			                style="height: 35px"
-			              />
-	  					<h5 class="card-title mx-2"><a href="/pet/${pet.id}"><c:out value="${pet.name}"/></a></h5>
-	  				</div>
-	    				<p class="card-text"><c:out value="${pet.age}"/> Years Old</p>
-	    				<p class="card-text"><c:out value="${pet.breed}"/></p>
-	  				</div>
-				</div>
+			      <div class="">
+			        <input class="" type="checkbox" name="bird" id="birdCheckboxFilter" <c:if test="${filterList.remove('bird')}">checked</c:if>>
+			        <label class="form-label" for="birdCheckboxFilter">
+			          Birds
+			        </label>
+			      </div>
+			      <div class="">
+			        <input class="" type="checkbox" name="reptile" id="reptileCheckboxFilter" <c:if test="${filterList.remove('reptile')}">checked</c:if>>
+			        <label class="form-label" for="reptileCheckboxFilter">
+			          Reptiles
+			        </label>
+			      </div>
+			      <!-- Age Filter  -->
+				  <label class="form-label">Age Range:</label>
+			      <div class="d-flex row mb-2">
+				      <div class="col-sm">
+				        <input class="form-control" type="number" name="low-age" id="lowAgeFilter" placeholder="0" value="${lowAge}">
+				      </div>
+				      <div class="col-sm">
+				        <input class="form-control" type="number" name="high-age" id="highAgeFilter" placeholder="10" value="${highAge}">
+				      </div>
+			      </div>
+				<!-- Gender Filter -->
+			      <div class="col-sm">
+					<select class="form-select" id="sexFilter" name="sex">
+						<option value="">Pick a gender...</option>
+						<option value="Female" <c:if test="${sexFilter == 'Female'}">selected</c:if>>Female</option>
+						<option value="Male" <c:if test="${sexFilter == 'Male'}">selected</c:if>>Male</option>
+					</select>
+			      </div>
+			    </div>	      
+			  </fieldset>
+			  <button type="submit" class="btn my-0">Filter</button>
+			</form>
 			</div>
-		</c:forEach>
-	</div>
-	<!-- Row of Pets -->
-	</div>
-	</div>
-	</main>
-	</div>
-	
-	<!-- Pagination -->
-	<div class="text-center">
-	<a href="/pet?page=1">1</a>
-	<a href="/pet?page=2">2</a>
-	<a href="/pet?page=3">3</a>
-	<a href="/pet?page=4">4</a>
-	
-	</div>
+		</div>
+		<!-- End Filter Box -->
+		
+		<!-- Right Column -->
+		<div class="p-2 col-sm ml-4">
+		<!-- Pet Cards -->
+		<div class="row">
+			<c:forEach var="pet" items="${petList}">
+				<div class="g-col-6 mx-1 mb-2">
+					<div class="card h-100" style="width: 18rem;">
+		  				<img
+				            src="/images/${pet.species}.png"
+				            class="img-thumbnail pet-profile mb-3 card-img-top"
+				            alt="Pet Image"
+				          />
+		  				<div class="card-body">
+		  				<div class="row px-2">
+		  					<img
+				                src="/images/${pet.species}_icon.png"
+				                alt=""
+				                style="height: 20px"
+				              />
+		  					<h5 class="card-title mx-1"><a href="/pet/${pet.id}"><c:out value="${pet.name}"/></a></h5>
+		  				</div>
+		  				<div class="row px-2">
+		    				<p class="card-subtitle card-text mx-1"><small><c:out value="${pet.age}"/> y.o. <c:out value="${pet.sex}"/></small></p>
+		    				<p class="card-subtitle card-text"><small><c:out value="${pet.breed}"/></small></p>
+		  				</div>
+					</div>
+					</div>
+				</div>
+			</c:forEach>
+			</div>
+			<!-- Pet Card End -->
+
+			<!-- Pagination -->
+			<c:if test="${lastPage > 1}">
+				<div class="text-center">
+				<a href="/pet?page=1${filterURL}">First</a>
+				<c:if test="${currentPage != 1}">
+					<a href="/pet?page=${currentPage-1}${filterURL}">Previous</a>
+				</c:if>
+			
+				<c:if test="${currentPage != lastPage}">
+					<a href="/pet?page=${currentPage+1}${filterURL}">Next</a>
+				</c:if>
+				<a href="/pet?page=${lastPage}${filterURL}">Last</a>
+				</div>
+			</c:if>
+			<!-- Pagination End-->
+			</div>
+		</div>
+		</main>
+	<!-- FOOTER -->
+    <div class="footer px-4 pt-5 mt-5">
+      <div class="d-flex flex-wrap justify-content-between">
+        <div class="d-flex flex-column mb-3">
+          <h5>
+            <img
+              src="/images/animalLogo_solid.png"
+              alt=""
+              style="height: 30px; padding-right: 10px; padding-bottom: 3px"
+            />Pet Adoption
+          </h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="/home" class="nav-link p-0 text-muted">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/events" class="nav-link p-0 text-muted"
+                >Upcoming Events</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/about" class="nav-link p-0 text-muted">About</a>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex flex-column mb-3">
+          <form>
+            <h5>Subscribe to our newsletter</h5>
+            <p>Monthly digest of what's new and exciting from us.</p>
+            <div class="d-flex flex-column justify-content-between">
+              <label for="newsletter1" class="visually-hidden"
+                >Email address</label
+              >
+              <div class="d-flex justify-content-between row-gapping">
+                <input
+                  id="newsletter1"
+                  type="text"
+                  class="form-control"
+                  placeholder="Email address"
+                />
+                <button class="btn" type="button">Subscribe</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
+        <div>
+          <p>{will be putting the main repo github link }</p>
+        </div>
+        <div>© 2023 Pet Adoption Center</div>
+      </div>
+    </div>
 
 
 </body>

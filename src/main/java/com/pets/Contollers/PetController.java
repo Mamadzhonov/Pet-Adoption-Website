@@ -88,14 +88,41 @@ public class PetController {
 		}
 		
 		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
+		String filterURL = "";
 		
 		model.addAttribute("loggedUser", loggedUser);
 		
-		if(size == null) {
-			model.addAttribute("petList", petService.getPetPage(page, filter));
-		} else {
-			model.addAttribute("petList", petService.getPetPage(page, size, filter));
+		model.addAttribute("currentPage", page);
+		model.addAttribute("lastPage", petService.getNumLastPage(filter));
+		
+		model.addAttribute("filterList", filter);
+		
+		if(filter != null) {
+			for(String filterString : filter) {
+				filterURL += "&filter=" + filterString;
+				if(filterString.contains("lowAge")) {
+					int lowAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
+					model.addAttribute("lowAge", lowAge);
+				}
+				if(filterString.contains("highAge")) {
+					int highAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
+					model.addAttribute("highAge", highAge);
+				}
+				if(filterString.contains("sex")) {
+					String filterSex = filterString.substring(filterString.indexOf(":") + 1);
+					model.addAttribute("sexFilter", filterSex);
+				}
+			}
 		}
+		
+		model.addAttribute("filterURL", filterURL);
+		
+		List<Pet> petPage;
+		
+		petPage = petService.getPetPage(page, filter);
+		
+		model.addAttribute("petList", petPage);
+		
 		return "availablePets.jsp";//Replace this with the availablePets.jsp when it's added
 	}
 	
@@ -205,7 +232,7 @@ public class PetController {
 		if(highAge != null) {
 			filter = filter.concat("&filter=highAge:" + highAge);
 		}
-		if(sex != null || sex != "") {
+		if(sex != null && sex != "") {
 			if(!sex.equals("None")) {
 				filter = filter.concat("&filter=sex:" + sex);
 			}
@@ -282,6 +309,7 @@ public class PetController {
 		model.addAttribute("inquiry", inquiry);
 		return "respondInquiry.jsp";//Put the jsp file here when complete.
 	}
+
 	// SHOW THE INQUIRY DASHBOARD
 	@GetMapping("/inquire/dashboard")
 	public String inquiryDashboard(Model model, HttpSession session, RedirectAttributes redirect) {
@@ -320,5 +348,8 @@ public class PetController {
 			return "redirect:/inquire/dashboard";
 		}
 	}
+
+
+	
 
 }

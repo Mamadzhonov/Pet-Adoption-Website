@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8" %>
 <!-- c:out ; c:forEach etc. -->
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Formatting (dates) -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!-- form:form -->
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- for rendering errors on PUT routes -->
 <%@ page isErrorPage="true" %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>View Pet</title>
+    <title>Home</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -34,15 +34,18 @@ pageEncoding="UTF-8"%>
       href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;800&display=swap"
       rel="stylesheet"
     />
+    <!--  -->
     <!-- BOOTSTRAP ICONS -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
     />
   </head>
+
   <body>
-    <div class="p-3">
-     <div
+    <!-- NAV BAR -->
+    <div class="top-half p-3">
+      <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
@@ -54,9 +57,9 @@ pageEncoding="UTF-8"%>
           <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
         </div>
         <div class="d-flex align-items-center ms-auto">
-          <a href="/home" class="nav-link">Home</a>
+          <a href="/about" class="nav-link">Home</a>
           |
-          <a href="/pet?page=1" class="nav-link">Pets</a>
+          <a href="/about" class="nav-link">Pets</a>
           |
           <a href="/about" class="nav-link">About</a>
           |
@@ -64,109 +67,119 @@ pageEncoding="UTF-8"%>
         </div>
         <!-- navbar: end section -->
         <div class="dropdown" id="dropdown">
-          <c:if test="${loggedUser.userType == 'user'}">
-          <a 
+          <a
             class="btn dropdown-toggle"
             href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-          ></c:if>
-          <c:if test="${loggedUser.userType == 'admin'}">
-             <a
-            class="btn admin-btn dropdown-toggle dropdown-toggle-admin"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
           >
-          </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
             <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-              <h6 class="dropdown-header">
-                User Type: <c:out value="${loggedUser.userType}"></c:out>
-              </h6>
-            </li>
+          <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
+            <li><a class="dropdown-item" href="/pet/new">+ New Pet</a></li>
             <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <c:if test="${loggedUser.userType == 'admin'}">
-              <li><h6 class="dropdown-header">Admin Actions:</h6></li>
-              <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
-              <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
-              <li>
-                <a class="dropdown-item" href="/event/new">+ New Event</a>
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-            </c:if>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
+      </div>
     </div>
-    <!-- MAIN CONTENT -->
+
+    <!-- EDIT EVENT FORM -->
     <main class="p-3 mb-5">
-      <div class="d-flex align-items-stretch">
-        <!-- LEFT COLUMN -->
+      <div class="d-flex align-items-center justify-content-between flex-wrap">
+        <!-- NEW EVENT FORM column -->
         <div class="p-2 col-sm">
-          <!-- might be a nice touch to add the species icon next to the name -->
-          <div class="card p-4 form-card mb-3">
-            <div class="d-flex align-items-center mb-2">
-              <!-- PET IMAGE -->
-              <img
-                src="/images/${pet.species}_icon.png"
-                alt=""
-                style="height: 35px"
-              />
-              <h1 class="mx-2 mb-0"><c:out value="${pet.name}"></c:out></h1>
-            </div>
-            <hr />
-            <h6>Species: <c:out value="${pet.species}"></c:out></h6>
-            <h6>breed: {breed}</h6>
-            <h6>Gender: {sex}</h6>
-            <h6>Status: {status}</h6>
-            <c:if test="${loggedUser.userType == 'admin'}"></c:if>
-            <div>
-              <hr />
-              <h6>Admin Actions:</h6>
-              <div class="d-flex">
-                <a
-                  href="/pet/edit/${pet.id}"
-                  class="btn"
-                  style="margin-right: 15px"
-                  >Edit Pet</a
-                >
-                <a href="/" class="btn admin-btn">Delete Pet</a>
+          <div class="card p-4 form-card">
+            <div class="d-flex align-items-top justify-content-between">
+              <h2>Edit '<c:out value="${eventName}"></c:out>' Event</h2>
+              <div>
+                <a class="btn" href="/events">Back to Events</a>
               </div>
             </div>
-          </div>
-          <div class="card p-4 form-card">
-            <h3>About this pet:</h3>
             <hr />
-            <!-- <a href="https://www.flaticon.com/free-icons/dog" title="dog icons">Dog icons created by Freepik - Flaticon</a> -->
-            <p>
-              <c:out value="${pet.description}"></c:out>
-            </p>
+            <form:form
+              action="/event/${eventId}/edit"
+              method="POST"
+              modelAttribute="event"
+            >
+              <input type="hidden" name="_method" value="PUT" />
+              <!-- event name -->
+              <div class="mb-3">
+                <form:label path="eventName" class="form-label"
+                  >Event Name:</form:label
+                >
+                <form:input
+                  path="eventName"
+                  class="form-control"
+                  placeholder="Your event name..."
+                />
+              </div>
+              <!-- error: event name -->
+              <form:errors class="text-danger" path="eventName"></form:errors>
+              <!-- date of event -->
+              <div class="mb-3">
+                <form:label path="date" class="form-label"
+                  >Date of Event:</form:label
+                >
+                <form:input type="date" class="form-control" path="date" />
+              </div>
+              <!-- error: date -->
+              <div class="mb-3">
+                <form:errors
+                  path="date"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+              </div>
+              <!-- location -->
+              <div class="mb-3">
+                <form:label path="location" class="form-label"
+                  >Location</form:label
+                >
+                <form:input
+                  path="location"
+                  class="form-control"
+                  placeholder="Your event's location..."
+                />
+              </div>
+              <!-- error: location -->
+              <form:errors class="text-danger" path="location"></form:errors>
+              <!-- event details -->
+              <div class="mb-3">
+                <form:label path="eventDetails" class="form-label"
+                  >Event Details</form:label
+                >
+                <form:textarea
+                  path="eventDetails"
+                  class="form-control"
+                  rows="5"
+                  cols="33"
+                  placeholder="Write a short description for your event here..."
+                />
+              </div>
+              <form:errors
+                class="text-danger"
+                path="eventDetails"
+              ></form:errors>
+              <div>
+                <button class="btn">Create Event</button>
+              </div>
+            </form:form>
           </div>
         </div>
-        <!-- RIGHT COLUMN -->
-        <div class="p-2 col-sm">
-          <!-- instead of a c:if, we can pass through what species to find the image -->
+        <div class="p-2 flex-fill">
+          <!-- <div class="card"> -->
           <img
-            src="/images/${pet.species}.png"
-            class="img-thumbnail pet-profile mb-3"
-            alt="..."
+            src="/images/event_img.png"
+            alt=""
+            style="height: auto; width: 375px"
           />
-          <div class="card p-4 form-card">
-            <h3>Location</h3>
-            <!-- leaving space for location, if we need it -->
-            <!-- can always take this out if we need to -->
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </main>

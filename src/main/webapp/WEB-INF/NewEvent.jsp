@@ -118,12 +118,13 @@ pageEncoding="UTF-8"%>
         <main class="p-3 mb-5">
             <div class="d-flex align-items-center justify-content-between">
                   
-                <!-- NEW EVENT FORM -->
+                <!-- NEW EVENT FORM column -->
                 <div class="p-2 col-sm">
       
                      <div class="card p-4 form-card">
                       <h2>Create a New Event</h2>
                       <hr>
+                      <!--  NEW EVENT form -->
                       <form:form action="/event/new" method="POST" modelAttribute="newEvent">
                         <!-- event name -->
                           <div class="mb-3">
@@ -195,7 +196,7 @@ pageEncoding="UTF-8"%>
               <a href="/home" class="nav-link p-0 text-muted">Home</a>
             </li>
             <li class="nav-item mb-2">
-              <a href="/pet" class="nav-link p-0 text-muted">Pets</a>
+              <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
             </li>
             <li class="nav-item mb-2">
               <a href="/events" class="nav-link p-0 text-muted"

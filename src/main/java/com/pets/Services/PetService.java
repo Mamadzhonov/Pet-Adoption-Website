@@ -34,21 +34,23 @@ public class PetService {
 	 * 	If the page that is requested is out of the bounds of the list, the function returns null
 	 * 	It then returns a sublist of the source list
 	 */
-	public List<Pet> getPetPage(Integer page, Integer size, List<String> filter) {
-		int startIndex = (page - 1) * size;
-		int lastIndex = startIndex + size;
+	public List<Pet> getPetPage(Integer page, List<String> filter) {
+		int startIndex = (page - 1) * 6;
+		int lastIndex = startIndex + 6;
 
 		List<Pet> petList = (filter == null) ? repo.findAll() : getFilteredPets(filter);
 		
-		if((page - 1) * size > petList.size()) return null;
+		if((page - 1) * 6 > petList.size()) return null;
 		
 		return petList.subList(startIndex, (lastIndex > petList.size()) ? petList.size(): lastIndex);
 	}
 	
-	//Overloaded function that doesn't accept size input, so it defaults to 6
-	public List<Pet> getPetPage(Integer page, List<String> filter) {
-		return getPetPage(page, 6, filter);
+	public int getNumLastPage(List<String> filter) {
+		List<Pet> petList = (filter == null) ? repo.findAll() : getFilteredPets(filter);
+		
+		return (int) Math.ceil(petList.size() / 6.0);
 	}
+
 	
 	public Pet savePet(Pet newPet) {
 		return repo.save(newPet);
@@ -89,12 +91,12 @@ public class PetService {
 			}
 			if(filterString.contains("lowAge")) {
 				int lowAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
-				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeGreaterThan(lowAge)));
+				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeGreaterThanEqual(lowAge)));
 				filterCount++;
 			}
 			if(filterString.contains("highAge")) {
 				int highAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
-				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeLessThan(highAge)));
+				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeLessThanEqual(highAge)));
 				filterCount++;
 			}
 			if(filterString.contains("sex")) {
