@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.pets.Models.Event;
 import com.pets.Models.User;
@@ -31,7 +30,8 @@ public class Events {
 
         if (session.getAttribute("loggedUser") == null) {
             redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-            return "redirect:/login";
+//            needs to route back to reg/login page
+            return "redirect:/";
         }
 
         Long id = (Long) session.getAttribute("loggedUser");
@@ -57,24 +57,36 @@ public class Events {
     }
 
     @PostMapping("/event/new")
-    public String createEvent(@ModelAttribute("newEvent") Event eventNew, BindingResult result, HttpSession session,
-            RedirectAttributes redirect, Model model) {
+    public String createEvent(@Valid @ModelAttribute("newEvent") Event eventNew, BindingResult result, HttpSession session, Model model) {
         if (result.hasErrors()) {
-        	 Long id = (Long) session.getAttribute("loggedUser");
-             User loggedUser = userServ.findById(id);
-             model.addAttribute("loggedUser", loggedUser);
+        	 	Long id = (Long) session.getAttribute("loggedUser");
+            User loggedUser = userServ.findById(id);
+            model.addAttribute("loggedUser", loggedUser);
             return "NewEvent.jsp";
         }
-
-        if (session.getAttribute("userId") == null) {
-            redirect.addFlashAttribute("login", "Need to login to edit this post");
-            return "redirect:/";
-        }
-
         eventServ.create(eventNew);
         return "redirect:/events";
     }
-
+    
+//	VIEW EVENT PAGE
+//   
+    @GetMapping("/event/{eventId}/edit")
+    public String editEvent(@PathVariable("eventId") Long eventId, Model model, HttpSession session, RedirectAttributes redirect) {
+    	   if (session.getAttribute("loggedUser") == null) {
+               redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+               return "redirect:/";
+        }
+    	   Long id = (Long) session.getAttribute("loggedUser");
+       User loggedUser = userServ.findById(id);
+        model.addAttribute("loggedUser", loggedUser);
+    	   	Event event = eventServ.findById(eventId);
+    	   	model.addAttribute("eventId", eventId);
+    	   	model.addAttribute("eventName", eventServ.findById(eventId).getEventName());
+        model.addAttribute("event", event);
+    		return "EditEvent.jsp";
+    }
+    
+//	VIEW EVENT PAGE
     @GetMapping("/event/{id}")
     public String eventDetails(@PathVariable("id") Long id, HttpSession session, Model model,
             RedirectAttributes redirect) {
@@ -109,7 +121,7 @@ public class Events {
 		Event event = eventServ.findById(eventId);
 		model.addAttribute("event", event);
 		return "viewEvent.jsp"; 
-			// ^^^ Add Event Details jsp when available
     }
+    
 
 }
