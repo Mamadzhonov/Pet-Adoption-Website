@@ -45,6 +45,12 @@ public class PetService {
 		return petList.subList(startIndex, (lastIndex > petList.size()) ? petList.size(): lastIndex);
 	}
 	
+	public Integer getNumLastPage(Integer size, List<String> filter) {
+		List<Pet> petList = (filter == null) ? repo.findAll() : getFilteredPets(filter);
+		
+		return Integer.valueOf((int) Math.ceil(petList.size() / size));
+	}
+	
 	//Overloaded function that doesn't accept size input, so it defaults to 6
 	public List<Pet> getPetPage(Integer page, List<String> filter) {
 		return getPetPage(page, 3, filter);

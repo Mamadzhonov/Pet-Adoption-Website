@@ -87,6 +87,9 @@ public class PetController {
 		
 		model.addAttribute("loggedUser", loggedUser);
 		
+		model.addAttribute("currentPage", page);
+		model.addAttribute("lastPage", petService.getNumLastPage(size, filter));
+		
 		model.addAttribute("filterList", filter);
 		
 		if(filter != null) {
@@ -109,11 +112,16 @@ public class PetController {
 		
 		model.addAttribute("filterURL", filterURL);
 		
+		List<Pet> petPage;
+		
 		if(size == null) {
-			model.addAttribute("petList", petService.getPetPage(page, filter));
+			petPage = petService.getPetPage(page, filter);
 		} else {
-			model.addAttribute("petList", petService.getPetPage(page, size, filter));
+			petPage = petService.getPetPage(page, size, filter);
 		}
+		
+		model.addAttribute("petList", petPage);
+		
 		return "availablePets.jsp";//Replace this with the availablePets.jsp when it's added
 	}
 	
