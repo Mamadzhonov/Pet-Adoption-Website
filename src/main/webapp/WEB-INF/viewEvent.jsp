@@ -1,18 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-<!-- c:out ; c:forEach etc. -->
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<!-- Formatting (dates) -->
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!-- form:form -->
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!-- for rendering errors on PUT routes -->
-<%@ page isErrorPage="true" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Create New Pet Inquiry</title>
+<head>
+<meta charset="ISO-8859-1">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -40,10 +33,10 @@ pageEncoding="UTF-8"%>
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
     />
-  </head>
-  <body>
-    <!-- PAGE CONTAINER -->
-    <div class="p-3">
+<title>View Event</title>
+</head>
+<body>
+	<div class="top-half p-3">
       <!-- NAV BAR -->
       <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
@@ -111,107 +104,32 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-      <main class="p-3 mb-5">
-        <div class="d-flex align-items-center">
-          <!-- LEFT COLUMN -->
-          <div class="p-2 flex-fill">
-            <!-- <div class="card"> -->
-            <img
-              src="/images/new_pet.png"
-              alt=""
-              style="height: auto; width: 375px"
-            />
-            <!-- </div> -->
-          </div>
-          <div class="p-2 col-sm">
-            <div class="card p-4 form-card">
-              <h6>Thank you for showing interest in <c:out value="${pet.name}"></c:out>! Please fill out
-					the following information, and our staff will respond within 48 hours.</h6>
-              <hr />
-              <p>I am interested in</p>
-              <form:form
-                action="/inquiry/add"
-                class="mt-2"
-                method="POST"
-                modelAttribute="newInquiry">
-              <!-- ADOPT/FOSTER -->
-                <div class="mb-3">
-                  <form:label path="name" class="form-label"
-                    >Pet Name:</form:label
-                  >
-                  <input type="radio" id="adopting" name="inquiryType" value="Adopting">
-					<label for="Adopting">Adopting</label><br>
-				  <input type="radio" id="Fostering" name="inquiryType" value="Fostering">
-					<label for="Fostering">Fostering</label><br>                    
-                  
-                </div>
-                <!-- ERROR: INQUIRY TYPE -->
-                <form:errors
-                  path="inquiry_type"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
-                <!-- DATE OF PICKUP -->
-                <div class="mb-3">
-                  <form:label path="dateOfPickup" class="form-label"
-                    >Pickup:</form:label
-                  >
-                  <form:input
-                    type="date"
-                    class="form-control"
-                    path="dateOfPickup"
-                  />
-                </div>
-                <!-- ERROR: date of pickup -->
-                <form:errors
-                  path="dateOfPickup"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
-
-                <!-- DATE OF DROPOFF -->
-                <div class="mb-3">
-                  <form:label path="dateOfDropoff" class="form-label"
-                    >Dropoff:</form:label>
-                  <form:input
-                    type="date"
-                    class="form-control"
-                    path="dateOfDropoff"
-                  />
-                </div>
-                <!-- ERROR: date of dropoff -->
-                <form:errors
-                  path="dateOfDropoff"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
-                
-                <!-- NOTES -->
-                <div class="mb-3">
-                  <form:label path="notes" class="form-label"
-                    >Notes</form:label>
-                  <form:textarea
-                    path="notes"
-                    class="form-control"
-                    style="height: 100px"
-                    placeholder="Questions..."
-                  ></form:textarea>
-                </div>
-                <form:errors
-                  path="notes"
-                  class="py-1 alert alert-danger"
-                ></form:errors>
-                <!-- PET ID OF THE PET BEING FOSTERED OR ADOPTED -->
-                <input type="hidden" id="pet" name="pet" value="${pet.id}">
-
-                <!-- DEFAULT THE RESPONDED FLAG TO NO  -->
-                <input type="hidden" id="responded" name="responded" value="No">
-
-
-                <button class="btn">Submit</button>
-              </form:form>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
+        <!-- NAV BAR END -->
+	  </div>
+	</div>
+	
+	<!-- Main Content -->
+	<main class="p-5 mb-5 min-vh-100">
+		<div class="d-flex justify-content-around align-items-stretch">
+			<!-- Left Column -->
+			<div class="col-5">
+				<h1 class="text-start"><c:out value="${event.eventName}"/></h1>
+				<div class="card form-card p-3">
+					<p><c:out value="${event.eventDetails}"/></p>
+				</div>
+			</div>
+			<!-- Right column -->
+			<div class="col-4">
+				<h3 class="text-start"><c:out value="${event.location}"/></h3>
+				<h4 class="text-start"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></h4>
+				<div class="card form-card">
+					<!-- Place for the map api potentially? -->
+				</div>
+			</div>
+		</div>
+	</main>
+	
+	<!-- Footer -->
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-3">
@@ -265,8 +183,8 @@ pageEncoding="UTF-8"%>
         <div>
           <p>{will be putting the main repo github link }</p>
         </div>
-        <div>Â© 2023 Pet Adoption Center</div>
+        <div>© 2023 Pet Adoption Center</div>
       </div>
     </div>
-  </body>
+</body>
 </html>

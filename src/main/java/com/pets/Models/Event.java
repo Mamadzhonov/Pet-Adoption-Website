@@ -26,6 +26,7 @@ public class Event {
     @NotEmpty(message = "Name is required")
     private String eventName;
 
+
     @NotNull(message="Date of event required")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
@@ -38,89 +39,89 @@ public class Event {
 
     @Column(nullable = true, length = 64)
     private String photos;
-    
+
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date createdAt; 
+    private Date createdAt;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
-    
-    public Event(){};
 
-	public Long getId() {
-		return id;
-	}
+    public Event() {
+    };
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getEventName() {
-		return eventName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
-	}
+    public String getEventName() {
+        return eventName;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public Date getDate() {
+        return date;
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    public String getLocation() {
+        return location;
+    }
 
-	public String getEventDetails() {
-		return eventDetails;
-	}
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-	public void setEventDetails(String eventDetails) {
-		this.eventDetails = eventDetails;
-	}
+    public String getEventDetails() {
+        return eventDetails;
+    }
 
-	public String getPhotos() {
-		return photos;
-	}
+    public void setEventDetails(String eventDetails) {
+        this.eventDetails = eventDetails;
+    }
 
-	public void setPhotos(String photos) {
-		this.photos = photos;
-	}
+    public String getPhotos() {
+        return photos;
+    }
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
+    public void setPhotos(String photos) {
+        this.photos = photos;
+    }
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
+    public Date getCreatedAt() {
+        return createdAt;
+    }
 
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	} 
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     @PrePersist
-    public void onCreate(){
+    public void onCreate() {
         this.createdAt = new Date();
     }
 
     @PreUpdate
-    public void onUpdate(){
+    public void onUpdate() {
         this.updatedAt = new Date();
     }
-    
 
 }
