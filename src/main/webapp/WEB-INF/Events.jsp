@@ -68,42 +68,46 @@
                   </ul>
                 </div>
               </div>
-
-              <div>
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <a href="event/new">Add event</a>
-              </div>
             </div>
 
+
+
+            <div>
+              <table class="table table-striped tbl">
+                  <thead>
+                      <tr>
+                          <th scope="col">Event Name</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Location</th>
+                          <th scope="col">Event Details</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                      <c:forEach var="event" items="${allEvents}">
+                          <tr>
+                              <th scope="row">
+                                  <a href="/event/${event.id}">
+                                      <c:out value="${event.eventName}"></c:out>
+                                  </a>
+                              </th>
+                              <td>
+                                  <c:out value="${event.date}"></c:out>
+                              </td>
+                              <td>
+                                  <c:out value="${event.location}"></c:out>
+                              </td> 
+                                <td>
+                                  <c:out value="${event.eventDetails}"></c:out>
+                              </td>
+                          </tr>
+                      </c:forEach>
+                  </tbody>
+              </table>
+              <p>
+                  <a class="btn btn-primary" href="/event/new">Add a Show </a>
+              </p>
+          </div>
           </body>
 
           </html>

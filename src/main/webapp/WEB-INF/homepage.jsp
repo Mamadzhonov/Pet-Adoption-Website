@@ -87,7 +87,7 @@ pageEncoding="UTF-8"%>
             <li><hr class="dropdown-divider" /></li>
             <li><h6 class="dropdown-header">Admin Actions:</h6></li>
             <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
-            <li><a class="dropdown-item" href="/event/add">+ New Event</a></li>
+            <li><a class="dropdown-item" href="/event/new">+ New Event</a></li>
             <li><hr class="dropdown-divider" /></li>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
