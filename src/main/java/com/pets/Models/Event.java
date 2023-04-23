@@ -27,6 +27,7 @@ public class Event {
     private String eventName;
 
     @NotNull(message="Date of event required")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @NotEmpty
