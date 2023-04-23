@@ -118,7 +118,7 @@ public class MainContoller {
 		// Check if email already used!
 		if (userServ.findByEmail(user.getEmail())) {
 			redirect.addFlashAttribute("emailExist", "Email is already used!");
-			return "redirect:/admin/register";
+			return "redirect:/admin/register-login";
 		}
 		
 		// Storing logged User's id

@@ -1,7 +1,5 @@
 package com.pets.Contollers;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -202,7 +200,7 @@ public class PetController {
 		if(highAge != null) {
 			filter = filter.concat("&filter=highAge:" + highAge);
 		}
-		if(sex != null) {
+		if(sex != null || sex != "") {
 			if(!sex.equals("None")) {
 				filter = filter.concat("&filter=sex:" + sex);
 			}

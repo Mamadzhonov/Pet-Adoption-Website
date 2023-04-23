@@ -150,10 +150,10 @@ public class PetService {
 	//Idk what species we are going to have exactly
 	//This can be easily adjusted to account for more or different species
 	private boolean isSpecies(String filterString) {
-		if(filterString.equals("Dog") ||
-			filterString.equals("Cat") ||
-			filterString.equals("Reptile") ||
-			filterString.equals("Bird")) {
+		if(filterString.equals("dog") ||
+			filterString.equals("cat") ||
+			filterString.equals("reptile") ||
+			filterString.equals("bird")) {
 			return true;
 		}
 		return false;

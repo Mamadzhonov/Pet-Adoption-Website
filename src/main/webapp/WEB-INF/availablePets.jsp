@@ -105,7 +105,6 @@
   					
   					<input type="checkbox">
   					<label for="">Filter</label>
-  				
   				</div>
 			</div>
 		</div>
