@@ -45,7 +45,7 @@ pageEncoding="UTF-8"%>
     <!-- PAGE CONTAINER -->
     <div class="p-3">
       <!-- NAV BAR -->
-      <div
+     <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
@@ -101,17 +101,16 @@ pageEncoding="UTF-8"%>
             <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
+              <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
               <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
               <li>
-                <a class="dropdown-item" href="/event/add">+ New Event</a>
+                <a class="dropdown-item" href="/event/new">+ New Event</a>
               </li>
               <li><hr class="dropdown-divider" /></li>
             </c:if>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-        <!--  -->
-      </div>
       <main class="p-3 mb-5">
         <div class="d-flex align-items-start">
           <!-- LEFT COLUMN -->

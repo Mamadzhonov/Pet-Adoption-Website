@@ -105,7 +105,7 @@ pageEncoding="UTF-8"%>
               <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
               <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
               <li>
-                <a class="dropdown-item" href="/event/add">+ New Event</a>
+                <a class="dropdown-item" href="/event/new">+ New Event</a>
               </li>
               <li><hr class="dropdown-divider" /></li>
             </c:if>
