@@ -187,17 +187,19 @@
 			            alt="Pet Image"
 			          />
 	  				<div class="card-body">
-	  				<div class="row">
+	  				<div class="row px-2">
 	  					<img
 			                src="/images/${pet.species}_icon.png"
 			                alt=""
-			                style="height: 25px"
+			                style="height: 20px"
 			              />
-	  					<h5 class="card-title mx-2"><a href="/pet/${pet.id}"><c:out value="${pet.name}"/></a></h5>
+	  					<h5 class="card-title mx-1"><a href="/pet/${pet.id}"><c:out value="${pet.name}"/></a></h5>
 	  				</div>
-	    				<p class="card-text"><c:out value="${pet.age}"/> Years Old</p>
-	    				<p class="card-text"><c:out value="${pet.breed}"/></p>
+	  				<div class="row px-2">
+	    				<p class="card-subtitle card-text mx-1"><small><c:out value="${pet.age}"/> y.o. <c:out value="${pet.sex}"/></small></p>
+	    				<p class="card-subtitle card-text"><small><c:out value="${pet.breed}"/></small></p>
 	  				</div>
+				</div>
 				</div>
 			</div>
 		</c:forEach>
