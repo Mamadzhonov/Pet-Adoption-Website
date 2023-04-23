@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pets.Models.Event;
@@ -84,6 +85,21 @@ public class Events {
     	   	model.addAttribute("eventName", eventServ.findById(eventId).getEventName());
         model.addAttribute("event", event);
     		return "EditEvent.jsp";
+    }
+    
+    @PutMapping("/event/{eventId}/edit")
+    public String updateEvent(@Valid @ModelAttribute("event") Event event, BindingResult result, Model model, HttpSession session, RedirectAttributes redirect, @PathVariable("eventId") Long eventId) {
+    	if (result.hasErrors()) {
+    		 Long id = (Long) session.getAttribute("loggedUser");
+    	     User loggedUser = userServ.findById(id);
+    	     model.addAttribute("loggedUser", loggedUser);
+    	    	 model.addAttribute("eventId", eventId);
+    	    	 model.addAttribute("eventName", eventServ.findById(eventId).getEventName());
+    	    	 return "EditEvent.jsp";
+    		}
+    		event.setId(eventId);
+    		eventServ.update(event);
+    		return "redirect:/event/" + eventId;
     }
     
 //	VIEW EVENT PAGE
