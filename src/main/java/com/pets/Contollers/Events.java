@@ -74,7 +74,7 @@ public class Events {
     
 //	VIEW EVENT PAGE
     @GetMapping("/events/{id}")
-    public String eventDetails(Model model, @PathVariable("eventId") Long eventId, HttpSession session, RedirectAttributes redirect) {
+    public String eventDetails(Model model, @PathVariable("id") Long eventId, HttpSession session, RedirectAttributes redirect) {
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
 			return "redirect:/";
@@ -86,7 +86,7 @@ public class Events {
 		
 		Event event = eventServ.findById(eventId);
 		model.addAttribute("event", event);
-		return ""; 
+		return "viewEvent.jsp"; 
 			// ^^^ Add Event Details jsp when available
     }
 

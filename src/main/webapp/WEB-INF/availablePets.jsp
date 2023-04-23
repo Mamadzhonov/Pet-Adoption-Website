@@ -246,7 +246,7 @@
               <a href="/home" class="nav-link p-0 text-muted">Home</a>
             </li>
             <li class="nav-item mb-2">
-              <a href="/pet" class="nav-link p-0 text-muted">Pets</a>
+              <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
             </li>
             <li class="nav-item mb-2">
               <a href="/events" class="nav-link p-0 text-muted"
