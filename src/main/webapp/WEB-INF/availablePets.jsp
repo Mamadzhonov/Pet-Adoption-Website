@@ -187,17 +187,19 @@
 			            alt="Pet Image"
 			          />
 	  				<div class="card-body">
-	  				<div class="row">
+	  				<div class="row px-2">
 	  					<img
 			                src="/images/${pet.species}_icon.png"
 			                alt=""
-			                style="height: 35px"
+			                style="height: 20px"
 			              />
-	  					<h5 class="card-title mx-2"><a href="/pet/${pet.id}"><c:out value="${pet.name}"/></a></h5>
+	  					<h5 class="card-title mx-1"><a href="/pet/${pet.id}"><c:out value="${pet.name}"/></a></h5>
 	  				</div>
-	    				<p class="card-text"><c:out value="${pet.age}"/> Years Old</p>
-	    				<p class="card-text"><c:out value="${pet.breed}"/></p>
+	  				<div class="row px-2">
+	    				<p class="card-subtitle card-text mx-1"><small><c:out value="${pet.age}"/> y.o. <c:out value="${pet.sex}"/></small></p>
+	    				<p class="card-subtitle card-text"><small><c:out value="${pet.breed}"/></small></p>
 	  				</div>
+				</div>
 				</div>
 			</div>
 		</c:forEach>
@@ -209,10 +211,11 @@
 	
 	<!-- Pagination -->
 	<div class="text-center">
-	<a href="/pet?page=1${filterURL}">1</a>
-	<a href="/pet?page=2${filterURL}">2</a>
-	<a href="/pet?page=3${filterURL}">3</a>
-	<a href="/pet?page=4${filterURL}">4</a>
+	<a href="/pet?page=1${filterURL}">First</a>
+	<a href="/pet?page=${currentPage-1}${filterURL}">Previous</a>
+
+	<a href="/pet?page=${currentPage+1}${filterURL}">Next</a>
+	<a href="/pet?page=${lastPage}${filterURL}">Last</a>
 	
 	</div>
 
