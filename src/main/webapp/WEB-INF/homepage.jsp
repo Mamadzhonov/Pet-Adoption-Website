@@ -102,6 +102,7 @@ pageEncoding="UTF-8"%>
             <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
+              <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
               <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
               <li>
                 <a class="dropdown-item" href="/event/add">+ New Event</a>

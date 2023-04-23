@@ -113,14 +113,14 @@ pageEncoding="UTF-8"%>
         <!--  -->
       </div>
       <main class="p-3 mb-5">
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-start">
           <!-- LEFT COLUMN -->
           <div class="p-2 flex-fill">
             <!-- <div class="card"> -->
             <img
-              src="/images/new_pet.png"
+              src="/images/inquiry_dashboard.png"
               alt=""
-              style="height: auto; width: 375px"
+              style="height: auto; width: 275px"
             />
             <!-- </div> -->
           </div>

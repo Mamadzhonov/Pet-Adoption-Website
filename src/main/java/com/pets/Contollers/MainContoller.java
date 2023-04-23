@@ -157,7 +157,21 @@ public class MainContoller {
 //		return "Login.jsp";
 //	}
 //
-
+	
+	// INQUIRY DASHBOARD
+	@GetMapping("/inquire/dashboard")
+	public String inquiryDashboard(Model model, HttpSession session, RedirectAttributes redirect) {
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/";
+		}
+		
+		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
+		model.addAttribute("loggedUser", loggedUser);
+		
+		return "dashboardInquiry.jsp";//Put the jsp file here when complete.
+	}
+	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.setAttribute("loggedUser", null);
