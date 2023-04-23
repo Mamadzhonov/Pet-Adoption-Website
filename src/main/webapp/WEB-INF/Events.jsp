@@ -79,8 +79,6 @@
             <i class="bi bi-person-fill me-3"></i>
             <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
-          </a>
-
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
               <h6 class="dropdown-header">
@@ -122,6 +120,30 @@
 		</c:forEach>
 	</div>
 
+                      <c:forEach var="event" items="${allEvents}">
+                          <tr>
+                              <th scope="row">
+                                  <a href="/event/${event.id}">
+                                      <c:out value="${event.eventName}"></c:out>
+                                  </a>
+                              </th>
+                              <td>
+                                  <c:out value="${event.date}"></c:out>
+                              </td>
+                              <td>
+                                  <c:out value="${event.location}"></c:out>
+                              </td> 
+                                <td>
+                                  <c:out value="${event.eventDetails}"></c:out>
+                              </td>
+                          </tr>
+                      </c:forEach>
+                  </tbody>
+              </table>
+              <p>
+                  <a class="btn btn-primary" href="/event/new">Add a Show </a>
+              </p>
+          </div>
           </body>
 
           </html>
