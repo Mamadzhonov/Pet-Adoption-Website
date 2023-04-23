@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pets.Models.Inquiry;
 import com.pets.Models.Pet;
 import com.pets.Models.User;
+import com.pets.Services.InquiryService;
 import com.pets.Services.PetService;
 import com.pets.Services.UserService;
 
@@ -39,6 +41,9 @@ public class PetController {
 	private UserService userServ;
 	@Autowired
 	PetService petService;
+	
+	@Autowired
+	InquiryService inquiryServ;
 	
 	
 	//This allows the "Date of Arrival" attribute to be bound to the Pet object
@@ -231,16 +236,55 @@ public class PetController {
 	
 	//----------		Inquiry Mappings		----------//
 	
-	@GetMapping("/inquire/{id}")
-	public String showInquiryDetails(Model model, HttpSession session, RedirectAttributes redirect) {
-		if (session.getAttribute("loggedUser") == null) {
-			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/";
+	// CREATE NEW INQUIRY
+
+		@GetMapping("/stest")
+		public String stevetest(Model model, HttpSession session, RedirectAttributes redirect) {
+			Long id = (Long) session.getAttribute("loggedUser");
+			User loggedUser = userServ.findById(id);
+			model.addAttribute("loggedUser", loggedUser);
+			model.addAttribute("newInquiry", new Inquiry());
+			return "addInquiry.jsp";
+		}
+
+		
+		
+		
+		@GetMapping("/add/inquiry")
+		public String addInquiry(Model model, HttpSession session, RedirectAttributes redirect) {
+			if (session.getAttribute("loggedUser") == null) {
+				redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+				return "redirect:/login";
+			}
+
+			Long id = (Long) session.getAttribute("loggedUser");
+			User loggedUser = userServ.findById(id);
+			model.addAttribute("loggedUser", loggedUser);
+			model.addAttribute("newInquiry", new Inquiry());
+			return "addInquiry.jsp";
+		}
+
+		
+		@PostMapping("/add/inquiry") 
+		public String saveInquiry(@Valid @ModelAttribute("newInquiry") Inquiry newInquiry, BindingResult result) {		
+			
+			if(result.hasErrors()) return "/addInquiry.jsp";
+			
+			inquiryServ.save(newInquiry);
+			return "redirect:/pet?page=1";
 		}
 		
-		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
-		model.addAttribute("loggedUser", loggedUser);
-		
-		return "";//Put the jsp file here when complete.
-	}
+			
+		@GetMapping("/inquire/{id}")
+		public String showInquiryDetails(Model model, HttpSession session, RedirectAttributes redirect) {
+			if (session.getAttribute("loggedUser") == null) {
+				redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+				return "redirect:/login";
+			}
+			
+			User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
+			model.addAttribute("loggedUser", loggedUser);
+			
+			return "";//Put the jsp file here when complete.
+		}
 }
