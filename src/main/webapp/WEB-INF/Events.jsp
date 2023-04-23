@@ -34,9 +34,9 @@
           </head>
 
           <body>
-            <!-- NAV BAR -->
             <div class="top-half p-3">
-              <div
+            <!-- NAV BAR -->
+           <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
@@ -79,6 +79,8 @@
             <i class="bi bi-person-fill me-3"></i>
             <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
+          </a>
+
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
               <h6 class="dropdown-header">
