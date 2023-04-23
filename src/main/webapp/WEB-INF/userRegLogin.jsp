@@ -160,11 +160,5 @@ uri="http://www.springframework.org/tags/form" %>
       </div>
     </div>
     <!--  -->
-
-    <div style="text-align: center">
-      <p class="text-danger">
-        <c:out value="${permitionIssue}"></c:out>
-      </p>
-    </div>
   </body>
 </html>

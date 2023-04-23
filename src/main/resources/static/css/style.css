@@ -57,6 +57,15 @@ select {
 .dropdown-toggle:hover{
 	color:white;
 }
+.dropdown-toggle-admin {
+	font-family: 'Unbounded', cursive;
+	font-weight: 300;
+	color: #fcfcf9;
+}
+
+.dropdown-toggle-admin:hover{
+	color:#fcfcf9;
+}
 .dropdown-item {
 	font-weight: 300;
 	font-size: 10pt;
