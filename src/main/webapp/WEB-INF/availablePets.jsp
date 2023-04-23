@@ -191,7 +191,7 @@
 	  					<img
 			                src="/images/${pet.species}_icon.png"
 			                alt=""
-			                style="height: 35px"
+			                style="height: 25px"
 			              />
 	  					<h5 class="card-title mx-2"><a href="/pet/${pet.id}"><c:out value="${pet.name}"/></a></h5>
 	  				</div>
