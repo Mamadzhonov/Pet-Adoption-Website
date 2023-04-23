@@ -12,9 +12,20 @@ import com.pets.Repositories.EventRepository;
 
 @Service
 public class EventService {
-    
-    @Autowired
+   @Autowired
    private  EventRepository eventRepo;
+    
+    public List<Event> all() {
+    	return eventRepo.findAll();
+    }
+    
+    public Event findById(Long id) {
+    	Optional<Event> event = eventRepo.findById(id);
+    	if(event.isPresent()) {
+    		return event.get();
+    	}
+    	return null;
+    }
 
     public Event create(Event event){
         return eventRepo.save(event);

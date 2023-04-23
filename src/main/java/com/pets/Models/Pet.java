@@ -1,7 +1,9 @@
 package com.pets.Models;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -46,14 +49,17 @@ public class Pet {
 	@NotEmpty(message = "Gender is required")
 	private String sex;
 	
-	private String apiUrlOfPicture;  //Just gonna leave this here with no validations until we figure it out entirely
-
 	@NotNull(message="Date of Arrival required")
 	private Date dateOfArrival;
 
+	private String petStatus;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@OneToMany(mappedBy="pet", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Inquiry> inquiries;
 
 	@Column(updatable = false)
 	private Date createdAt;
@@ -164,12 +170,23 @@ public class Pet {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-
-	public String getApiUrlOfPicture() {
-		return apiUrlOfPicture;
+	
+	
+	public String getPetStatus() {
+		return petStatus;
 	}
 
-	public void setApiUrlOfPicture(String apiUrlOfPicture) {
-		this.apiUrlOfPicture = apiUrlOfPicture;
+	public void setPetStatus(String petStatus) {
+		this.petStatus = petStatus;
 	}
+
+	public List<Inquiry> getInquiries() {
+		return inquiries;
+	}
+
+	public void setInquiries(List<Inquiry> inquiries) {
+		this.inquiries = inquiries;
+	}
+	
+	
 }

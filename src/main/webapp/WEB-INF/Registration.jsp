@@ -41,6 +41,18 @@ charset=UTF-8" pageEncoding="UTF-8" %>
                 <c:out value="${emailExist}"></c:out>
               </p>
 
+
+      <div class="col-md-5 mb-3">
+        <form:label path="email">Email</form:label>
+        <form:input
+          path="email"
+          class="form-control"
+          type="email"
+          placeholder="Email"
+        />
+        <form:errors class="text-danger" path="email"></form:errors>
+      </div>
+
               <p class="text-danger">
                 <c:out value="${permitionIssue}"></c:out>
               </p>

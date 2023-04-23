@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>View Pet</title>
+    <title>Inquiry Dashboard</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -34,6 +34,7 @@ pageEncoding="UTF-8"%>
       href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;800&display=swap"
       rel="stylesheet"
     />
+    <!--  -->
     <!-- BOOTSTRAP ICONS -->
     <link
       rel="stylesheet"
@@ -41,7 +42,9 @@ pageEncoding="UTF-8"%>
     />
   </head>
   <body>
+    <!-- PAGE CONTAINER -->
     <div class="p-3">
+      <!-- NAV BAR -->
      <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
@@ -108,68 +111,48 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
+      <main class="p-3 mb-5">
+        <div class="d-flex align-items-start">
+          <!-- LEFT COLUMN -->
+          <div class="p-2 flex-fill">
+            <!-- <div class="card"> -->
+            <img
+              src="/images/inquiry_dashboard.png"
+              alt=""
+              style="height: auto; width: 275px"
+            />
+            <!-- </div> -->
+          </div>
+          <div class="p-2 col-sm-10">
+            
+            	<h2>Pet Inquiry Dashboard</h2>
+              	<table class="table table-striped">
+				<thead class="table-secondary">
+					<tr>
+						<th>User Name</th>
+						<th>Pet Name</th>
+						<th>Adoption/Foster</th>
+						<th>Pickup</th>
+						<th>Dropoff</th>
+						<th>Responded</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="inquiry" items="${inquiries}">
+					<tr>
+        				<td><c:out value="${inquiry.user.name}"></c:out></td>
+        				<td><a href="/items/${inquiry.pet.id}" class="text-success"><c:out value="${inquiry.pet.name}"></c:out></a></td>
+        				<td><c:out value="${inquiry.inquiryType}"></c:out></td>
+        				<td><c:out value="${inquiry.dateOfPickup}"></c:out></td>
+        				<td><c:out value="${inquiry.dateOfDropoff}"></c:out></td>
+        				<td><c:out value="${inquiry.responded}"></c:out></td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+              
+       </main>
     </div>
-    <!-- MAIN CONTENT -->
-    <main class="p-3 mb-5">
-      <div class="d-flex align-items-stretch">
-        <!-- LEFT COLUMN -->
-        <div class="p-2 col-sm">
-          <!-- might be a nice touch to add the species icon next to the name -->
-          <div class="card p-4 form-card mb-3">
-            <div class="d-flex align-items-center mb-2">
-              <!-- PET IMAGE -->
-              <img
-                src="/images/${pet.species}_icon.png"
-                alt=""
-                style="height: 35px"
-              />
-              <h1 class="mx-2 mb-0"><c:out value="${pet.name}"></c:out></h1>
-            </div>
-            <hr />
-            <h6>Species: <c:out value="${pet.species}"></c:out></h6>
-            <h6>breed: {breed}</h6>
-            <h6>Gender: {sex}</h6>
-            <h6>Status: {status}</h6>
-            <c:if test="${loggedUser.userType == 'admin'}"></c:if>
-            <div>
-              <hr />
-              <h6>Admin Actions:</h6>
-              <div class="d-flex">
-                <a
-                  href="/pet/edit/${pet.id}"
-                  class="btn"
-                  style="margin-right: 15px"
-                  >Edit Pet</a
-                >
-                <a href="/" class="btn admin-btn">Delete Pet</a>
-              </div>
-            </div>
-          </div>
-          <div class="card p-4 form-card">
-            <h3>About this pet:</h3>
-            <hr />
-            <!-- <a href="https://www.flaticon.com/free-icons/dog" title="dog icons">Dog icons created by Freepik - Flaticon</a> -->
-            <p>
-              <c:out value="${pet.description}"></c:out>
-            </p>
-          </div>
-        </div>
-        <!-- RIGHT COLUMN -->
-        <div class="p-2 col-sm">
-          <!-- instead of a c:if, we can pass through what species to find the image -->
-          <img
-            src="/images/${pet.species}.png"
-            class="img-thumbnail pet-profile mb-3"
-            alt="..."
-          />
-          <div class="card p-4 form-card">
-            <h3>Location</h3>
-            <!-- leaving space for location, if we need it -->
-            <!-- can always take this out if we need to -->
-          </div>
-        </div>
-      </div>
-    </main>
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-3">
