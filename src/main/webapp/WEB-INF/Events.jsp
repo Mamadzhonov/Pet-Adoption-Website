@@ -102,41 +102,25 @@
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-
-              <div>
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Handle</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <a href="event/new">Add event</a>
-              </div>
-            </div>
+        </div>
+        
+        
+<!-- Event Cards -->
+	<div class="d-flex row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+		<c:forEach var="event" items="${events}">
+			<div class="col">
+				<div class="card h-100" style="width: 18rem;">
+	  				<div class="card-body">
+	  					<h5 class="card-title mx-2"><a href="/events/${event.id}"><c:out value="${event.eventName}"/></a></h5>
+	  				</div>
+	  				<div>
+	    				<p class="card-text"><c:out value="${event.date}"/></p>
+	    				<p class="card-text"><c:out value="${event.location}"/></p>
+	  				</div>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
 
           </body>
 
