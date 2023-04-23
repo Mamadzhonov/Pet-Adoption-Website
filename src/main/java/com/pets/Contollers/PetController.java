@@ -244,16 +244,4 @@ public class PetController {
 		return "";//Put the jsp file here when complete.
 	}
 	
-	@GetMapping("/inquire/dashboard")
-	public String inquiryDashboard(Model model, HttpSession session, RedirectAttributes redirect) {
-		if (session.getAttribute("loggedUser") == null) {
-			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/";
-		}
-		
-		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
-		model.addAttribute("loggedUser", loggedUser);
-		
-		return "dashboardInquiry.jsp";//Put the jsp file here when complete.
-	}
 }
