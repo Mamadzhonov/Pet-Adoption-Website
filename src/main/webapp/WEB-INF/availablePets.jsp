@@ -97,28 +97,6 @@
         <!-- NAV BAR END -->
 	</div>
 <!-- Body -->
-<!-- Filter Box -->
-	<div class="d-flex row row-cols-3 g-3">
-		<div class="col">
-			<div class="card h-100" style="width: 18rem;">
-  				<img src="..." class="card-img-top" alt="Pet Image">
-  				<div class="card-body">
-  					<input type="checkbox">
-  					<label for="">Filter</label>
-  					
-  					<input type="checkbox">
-  					<label for="">Filter</label>
-  					
-  					<input type="checkbox">
-  					<label for="">Filter</label>
-  					
-  					<input type="checkbox">
-  					<label for="">Filter</label>
-  				</div>
-			</div>
-		</div>
-	</div>
-
 <div>
 <h1>Our Available Pets:</h1>
 </div>
@@ -133,6 +111,7 @@
 	  				<div class="card-body">
 		  				<ul class="list-group list-group-flush ">
 		  					<li class="text-start ">Filter Categories</li>
+		  					<!-- Species Filter -->
 		  					<li class="list-group-item list-group-item-action">
 						    	<input class="form-check-input me-1" type="checkbox" value="" id="catCheckboxFilter" name="cat">
 						    	<label class="form-check-label stretched-link" for="catCheckboxFilter"><small>Cats</small></label>
@@ -149,20 +128,33 @@
 						    	<input class="form-check-input me-1" type="checkbox" value="" id="reptileCheckboxFilter" name="reptile">
 						    	<label class="form-check-label stretched-link" for="reptileCheckboxFilter"><small>Reptiles</small></label>
 						  	</li>
-						  	<!-- change to select -->
+						  	<!-- Age Filter -->
 						  	<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="maleCheckboxFilter">
-						    	<label class="form-check-label stretched-link" for="maleCheckboxFilter"><small>Male</small></label>
+						    	<input class="form-check-input me-1" type="number" value="" id="lowAgeFilter" name="low-age">
+						    	
 						  	</li>
 						  	<li class="list-group-item list-group-item-action">
-						    	<input class="form-check-input me-1" type="checkbox" value="" id="femaleCheckboxFilter">
-						    	<label class="form-check-label stretched-link" for="femaleCheckboxFilter"><small>Female</small></label>
+						    	<input class="form-check-input me-1" type="number" value="" id="highAgeFilter" name="high-age">
+						    	
+						  	</li>
+						  	<!-- Gender Filter -->
+						  	<li class="list-group-item list-group-item-action">
+						    	<select class="form-check-input me-1" value="" id="sexFilter" name="sex">
+						    		<option value="">Pick a gender...</option>
+						    		<option value="Female">Female</option>
+						    		<option value="Male">Male</option>
+						    	</select>
+						   
 						  	</li>
 						</ul>
 	  				</div>
 				</div>
 			</div>
 		</div>
+	
+	<form action="/pet/filter" method="POST">
+		
+	</form>
 	
 		<c:forEach var="pet" items="${pets}">
 			<div class="col">
