@@ -34,31 +34,23 @@ public class PetService {
 	 * 	If the page that is requested is out of the bounds of the list, the function returns null
 	 * 	It then returns a sublist of the source list
 	 */
-	public List<Pet> getPetPage(Integer page, Integer size, List<String> filter) {
-		int startIndex = (page - 1) * size;
-		int lastIndex = startIndex + size;
+	public List<Pet> getPetPage(Integer page, List<String> filter) {
+		int startIndex = (page - 1) * 6;
+		int lastIndex = startIndex + 6;
 
 		List<Pet> petList = (filter == null) ? repo.findAll() : getFilteredPets(filter);
 		
-		if((page - 1) * size > petList.size()) return null;
+		if((page - 1) * 6 > petList.size()) return null;
 		
 		return petList.subList(startIndex, (lastIndex > petList.size()) ? petList.size(): lastIndex);
 	}
 	
-	public Integer getNumLastPage(Integer size, List<String> filter) {
+	public int getNumLastPage(List<String> filter) {
 		List<Pet> petList = (filter == null) ? repo.findAll() : getFilteredPets(filter);
 		
-		if(size == null) {
-			size = 6;
-		}
-		
-		return Integer.valueOf((int) Math.ceil(petList.size() / size));
+		return (int) Math.ceil(petList.size() / 6.0);
 	}
-	
-	//Overloaded function that doesn't accept size input, so it defaults to 6
-	public List<Pet> getPetPage(Integer page, List<String> filter) {
-		return getPetPage(page, 6, filter);
-	}
+
 	
 	public Pet savePet(Pet newPet) {
 		return repo.save(newPet);
