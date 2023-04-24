@@ -99,7 +99,7 @@ pageEncoding="UTF-8" %>
             <h2>Edit '<c:out value="${eventName}"></c:out>' Event</h2>
             <hr />
             <form:form
-              action="/event/${eventId}/edit"
+              action="/event/edit/${eventId}"
               method="POST"
               modelAttribute="event"
             >
@@ -163,7 +163,7 @@ pageEncoding="UTF-8" %>
               ></form:errors>
               <div class="d-flex">
                 <button class="btn" style="margin-right: 10px">
-                  Create Event
+                  Update Event
                 </button>
                 <a href="/events/${eventId}" class="btn admin-btn">Cancel</a>
               </div>
