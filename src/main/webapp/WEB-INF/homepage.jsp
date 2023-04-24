@@ -123,66 +123,86 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
     </div>
-    <!--  -->
     <!-- EVENT CAROUSEL  -->
-    <!-- will be adding more event info later on once I research more on carousel -->
     <div class="event-row p-3 mb-3">
       <div
         id="carouselExampleControls"
         class="carousel slide px-4"
-        data-bs-ride="carousel"
+        data-bs-ride="false"
       >
         <div class="carousel-inner">
-          <div class="carousel-item active d-flex">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">
-                  Card subtitle
-                </h6>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">
-                  Card subtitle
-                </h6>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">
-                  Card subtitle
-                </h6>
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+          <!-- FOR LOOP - CAROUSEL -->
+          <c:forEach var="event" items="${allEvents}" varStatus="loop">
+            <c:choose>
+            <c:when test="${loop.index == 0}">
+          <div class="carousel-item active">
+            <!-- EVENT -->
+            <div class="event-card card">
+              <div class="d-flex">
+                  <img
+                    src="/images/event.png"
+                    class="card-img-top"
+                    alt="..."
+                  />
+                <!-- MAIN CARD CONTENT -->
+                <div class="card-body">
+                  <h5 class="card-title mb-1"><c:out value="${event.eventName}"></c:out></h5>
+                  <div class="d-flex align-items-baseline mb-1">
+                    <i class="bi bi-calendar-fill" style="padding-top: 5px;padding-right: 10px; font-size: 1rem;"></i>
+                    <h6 class="card-subtitle  text-body-secondary">
+                      <fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/>
+                    </h6>
+                  </div>
+                  <div class="d-flex align-items-baseline mb-2">
+                    <i class="bi bi-geo-alt-fill" style="padding-top: 5px;padding-right: 10px; font-size: 1rem;"></i>
+                    <h6 class="card-subtitle  text-body-secondary">
+                      <c:out value="${event.location}"></c:out>
+                    </h6>
+                  </div>
+                  <p class="card-text">
+                    <c:out value="${event.eventDetails}"></c:out>
+                  </p>
+                  <a href="/events/${event.id}" class="btn">Event Details</a>
+                </div>
               </div>
             </div>
           </div>
-          <!-- <div class="carousel-item">
-                  <img src="..." class="d-block w-100" alt="..." />
+          </c:when>
+          <c:otherwise>
+            <div class="carousel-item">
+                <div class="event-card card">
+                <div class="d-flex">
+                    <img
+                      src="/images/event.png"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                  <!-- MAIN CARD CONTENT -->
+                  <div class="card-body">
+                  <h5 class="card-title mb-1"><c:out value="${event.eventName}"></c:out></h5>
+                  <div class="d-flex align-items-baseline mb-1">
+                    <i class="bi bi-calendar-fill" style="padding-top: 5px;padding-right: 10px; font-size: 1rem;"></i>
+                    <h6 class="card-subtitle  text-body-secondary">
+                      <fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/>
+                    </h6>
+                  </div>
+                  <div class="d-flex align-items-baseline mb-2">
+                    <i class="bi bi-geo-alt-fill" style="padding-top: 5px;padding-right: 10px; font-size: 1rem;"></i>
+                    <h6 class="card-subtitle  text-body-secondary">
+                      <c:out value="${event.location}"></c:out>
+                    </h6>
+                  </div>
+                  <p class="card-text">
+                    <c:out value="${event.eventDetails}"></c:out>
+                  </p>
+                  <a href="/events/${event.id}" class="btn">Event Details</a>
                 </div>
-                <div class="carousel-item">
-                  <img src="..." class="d-block w-100" alt="..." />
-                </div> -->
+                </div>
+              </div>
+            </div>
+          </c:otherwise>
+          </c:choose>
+        </c:forEach>     
         </div>
         <button
           class="carousel-control-prev"

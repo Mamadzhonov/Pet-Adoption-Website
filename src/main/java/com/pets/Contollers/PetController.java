@@ -288,8 +288,9 @@ public class PetController {
 	@PostMapping("/add/inquiry") 
 	public String saveInquiry(@Valid @ModelAttribute("newInquiry") Inquiry newInquiry, BindingResult result) {		
 		
-		if(result.hasErrors()) return "/addInquiry.jsp";
-		
+		if(result.hasErrors()) {
+			return "addInquiry.jsp";
+		}
 		inquiryServ.save(newInquiry);
 		return "redirect:/pet?page=1";
 	}

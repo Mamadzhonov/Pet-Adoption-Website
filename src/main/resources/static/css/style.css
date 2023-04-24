@@ -114,6 +114,9 @@ ul, li {
 	border: 2.5px solid #FFA400;
 	border-radius:10px;
 }
+.form-label-filter {
+	font-weight: 300;
+}
 .admin {
 	border: 2.5px solid #c65a3f;
 }
@@ -147,4 +150,16 @@ th {
 }
 .inquiry-link:hover {
 	color: #FFA400;
+}
+.pet-card:hover {
+	box-shadow: 16px 16px 17px rgba(175, 126, 67, 0.1);
+}
+.event-card {
+	flex-direction: row;
+	border-radius: 15px;
+	border:3px solid #31A200;
+}
+.event-card img {
+	border-radius: 12px 0px 0px 12px; 
+	width:30%;
 }

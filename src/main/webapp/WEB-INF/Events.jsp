@@ -77,14 +77,6 @@
 
 
           <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-              <h6 class="dropdown-header">
-                User Type: <c:out value="${loggedUser.userType}"></c:out>
-              </h6>
-            </li>
-            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
-            <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
               <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
@@ -108,15 +100,12 @@
     <main class="p-3 mb-5">
     <div class="d-flex align-items-stretch">
     <!-- Left Column -->    
-	<div class="p-2 col-sm-2">
-		<div class="card form-card p-4 mb-3">
-			<img
-				src=""
-				class="img-thumbnail pet-profile mb-3"
-				alt="Image"
-			/>
-			<p>Image here, delete this sentence later</p>
-		</div>
+	<div class="p-2 col-sm-3">
+             <img
+            src="/images/event_list_img.png"
+            alt=""
+            style="width: 100%"
+          />
 	</div>
 	
 	<!-- Right Column -->

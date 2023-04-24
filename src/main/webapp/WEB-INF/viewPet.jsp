@@ -129,14 +129,14 @@ pageEncoding="UTF-8"%>
                 <!-- PET INQUIRY BTN -->
                  <div>
                   <a href="/pet/add/inquiry/${pet.id}" class="btn">Interested in this pet?</a>
-                </div>
+                </div>lar
               </c:if>
             </div>
-            <hr />
-            <h6>Species: <c:out value="${pet.species}"></c:out></h6>
-            <h6>Breed: <c:out value="${pet.breed}"></c:out></h6>
-            <h6>Gender: <c:out value="${pet.sex}"></c:out></h6>
-            <h6>Status: <c:out value="${pet.petStatus}"></c:out></h6>
+            <hr class="my-1 mb-3"/>
+            <h6>Species: <span style="font-weight: 300;"><c:out value="${pet.species}"></c:out></span></h6>
+            <h6>Breed: <span style="font-weight: 300;"><c:out value="${pet.breed}"></c:out></span></h6>
+            <h6>Gender: <span style="font-weight: 300;"><c:out value="${pet.sex}"></c:out></span></h6>
+            <h6>Status: <span style="font-weight: 300;"><c:out value="${pet.petStatus}"></c:out></span></h6>
             <c:if test="${loggedUser.userType == 'admin'}">
               <div>
               <hr />
