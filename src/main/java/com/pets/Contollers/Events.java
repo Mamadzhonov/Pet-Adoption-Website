@@ -163,6 +163,7 @@ public class Events {
         User loggedUser = userServ.findById(userLoggedId);
         model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("event", eventServ.findById(id));
+     // NEED these model attributes for form to work
         model.addAttribute("eventId", id);
         model.addAttribute("eventName", eventServ.findById(id).getEventName());
         return "EditEvent.jsp";
@@ -176,6 +177,7 @@ public class Events {
         	Long userLoggedId = (Long) session.getAttribute("loggedUser");
             User loggedUser = userServ.findById(userLoggedId);
             model.addAttribute("loggedUser", loggedUser);
+            // NEED these model attributes for form to work
             model.addAttribute("eventId", id);
             model.addAttribute("eventName", eventServ.findById(id).getEventName());
             return "EditEvent.jsp";

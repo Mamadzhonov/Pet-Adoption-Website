@@ -115,16 +115,22 @@
       <div class="d-flex justify-content-between align-items-top row-gapping">
         <!-- Left Column -->
         <div class="col px-0">
+          <!-- EVENT NAME -->
           <h1 class="text-start"><c:out value="${event.eventName}"/></h1>
           <!-- location row -->
           <div class="d-flex align-items-baseline mb-1">
             <i class="bi bi-geo-alt-fill" style="padding-right: 10px; font-size: 1.25rem;"></i>
-            <h6 class="" style="font-weight: 300;"><c:out value="${event.location}"/></h6>
+            <h6 style="font-weight: 300;"><c:out value="${event.location}"/></h6>
           </div>
-          <!-- date of event -->
+          <!-- date of event row-->
           <div class="d-flex align-items-baseline mb-1">
             <i class="bi bi-calendar-fill" style="padding-right: 10px; font-size: 1.25rem;"></i>
-            <h6 class="" style="font-weight: 300;"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></h6>
+            <h6 style="font-weight: 300;"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></h6>
+          </div>
+          <!-- EVENT CREATOR -->
+          <div class="d-flex align-items-baseline mb-1">
+            <i class="bi bi-person-fill" style="padding-right: 10px; font-size: 1.25rem;"></i>
+            <h6 style="font-weight: 300;"><c:out value="${event.postedBy}"></c:out></h6>
           </div>
           <div class="card form-card p-3 mb-3">
             <h6>About this event:</h6>
