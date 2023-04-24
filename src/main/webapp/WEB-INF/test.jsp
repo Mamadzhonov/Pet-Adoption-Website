@@ -10,7 +10,8 @@
 
 <title>Insert title here</title>
 </head>
-<body onLoad="getMapsImageSrc('${event.location}')">
-	<img id="google-map"></img>
+<body onLoad="setAllMapsImageSrc()">
+	<img class="google-map" alt="${event.location}"></img>
+	<img class="google-map" alt="Fayetteville, AR"></img>
 </body>
 </html>
