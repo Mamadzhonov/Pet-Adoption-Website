@@ -318,6 +318,7 @@ public class PetController {
 			User loggedUser = userServ.findById(id);
 			model.addAttribute("loggedUser", loggedUser);
 			// get inquiry
+			//Inquiry inquiry = inquiryServ.findById(inquiryId); 
 			model.addAttribute("inquiryId", inquiryId);
 			return "respondInquiry.jsp";
 		} else {

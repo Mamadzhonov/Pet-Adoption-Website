@@ -144,9 +144,8 @@ pageEncoding="UTF-8"%>
                 class="mt-2"
                 method="PUT"
                 modelAttribute="inquiry">
-
-                
-                <!-- NOTES -->
+           
+                <!-- Response -->
                 <div class="mb-3">
                   <form:label path="response" class="form-label"
                     >Respond</form:label>
@@ -164,7 +163,9 @@ pageEncoding="UTF-8"%>
        
                 <!-- DEFAULT THE RESPONDED FLAG TO NO  -->
                 <input type="hidden" id="responded" name="responded" value="Yes">
-
+  
+      		
+  
                 <button class="btn">Respond</button>
               </form:form>
             </div>
