@@ -91,14 +91,6 @@ pageEncoding="UTF-8"%>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-              <h6 class="dropdown-header">
-                User Type: <c:out value="${loggedUser.userType}"></c:out>
-              </h6>
-            </li>
-            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
-            <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
               <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
@@ -141,11 +133,10 @@ pageEncoding="UTF-8"%>
               <p>Response</p>
               <p><c:out value="${inquiry.response}"></c:out></p>
               <form:form
-                action="/pet/edit/inquiry/${inquiry.id}"
+                action="/pet/edit/inquiry/${inquiryId}"
                 class="mt-2"
                 method="PUT"
                 modelAttribute="inquiry">
-                
            
                 <!-- Response -->
                 <div class="mb-3">
@@ -176,6 +167,12 @@ pageEncoding="UTF-8"%>
   
                 <button class="btn">Respond</button>
               </form:form>
+              <!-- <form action="/pet/edit/inquiry/${inquiryId}/respond" method="POST" modelAttribute="response">
+                <div class="mb-3">
+                  <label for="response"> Response</label>
+                  <textarea name="response" id="response" cols="30" rows="10" placeholder="Type a message"></textarea>
+                </div>
+              </form> -->
             </div>
           </div>
         </div>

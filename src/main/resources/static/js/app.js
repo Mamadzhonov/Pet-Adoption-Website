@@ -1,4 +1,3 @@
-
 //alert("hello");
 
 async function getAJoke() {
@@ -27,7 +26,25 @@ async function getDogImage() {
 
     title1.innerHTML = `
     <img src="${data.message}" alt="" srcset="">
-    `
+  	`
 }
 
+async function setAllMapsImageSrc() {
+	var mapImgArr = document.getElementsByClassName("google-map");
+	
+	for(let i = 0; i < mapImgArr.length; i++) {
+		await setMapsImageSrc(mapImgArr[i], mapImgArr[i].alt);
+	}
+}
 
+async function setMapsImageSrc(img, location) {	
+	const apiKeyResponse = await fetch("/apiKey");
+	
+	const apiKey = await apiKeyResponse.json();
+	
+	console.log("Key: " + apiKey);
+	
+	const response = await fetch("https://maps.googleapis.com/maps/api/staticmap?center="+location+"&zoom=14&size=500x500&key="+apiKey[0]);
+	
+	img.src = response.url;
+}

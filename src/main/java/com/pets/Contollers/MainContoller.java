@@ -1,5 +1,12 @@
 package com.pets.Contollers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -158,19 +165,6 @@ public class MainContoller {
 		session.setAttribute("loggedUser", user.getId());
 		return "redirect:/home";
 	}
-//	@GetMapping("/register")
-//	public String registration(Model model, HttpSession session, RedirectAttributes redirect) {
-//		model.addAttribute("newUser", new User());
-//		return "Registration.jsp";
-//	}
-//	
-	
-//	@GetMapping("/login")
-//	public String getLoginPage(Model model) {
-//		model.addAttribute("newLogin", new LoginUser());
-//		return "Login.jsp";
-//	}
-//
 	
 	// INQUIRY DASHBOARD
 	@GetMapping("/inquire/dashboard")
@@ -209,4 +203,11 @@ public class MainContoller {
 
 		return "about.jsp";
 	}
+	
+	@GetMapping("/test")
+	public String test(Model model){
+		model.addAttribute("event", eventServ.findById(Long.valueOf(3)));
+		return "test.jsp";
+	}
+	
 }
