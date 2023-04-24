@@ -12,9 +12,20 @@ import com.pets.Repositories.EventRepository;
 
 @Service
 public class EventService {
-    
-    @Autowired
+   @Autowired
    private  EventRepository eventRepo;
+    
+    public List<Event> all() {
+    	return eventRepo.findAll();
+    }
+    
+    public Event findById(Long id) {
+    	Optional<Event> event = eventRepo.findById(id);
+    	if(event.isPresent()) {
+    		return event.get();
+    	}
+    	return null;
+    }
 
     public Event create(Event event){
         return eventRepo.save(event);
@@ -22,14 +33,6 @@ public class EventService {
 
     public List<Event> allEvents() {
         return eventRepo.findAll();
-    }
-
-    public Event findById(Long id) {
-        Optional<Event> optEvent = eventRepo.findById(id);
-        if (optEvent.isPresent()) {
-            return optEvent.get();
-        }
-        return null;
     }
 
     public void deleteById(Long id){

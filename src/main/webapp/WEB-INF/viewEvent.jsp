@@ -1,18 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-<!-- c:out ; c:forEach etc. -->
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<!-- Formatting (dates) -->
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!-- form:form -->
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!-- for rendering errors on PUT routes -->
-<%@ page isErrorPage="true" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>View Pet</title>
+<head>
+<meta charset="ISO-8859-1">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -34,15 +27,18 @@ pageEncoding="UTF-8"%>
       href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;800&display=swap"
       rel="stylesheet"
     />
+    <!--  -->
     <!-- BOOTSTRAP ICONS -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
     />
-  </head>
-  <body>
-    <div class="p-3">
-     <div
+<title>View Event</title>
+</head>
+<body>
+	<div class="top-half p-3">
+      <!-- NAV BAR -->
+      <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
@@ -108,68 +104,32 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-    </div>
-    <!-- MAIN CONTENT -->
-    <main class="p-3 mb-5">
-      <div class="d-flex align-items-stretch">
-        <!-- LEFT COLUMN -->
-        <div class="p-2 col-sm">
-          <!-- might be a nice touch to add the species icon next to the name -->
-          <div class="card p-4 form-card mb-3">
-            <div class="d-flex align-items-center mb-2">
-              <!-- PET IMAGE -->
-              <img
-                src="/images/${pet.species}_icon.png"
-                alt=""
-                style="height: 35px"
-              />
-              <h1 class="mx-2 mb-0"><c:out value="${pet.name}"></c:out></h1>
-            </div>
-            <hr />
-            <h6>Species: <c:out value="${pet.species}"></c:out></h6>
-            <h6>breed: {breed}</h6>
-            <h6>Gender: {sex}</h6>
-            <h6>Status: {status}</h6>
-            <c:if test="${loggedUser.userType == 'admin'}"></c:if>
-            <div>
-              <hr />
-              <h6>Admin Actions:</h6>
-              <div class="d-flex">
-                <a
-                  href="/pet/edit/${pet.id}"
-                  class="btn"
-                  style="margin-right: 15px"
-                  >Edit Pet</a
-                >
-                <a href="/" class="btn admin-btn">Delete Pet</a>
-              </div>
-            </div>
-          </div>
-          <div class="card p-4 form-card">
-            <h3>About this pet:</h3>
-            <hr />
-            <!-- <a href="https://www.flaticon.com/free-icons/dog" title="dog icons">Dog icons created by Freepik - Flaticon</a> -->
-            <p>
-              <c:out value="${pet.description}"></c:out>
-            </p>
-          </div>
-        </div>
-        <!-- RIGHT COLUMN -->
-        <div class="p-2 col-sm">
-          <!-- instead of a c:if, we can pass through what species to find the image -->
-          <img
-            src="/images/${pet.species}.png"
-            class="img-thumbnail pet-profile mb-3"
-            alt="..."
-          />
-          <div class="card p-4 form-card">
-            <h3>Location</h3>
-            <!-- leaving space for location, if we need it -->
-            <!-- can always take this out if we need to -->
-          </div>
-        </div>
-      </div>
-    </main>
+        <!-- NAV BAR END -->
+	  </div>
+	</div>
+	
+	<!-- Main Content -->
+	<main class="p-5 mb-5 min-vh-100">
+		<div class="d-flex justify-content-around align-items-stretch">
+			<!-- Left Column -->
+			<div class="col-5">
+				<h1 class="text-start"><c:out value="${event.eventName}"/></h1>
+				<div class="card form-card p-3">
+					<p><c:out value="${event.eventDetails}"/></p>
+				</div>
+			</div>
+			<!-- Right column -->
+			<div class="col-4">
+				<h3 class="text-start"><c:out value="${event.location}"/></h3>
+				<h4 class="text-start"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></h4>
+				<div class="card form-card">
+					<!-- Place for the map api potentially? -->
+				</div>
+			</div>
+		</div>
+	</main>
+	
+	<!-- Footer -->
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-3">
@@ -223,8 +183,8 @@ pageEncoding="UTF-8"%>
         <div>
           <p>{will be putting the main repo github link }</p>
         </div>
-        <div>Â© 2023 Pet Adoption Center</div>
+        <div>© 2023 Pet Adoption Center</div>
       </div>
     </div>
-  </body>
+</body>
 </html>

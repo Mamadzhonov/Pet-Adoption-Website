@@ -34,56 +34,94 @@
           </head>
 
           <body>
-            <!-- NAV BAR -->
             <div class="top-half p-3">
-              <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
-                <div class="d-flex align-items-center mb-1 nav-links">
-                  <img src="/images/animalLogo_solid.png" alt=""
-                    style="height: 30px; padding-right: 10px; padding-bottom: 3px" />
-                  <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
-                </div>
-                <div class="d-flex align-items-center ms-auto">
-                  <a href="/about" class="nav-link">Home</a>
-                  |
-                  <a href="/about" class="nav-link">Pets</a>
-                  |
-                  <a href="/about" class="nav-link">About</a>
-                  |
-                  <a href="/events" class="nav-link">Upcoming Events</a>
-                </div>
-                <!-- navbar: end section -->
-                <div class="dropdown" id="dropdown">
-                  <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <!-- user icon -->
-                    <i class="bi bi-person-fill me-3"></i>
-                    <!-- will be replacing with {user.name} -->
-                    <c:out value="${loggedUser.userName}"></c:out>
-                  </a>
+            <!-- NAV BAR -->
+           <div
+        class="d-flex flex-wrap justify-content-between align-items-center mb-3"
+      >
+        <div class="d-flex align-items-center mb-1 nav-links">
+          <img
+            src="/images/animalLogo_solid.png"
+            alt=""
+            style="height: 30px; padding-right: 10px; padding-bottom: 3px"
+          />
+          <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
+        </div>
+        <div class="d-flex align-items-center ms-auto">
+          <a href="/home" class="nav-link">Home</a>
+          |
+          <a href="/pet?page=1" class="nav-link">Pets</a>
+          |
+          <a href="/about" class="nav-link">About</a>
+          |
+          <a href="/events" class="nav-link">Upcoming Events</a>
+        </div>
+        <!-- navbar: end section -->
+        <div class="dropdown" id="dropdown">
+          <c:if test="${loggedUser.userType == 'user'}">
+          <a 
+            class="btn dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          ></c:if>
+          <c:if test="${loggedUser.userType == 'admin'}">
+             <a
+            class="btn admin-btn dropdown-toggle dropdown-toggle-admin"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+          </c:if>
+            <!-- user icon -->
+            <i class="bi bi-person-fill me-3"></i>
+            <!-- will be replacing with {user.name} -->
+            <c:out value="${loggedUser.userName}"></c:out>
+          </a>
 
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-                    <li><a class="dropdown-item" href="/pet/new">+ New Pet</a></li>
-                    <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
-                    <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
 
-
-
-            <div>
-              <table class="table table-striped tbl">
-                  <thead>
-                      <tr>
-                          <th scope="col">Event Name</th>
-                          <th scope="col">Date</th>
-                          <th scope="col">Location</th>
-                          <th scope="col">Event Details</th>
-                          <th scope="col">Posted By</th>
-                      </tr>
-                  </thead>
-                  <tbody>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <h6 class="dropdown-header">
+                User Type: <c:out value="${loggedUser.userType}"></c:out>
+              </h6>
+            </li>
+            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
+            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <c:if test="${loggedUser.userType == 'admin'}">
+              <li><h6 class="dropdown-header">Admin Actions:</h6></li>
+              <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
+              <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
+              <li>
+                <a class="dropdown-item" href="/event/new">+ New Event</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+            </c:if>
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          </ul>
+        </div>
+        </div>
+        
+        
+<!-- Event Cards -->
+	<div class="d-flex row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+		<c:forEach var="event" items="${events}">
+			<div class="col">
+				<div class="card h-100" style="width: 18rem;">
+	  				<div class="card-body">
+	  					<h5 class="card-title mx-2"><a href="/events/${event.id}"><c:out value="${event.eventName}"/></a></h5>
+	  				</div>
+	  				<div>
+	    				<p class="card-text"><c:out value="${event.date}"/></p>
+	    				<p class="card-text"><c:out value="${event.location}"/></p>
+	  				</div>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
 
                       <c:forEach var="event" items="${allEvents}">
                           <tr>

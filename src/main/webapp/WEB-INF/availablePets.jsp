@@ -1,18 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-<!-- c:out ; c:forEach etc. -->
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<!-- Formatting (dates) -->
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!-- form:form -->
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!-- for rendering errors on PUT routes -->
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isErrorPage="true" %>
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>View Pet</title>
+<head>
+<meta charset="ISO-8859-1">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -34,15 +30,19 @@ pageEncoding="UTF-8"%>
       href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;800&display=swap"
       rel="stylesheet"
     />
+    <!--  -->
     <!-- BOOTSTRAP ICONS -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
     />
-  </head>
-  <body>
-    <div class="p-3">
-     <div
+
+<title>Current Available Pets</title>
+</head>
+<body>
+	<div class="top-half p-3">
+      <!-- NAV BAR -->
+      <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
@@ -108,68 +108,129 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-    </div>
-    <!-- MAIN CONTENT -->
-    <main class="p-3 mb-5">
-      <div class="d-flex align-items-stretch">
-        <!-- LEFT COLUMN -->
-        <div class="p-2 col-sm">
-          <!-- might be a nice touch to add the species icon next to the name -->
-          <div class="card p-4 form-card mb-3">
-            <div class="d-flex align-items-center mb-2">
-              <!-- PET IMAGE -->
-              <img
-                src="/images/${pet.species}_icon.png"
-                alt=""
-                style="height: 35px"
-              />
-              <h1 class="mx-2 mb-0"><c:out value="${pet.name}"></c:out></h1>
-            </div>
-            <hr />
-            <h6>Species: <c:out value="${pet.species}"></c:out></h6>
-            <h6>breed: {breed}</h6>
-            <h6>Gender: {sex}</h6>
-            <h6>Status: {status}</h6>
-            <c:if test="${loggedUser.userType == 'admin'}"></c:if>
-            <div>
-              <hr />
-              <h6>Admin Actions:</h6>
-              <div class="d-flex">
-                <a
-                  href="/pet/edit/${pet.id}"
-                  class="btn"
-                  style="margin-right: 15px"
-                  >Edit Pet</a
-                >
-                <a href="/" class="btn admin-btn">Delete Pet</a>
-              </div>
-            </div>
-          </div>
-          <div class="card p-4 form-card">
-            <h3>About this pet:</h3>
-            <hr />
-            <!-- <a href="https://www.flaticon.com/free-icons/dog" title="dog icons">Dog icons created by Freepik - Flaticon</a> -->
-            <p>
-              <c:out value="${pet.description}"></c:out>
-            </p>
-          </div>
         </div>
-        <!-- RIGHT COLUMN -->
-        <div class="p-2 col-sm">
-          <!-- instead of a c:if, we can pass through what species to find the image -->
-          <img
-            src="/images/${pet.species}.png"
-            class="img-thumbnail pet-profile mb-3"
-            alt="..."
-          />
-          <div class="card p-4 form-card">
-            <h3>Location</h3>
-            <!-- leaving space for location, if we need it -->
-            <!-- can always take this out if we need to -->
-          </div>
-        </div>
-      </div>
-    </main>
+	</div>
+        <!-- NAV BAR END -->
+	
+	<!-- Body/Main Content -->
+	<!-- Available Pets Header -->
+	<div>
+		<h1>Our Available Pets:</h1>
+	</div>
+	<!-- Header End -->
+	<main class="p-3 mb-5">
+	<div class="d-flex align-items-stretch">
+	
+	<!-- Left Column -->
+	<div class="p-2 col-sm-2">
+		<!-- Filter Box -->
+			<div class="card form-card p-4 mb-3">
+			<form action="/pet/filter" method="POST" class="">
+			  <fieldset class="d-flex mb-2">
+			    <legend class="">Filter</legend>
+			    <div class="">
+			    <!-- Species Filter -->
+			      <div class="">
+			        <input class="" type="checkbox" name="cat" id="catCheckboxFilter" <c:if test="${filterList.remove('cat')}">checked</c:if>>
+			        <label class="form-label" for="catCheckboxFilter">
+			          Cats
+			        </label>
+			      </div>
+			      <div class="">
+			        <input class="" type="checkbox" name="dog" id="dogCheckboxFilter" <c:if test="${filterList.remove('dog')}">checked</c:if>>
+			        <label class="form-label" for="dogCheckboxFilter">
+			          Dogs
+			        </label>
+			      </div>
+			      <div class="">
+			        <input class="" type="checkbox" name="bird" id="birdCheckboxFilter" <c:if test="${filterList.remove('bird')}">checked</c:if>>
+			        <label class="form-label" for="birdCheckboxFilter">
+			          Birds
+			        </label>
+			      </div>
+			      <div class="">
+			        <input class="" type="checkbox" name="reptile" id="reptileCheckboxFilter" <c:if test="${filterList.remove('reptile')}">checked</c:if>>
+			        <label class="form-label" for="reptileCheckboxFilter">
+			          Reptiles
+			        </label>
+			      </div>
+			      <!-- Age Filter  -->
+				  <label class="form-label">Age Range:</label>
+			      <div class="d-flex row mb-2">
+				      <div class="col-sm">
+				        <input class="form-control" type="number" name="low-age" id="lowAgeFilter" placeholder="0" value="${lowAge}">
+				      </div>
+				      <div class="col-sm">
+				        <input class="form-control" type="number" name="high-age" id="highAgeFilter" placeholder="10" value="${highAge}">
+				      </div>
+			      </div>
+				<!-- Gender Filter -->
+			      <div class="col-sm">
+					<select class="form-select" id="sexFilter" name="sex">
+						<option value="">Pick a gender...</option>
+						<option value="Female" <c:if test="${sexFilter == 'Female'}">selected</c:if>>Female</option>
+						<option value="Male" <c:if test="${sexFilter == 'Male'}">selected</c:if>>Male</option>
+					</select>
+			      </div>
+			    </div>	      
+			  </fieldset>
+			  <button type="submit" class="btn my-0">Filter</button>
+			</form>
+			</div>
+		</div>
+		<!-- End Filter Box -->
+		
+		<!-- Right Column -->
+		<div class="p-2 col-sm ml-4">
+		<!-- Pet Cards -->
+		<div class="row">
+			<c:forEach var="pet" items="${petList}">
+				<div class="g-col-6 mx-1 mb-2">
+					<div class="card h-100" style="width: 18rem;">
+		  				<img
+				            src="/images/${pet.species}.png"
+				            class="img-thumbnail pet-profile mb-3 card-img-top"
+				            alt="Pet Image"
+				          />
+		  				<div class="card-body">
+		  				<div class="row px-2">
+		  					<img
+				                src="/images/${pet.species}_icon.png"
+				                alt=""
+				                style="height: 20px"
+				              />
+		  					<h5 class="card-title mx-1"><a href="/pet/${pet.id}"><c:out value="${pet.name}"/></a></h5>
+		  				</div>
+		  				<div class="row px-2">
+		    				<p class="card-subtitle card-text mx-1"><small><c:out value="${pet.age}"/> y.o. <c:out value="${pet.sex}"/></small></p>
+		    				<p class="card-subtitle card-text"><small><c:out value="${pet.breed}"/></small></p>
+		  				</div>
+					</div>
+					</div>
+				</div>
+			</c:forEach>
+			</div>
+			<!-- Pet Card End -->
+
+			<!-- Pagination -->
+			<c:if test="${lastPage > 1}">
+				<div class="text-center">
+				<a href="/pet?page=1${filterURL}">First</a>
+				<c:if test="${currentPage != 1}">
+					<a href="/pet?page=${currentPage-1}${filterURL}">Previous</a>
+				</c:if>
+			
+				<c:if test="${currentPage != lastPage}">
+					<a href="/pet?page=${currentPage+1}${filterURL}">Next</a>
+				</c:if>
+				<a href="/pet?page=${lastPage}${filterURL}">Last</a>
+				</div>
+			</c:if>
+			<!-- Pagination End-->
+			</div>
+		</div>
+		</main>
+	<!-- FOOTER -->
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-3">
@@ -223,8 +284,10 @@ pageEncoding="UTF-8"%>
         <div>
           <p>{will be putting the main repo github link }</p>
         </div>
-        <div>Â© 2023 Pet Adoption Center</div>
+        <div>© 2023 Pet Adoption Center</div>
       </div>
     </div>
-  </body>
+
+
+</body>
 </html>

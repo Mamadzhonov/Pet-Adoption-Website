@@ -18,15 +18,20 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pets.Models.Inquiry;
 import com.pets.Models.Pet;
 import com.pets.Models.User;
+import com.pets.Services.InquiryService;
 import com.pets.Services.PetService;
 import com.pets.Services.UserService;
+
 
 @Controller
 @RequestMapping("/pet")
@@ -37,9 +42,9 @@ public class PetController {
 	private UserService userServ;
 	@Autowired
 	PetService petService;
-	
 	@Autowired
-	UserService userService;
+	InquiryService inquiryServ;
+		
 	
 	//This allows the "Date of Arrival" attribute to be bound to the Pet object
 	//Otherwise Spring JPA doesn't know how to convert it to a Java Date object
@@ -72,23 +77,53 @@ public class PetController {
 	*	URL: http://localhost:8080/pet?page=2&filter=Dog&filter=lowAge:3&filter=highAge:8&filter=sex:Male	--Returns the 2nd page of male dogs that are between the ages of 3 and 8	
 	*/
 	@GetMapping("") 
-	public String petPage(Model model, HttpSession session, 
+	public String petPage(Model model, HttpSession session, RedirectAttributes redirect,
 			@RequestParam(name="page") Integer page, 
 			@RequestParam(name="size", required=false) Integer size, 
 			@RequestParam(name="filter", required=false) List<String> filter) {
 		
-		if(session.getAttribute("loggedUser") == null) return "redirect:/login";
+		if(session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/";
+		}
 		
-		User loggedUser = userService.findById((Long) session.getAttribute("loggedUser"));
+		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
+		String filterURL = "";
 		
 		model.addAttribute("loggedUser", loggedUser);
 		
-		if(size == null) {
-			model.addAttribute("petList", petService.getPetPage(page, filter));
-		} else {
-			model.addAttribute("petList", petService.getPetPage(page, size, filter));
+		model.addAttribute("currentPage", page);
+		model.addAttribute("lastPage", petService.getNumLastPage(filter));
+		
+		model.addAttribute("filterList", filter);
+		
+		if(filter != null) {
+			for(String filterString : filter) {
+				filterURL += "&filter=" + filterString;
+				if(filterString.contains("lowAge")) {
+					int lowAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
+					model.addAttribute("lowAge", lowAge);
+				}
+				if(filterString.contains("highAge")) {
+					int highAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
+					model.addAttribute("highAge", highAge);
+				}
+				if(filterString.contains("sex")) {
+					String filterSex = filterString.substring(filterString.indexOf(":") + 1);
+					model.addAttribute("sexFilter", filterSex);
+				}
+			}
 		}
-		return "test.jsp";//These are test jsps I created
+		
+		model.addAttribute("filterURL", filterURL);
+		
+		List<Pet> petPage;
+		
+		petPage = petService.getPetPage(page, filter);
+		
+		model.addAttribute("petList", petPage);
+		
+		return "availablePets.jsp";//Replace this with the availablePets.jsp when it's added
 	}
 	
 	
@@ -97,7 +132,7 @@ public class PetController {
 	public String addPet(Model model, HttpSession session, RedirectAttributes redirect) {
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		Long id = (Long) session.getAttribute("loggedUser");
@@ -108,32 +143,65 @@ public class PetController {
 	}
 	
 	@PostMapping("/add") 
-	public String savePet(@Valid @ModelAttribute("newPet") Pet newPet, BindingResult result) {		
-		
-		if(result.hasErrors()) return "/add-pet.jsp";
-		
+	public String savePet(@Valid @ModelAttribute("newPet") Pet newPet, BindingResult result, HttpSession session, RedirectAttributes redirect, Model model) {		
+		if(result.hasErrors()) {
+			Long id = (Long) session.getAttribute("loggedUser");
+			User loggedUser = userServ.findById(id);
+			model.addAttribute("loggedUser", loggedUser);
+			return "addPet.jsp";
+		} 
+		// we need to set the pet.user = session.userId
+		Long id = (Long) session.getAttribute("loggedUser");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
+		newPet.setUser(loggedUser);
 		petService.savePet(newPet);
-		return "redirect:/pet?page=1";
+//		return "redirect:/pet?page=1";
+		return "redirect:/home";
 	}
 	
 	// EDIT PET FORM
 	// eventually going to add the pet.id in the route
-	@GetMapping("/edit")
-	public String editPet(Model model, HttpSession session, RedirectAttributes redirect){
+	@GetMapping("/edit/{petId}")
+	public String editPet(@PathVariable("petId") Long petId, Model model, HttpSession session, RedirectAttributes redirect){
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		Long id = (Long) session.getAttribute("loggedUser");
 		User loggedUser = userServ.findById(id);
 		model.addAttribute("loggedUser", loggedUser);
+//		temp model attribute
+		Pet pet = petService.findById(petId);
+		model.addAttribute("pet", pet);
+		model.addAttribute("petId", petId);
 		// will un comment this once I add in the form
 //		model.addAttribute("pet", petService.findById(id));
 		return "editPet.jsp";
 	}
 	
-	
+	@PutMapping("/edit/{petId}")
+	public String updatePet(@Valid @ModelAttribute("pet") Pet pet, BindingResult result, HttpSession session, Model model, @PathVariable("petId") Long petId) {
+		if (result.hasErrors()) {
+//			get user
+			Long id = (Long) session.getAttribute("loggedUser");
+			User loggedUser = userServ.findById(id);
+			model.addAttribute("loggedUser", loggedUser);
+			// get pet
+			model.addAttribute("petId", petId);
+			return "editPet.jsp";
+		} else {
+			// making sure that this updated pet has the same id
+			pet.setId(petId);
+			// also making sure pet.user stays the same as before
+			Pet thisPet = petService.findById(petId);
+			pet.setUser(thisPet.getUser());
+			// saving pet into db
+			petService.savePet(pet);
+			return "redirect:/pet/" + petId;
+		}
+	}
 	
 	/*	This is the post mapping for the "filter form" from the Pet Adoption page
 	 * 	It reads the form inputs and adds the filter parameters the Pet Adoption page URL before redirecting back there
@@ -164,7 +232,7 @@ public class PetController {
 		if(highAge != null) {
 			filter = filter.concat("&filter=highAge:" + highAge);
 		}
-		if(sex != null) {
+		if(sex != null && sex != "") {
 			if(!sex.equals("None")) {
 				filter = filter.concat("&filter=sex:" + sex);
 			}
@@ -175,8 +243,30 @@ public class PetController {
 	
 	// VIEW PET PAGE 
 	// will be changing "view" to "{id}" once jsp is halfway done
-	@GetMapping("/view")
-	public String viewPet(Model model, HttpSession session, RedirectAttributes redirect) {
+	@GetMapping("/{petId}")
+	public String viewPet(@PathVariable("petId") Long petId, Model model, HttpSession session, RedirectAttributes redirect) {
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/";
+		}
+		
+		Long id = (Long) session.getAttribute("loggedUser");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
+		
+		Pet pet = petService.findById(petId);
+		model.addAttribute("pet", pet);
+//		model.addAttribute("pet", petService.findById(id));
+		return "viewPet.jsp";
+	}
+	
+	
+	//----------		Inquiry Mappings		----------//
+
+	// SHOW THE INQUIRY ADD PAGE 
+	@GetMapping("/add/inquiry/{petId}")
+	public String addInquiry(Model model,@PathVariable("petId") Long petId, 
+							HttpSession session, RedirectAttributes redirect) {
 		if (session.getAttribute("loggedUser") == null) {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
 			return "redirect:/login";
@@ -185,7 +275,81 @@ public class PetController {
 		Long id = (Long) session.getAttribute("loggedUser");
 		User loggedUser = userServ.findById(id);
 		model.addAttribute("loggedUser", loggedUser);
-//		model.addAttribute("pet", petService.findById(id));
-		return "viewPet.jsp";
+		model.addAttribute("newInquiry", new Inquiry());
+
+		Pet pet = petService.findById(petId);
+		model.addAttribute("pet", pet);
+		model.addAttribute("petId", petId);
+
+		return "addInquiry.jsp";
 	}
+
+	//POST TO THE ADD INQUIRY
+	@PostMapping("/add/inquiry") 
+	public String saveInquiry(@Valid @ModelAttribute("newInquiry") Inquiry newInquiry, BindingResult result) {		
+		
+		if(result.hasErrors()) return "/addInquiry.jsp";
+		
+		inquiryServ.save(newInquiry);
+		return "redirect:/pet?page=1";
+	}
+	
+	
+	//SHOW THE INQUIRY DETAIL 
+	@GetMapping("/inquire/{inquiryId}")
+	public String showInquiryDetails(Model model, HttpSession session, @PathVariable("inquiryId")  Long inquiryId, RedirectAttributes redirect) {
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/";
+		}
+		
+		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
+		model.addAttribute("loggedUser", loggedUser);
+		Inquiry inquiry = inquiryServ.findById(inquiryId); 
+		model.addAttribute("inquiry", inquiry);
+		return "respondInquiry.jsp";//Put the jsp file here when complete.
+	}
+
+	// SHOW THE INQUIRY DASHBOARD
+	@GetMapping("/inquire/dashboard")
+	public String inquiryDashboard(Model model, HttpSession session, RedirectAttributes redirect) {
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/";
+		}
+		
+		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
+		model.addAttribute("loggedUser", loggedUser);
+		List<Inquiry> inquiries = inquiryServ.findAll();
+		model.addAttribute("inquiries",inquiries);
+		return "dashboardInquiry.jsp";//Put the jsp file here when complete.
+	}
+	
+	// UPDATE THE INQUIRY WITH THE RESPONSE
+	@PutMapping("/edit/inquiry/{inquiryId}")
+	public String updateInquiry(@Valid @ModelAttribute("inquiry") Inquiry inquiry, BindingResult result, 
+								HttpSession session, Model model, @PathVariable("inquiryId") Long inquiryId) {
+		if (result.hasErrors()) {
+//			get user
+			Long id = (Long) session.getAttribute("loggedUser");
+			User loggedUser = userServ.findById(id);
+			model.addAttribute("loggedUser", loggedUser);
+			// get inquiry
+			model.addAttribute("inquiryId", inquiryId);
+			return "respondInquiry.jsp";
+		} else {
+			// making sure that this updated inquiry has the same id
+			inquiry.setId(inquiryId);
+			// also making sure pet.user stays the same as before
+			Inquiry thisInquiry = inquiryServ.findById(inquiryId);
+//			inquiry.setUser(thisInquiry.getUser());
+			// saving inquiry into db
+			inquiryServ.save(inquiry);
+			return "redirect:/inquire/dashboard";
+		}
+	}
+
+
+	
+
 }

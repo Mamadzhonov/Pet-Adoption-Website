@@ -34,21 +34,23 @@ public class PetService {
 	 * 	If the page that is requested is out of the bounds of the list, the function returns null
 	 * 	It then returns a sublist of the source list
 	 */
-	public List<Pet> getPetPage(Integer page, Integer size, List<String> filter) {
-		int startIndex = (page - 1) * size;
-		int lastIndex = startIndex + size;
+	public List<Pet> getPetPage(Integer page, List<String> filter) {
+		int startIndex = (page - 1) * 6;
+		int lastIndex = startIndex + 6;
 
 		List<Pet> petList = (filter == null) ? repo.findAll() : getFilteredPets(filter);
 		
-		if((page - 1) * size > petList.size()) return null;
+		if((page - 1) * 6 > petList.size()) return null;
 		
 		return petList.subList(startIndex, (lastIndex > petList.size()) ? petList.size(): lastIndex);
 	}
 	
-	//Overloaded function that doesn't accept size input, so it defaults to 6
-	public List<Pet> getPetPage(Integer page, List<String> filter) {
-		return getPetPage(page, 6, filter);
+	public int getNumLastPage(List<String> filter) {
+		List<Pet> petList = (filter == null) ? repo.findAll() : getFilteredPets(filter);
+		
+		return (int) Math.ceil(petList.size() / 6.0);
 	}
+
 	
 	public Pet savePet(Pet newPet) {
 		return repo.save(newPet);
@@ -89,12 +91,12 @@ public class PetService {
 			}
 			if(filterString.contains("lowAge")) {
 				int lowAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
-				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeGreaterThan(lowAge)));
+				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeGreaterThanEqual(lowAge)));
 				filterCount++;
 			}
 			if(filterString.contains("highAge")) {
 				int highAge = Integer.parseInt(filterString.substring(filterString.indexOf(":") + 1));
-				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeLessThan(highAge)));
+				filteredPetIdList.addAll(getIdListFromPetList(repo.findByAgeLessThanEqual(highAge)));
 				filterCount++;
 			}
 			if(filterString.contains("sex")) {
@@ -123,7 +125,7 @@ public class PetService {
 	 * 		If for every filter you store every pet id that passes it, then the pets that pass all of the filters should have an id for every filter.
 	 * 		-	4 filters = 4 ids. If there is less than 4 ids for a pet, then it doesn't pass. There should never be more
 	 * 		-	2 filters = 2 ids.
-	 * 		- 	4 filters and 2 pet ids means that pet doesn't pass
+	 * 		- 	4 filters and 2 pet ids means that pet only passed 2 filters and doesn't pass the entire filter
 	 */
 	private List<Pet> combineFilteredLists(List<Long> idList, int filterCount) {
 		Long currentId;
@@ -150,10 +152,10 @@ public class PetService {
 	//Idk what species we are going to have exactly
 	//This can be easily adjusted to account for more or different species
 	private boolean isSpecies(String filterString) {
-		if(filterString.equals("Dog") ||
-			filterString.equals("Cat") ||
-			filterString.equals("Reptile") ||
-			filterString.equals("Bird")) {
+		if(filterString.equals("dog") ||
+			filterString.equals("cat") ||
+			filterString.equals("reptile") ||
+			filterString.equals("bird")) {
 			return true;
 		}
 		return false;

@@ -42,6 +42,12 @@ public class User {
     
     @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
     private List<Pet> petsPosted;
+    
+    @OneToMany(mappedBy="sender", fetch=FetchType.LAZY)
+    private List<Message> messagesSent;
+    
+    @OneToMany(mappedBy="receiver", fetch=FetchType.LAZY)
+    private List<Message> messagesReceived;
 
     @Column(updatable = false)
     private Date createdAt;
@@ -141,6 +147,20 @@ public class User {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
-	
-	
+
+	public List<Message> getMessagesSent() {
+		return messagesSent;
+	}
+
+	public void setMessagesSent(List<Message> messagesSent) {
+		this.messagesSent = messagesSent;
+	}
+
+	public List<Message> getMessagesReceived() {
+		return messagesReceived;
+	}
+
+	public void setMessagesReceived(List<Message> messagesReceived) {
+		this.messagesReceived = messagesReceived;
+	}
 }

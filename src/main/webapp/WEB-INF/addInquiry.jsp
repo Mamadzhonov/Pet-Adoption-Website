@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>View Pet</title>
+    <title>Create New Pet Inquiry</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -34,6 +34,7 @@ pageEncoding="UTF-8"%>
       href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;800&display=swap"
       rel="stylesheet"
     />
+    <!--  -->
     <!-- BOOTSTRAP ICONS -->
     <link
       rel="stylesheet"
@@ -41,8 +42,10 @@ pageEncoding="UTF-8"%>
     />
   </head>
   <body>
+    <!-- PAGE CONTAINER -->
     <div class="p-3">
-     <div
+      <!-- NAV BAR -->
+      <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
@@ -108,68 +111,110 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-    </div>
-    <!-- MAIN CONTENT -->
-    <main class="p-3 mb-5">
-      <div class="d-flex align-items-stretch">
-        <!-- LEFT COLUMN -->
-        <div class="p-2 col-sm">
-          <!-- might be a nice touch to add the species icon next to the name -->
-          <div class="card p-4 form-card mb-3">
-            <div class="d-flex align-items-center mb-2">
-              <!-- PET IMAGE -->
-              <img
-                src="/images/${pet.species}_icon.png"
-                alt=""
-                style="height: 35px"
-              />
-              <h1 class="mx-2 mb-0"><c:out value="${pet.name}"></c:out></h1>
-            </div>
-            <hr />
-            <h6>Species: <c:out value="${pet.species}"></c:out></h6>
-            <h6>breed: {breed}</h6>
-            <h6>Gender: {sex}</h6>
-            <h6>Status: {status}</h6>
-            <c:if test="${loggedUser.userType == 'admin'}"></c:if>
-            <div>
+      <main class="p-3 mb-5">
+        <div class="d-flex align-items-center">
+          <!-- LEFT COLUMN -->
+          <div class="p-2 flex-fill">
+            <!-- <div class="card"> -->
+            <img
+              src="/images/new_pet.png"
+              alt=""
+              style="height: auto; width: 375px"
+            />
+            <!-- </div> -->
+          </div>
+          <div class="p-2 col-sm">
+            <div class="card p-4 form-card">
+              <h6>Thank you for showing interest in <c:out value="${pet.name}"></c:out>! Please fill out
+					the following information, and our staff will respond within 48 hours.</h6>
               <hr />
-              <h6>Admin Actions:</h6>
-              <div class="d-flex">
-                <a
-                  href="/pet/edit/${pet.id}"
-                  class="btn"
-                  style="margin-right: 15px"
-                  >Edit Pet</a
-                >
-                <a href="/" class="btn admin-btn">Delete Pet</a>
-              </div>
+              <p>I am interested in</p>
+              <form:form
+                action="/pet/add/inquiry"
+                class="mt-2"
+                method="POST"
+                modelAttribute="newInquiry">
+              <!-- ADOPT/FOSTER -->
+                <div class="mb-3">
+
+                 
+                 
+                 <input type="radio" id="inquiryType"  name="inquiryType" value="Adopting">
+				<label for="inquiryType">Adopting</label><br>
+				<input type="radio" id="inquiryType" name="inquiryType" value="Fostering">
+				<label for="inquiryType">Fostering</label><br>                   
+                  
+                </div>
+                <!-- ERROR: INQUIRY TYPE -->
+                <form:errors
+                  path="inquiryType"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+                <!-- DATE OF PICKUP -->
+                <div class="mb-3">
+                  <form:label path="dateOfPickup" class="form-label"
+                    >Pickup:</form:label
+                  >
+                  <form:input
+                    type="date"
+                    class="form-control"
+                    path="dateOfPickup"
+                  />
+                </div>
+                <!-- ERROR: date of pickup -->
+                <form:errors
+                  path="dateOfPickup"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+
+                <!-- DATE OF DROPOFF -->
+                <div class="mb-3">
+                  <form:label path="dateOfDropoff" class="form-label"
+                    >Dropoff:</form:label>
+                  <form:input
+                    type="date"
+                    class="form-control"
+                    path="dateOfDropoff"
+                  />
+                </div>
+                <!-- ERROR: date of dropoff -->
+                <form:errors
+                  path="dateOfDropoff"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+                
+                <!-- NOTES -->
+                <div class="mb-3">
+                  <form:label path="notes" class="form-label"
+                    >Notes</form:label>
+                  <form:textarea
+                    path="notes"
+                    class="form-control"
+                    style="height: 100px"
+                    placeholder="Questions..."
+                  ></form:textarea>
+                </div>
+                <form:errors
+                  path="notes"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+                <!-- PET ID OF THE PET BEING FOSTERED OR ADOPTED -->
+                <input type="hidden" id="pet" name="pet" value="${pet.id}">
+                
+                <!-- USER ID OF THE USER THAT IS INQUIRING -->
+                <input type="hidden" id="inquirer_id" name="inquirer_id" value="${loggedUser.id}">
+
+                <!-- DEFAULT THE RESPONDED FLAG TO NO  -->
+                <input type="hidden" id="responded" name="responded" value="No">
+
+
+                <button class="btn">Submit</button>
+              </form:form>
             </div>
           </div>
-          <div class="card p-4 form-card">
-            <h3>About this pet:</h3>
-            <hr />
-            <!-- <a href="https://www.flaticon.com/free-icons/dog" title="dog icons">Dog icons created by Freepik - Flaticon</a> -->
-            <p>
-              <c:out value="${pet.description}"></c:out>
-            </p>
-          </div>
         </div>
-        <!-- RIGHT COLUMN -->
-        <div class="p-2 col-sm">
-          <!-- instead of a c:if, we can pass through what species to find the image -->
-          <img
-            src="/images/${pet.species}.png"
-            class="img-thumbnail pet-profile mb-3"
-            alt="..."
-          />
-          <div class="card p-4 form-card">
-            <h3>Location</h3>
-            <!-- leaving space for location, if we need it -->
-            <!-- can always take this out if we need to -->
-          </div>
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-3">

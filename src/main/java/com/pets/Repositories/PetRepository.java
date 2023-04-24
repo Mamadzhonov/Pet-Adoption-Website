@@ -11,7 +11,7 @@ import com.pets.Models.Pet;
 public interface PetRepository extends CrudRepository<Pet, Long>{
 	public List<Pet> findAll();
 	public List<Pet> findBySpecies(String species);
-	public List<Pet> findByAgeGreaterThan(Integer age);
-	public List<Pet> findByAgeLessThan(Integer age);
+	public List<Pet> findByAgeGreaterThanEqual(Integer age);
+	public List<Pet> findByAgeLessThanEqual(Integer age);
 	public List<Pet> findBySexIs(String sex);
 }
