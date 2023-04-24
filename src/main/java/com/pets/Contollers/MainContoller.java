@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pets.Models.Event;
+import com.pets.Models.Inquiry;
 import com.pets.Models.LoginUser;
 import com.pets.Models.User;
 import com.pets.Services.EventService;
+import com.pets.Services.InquiryService;
 import com.pets.Services.UserService;
 
 @Controller
@@ -27,6 +29,8 @@ public class MainContoller {
 	private UserService userServ;
 	@Autowired
 	private EventService eventServ;
+	@Autowired
+	private InquiryService inquiryServ;
 
 //	@GetMapping("/")
 //	public String index() {
@@ -178,7 +182,8 @@ public class MainContoller {
 		
 		User loggedUser = userServ.findById((Long) session.getAttribute("loggedUser"));
 		model.addAttribute("loggedUser", loggedUser);
-		
+		List<Inquiry> inquiries = inquiryServ.findAll();
+		model.addAttribute("inquiries",inquiries);
 		return "dashboardInquiry.jsp";//Put the jsp file here when complete.
 	}
 	
