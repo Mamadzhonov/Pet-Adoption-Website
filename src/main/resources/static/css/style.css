@@ -130,3 +130,21 @@ ul, li {
 	font-weight: 300;
 	font-size:12px;
 }
+.table-secondary {
+	background-color: rgba(255, 164, 0, .4);
+
+}
+tr {
+	border-bottom: 2px solid #FFA400;
+}
+
+th {
+	font-weight: 300;
+}
+.inquiry-link {
+	color: #c65a3f;
+	transition: all 200ms ease;
+}
+.inquiry-link:hover {
+	color: #FFA400;
+}
