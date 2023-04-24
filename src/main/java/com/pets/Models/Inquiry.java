@@ -17,6 +17,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="inquiries")
@@ -31,12 +34,17 @@ public class Inquiry {
 	@NotNull(message="Inquiry type required")
 	private String inquiryType;
 	
+	@NotNull(message="Pickup date required")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateOfPickup;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateOfDropoff;
 	
 	private String responded;
 	
+	@NotNull()
+	@Size(min = 1, message="Please include a note")
 	private String notes;
 		
 	private String response;
