@@ -140,10 +140,13 @@ pageEncoding="UTF-8"%>
               <p>Response</p>
               <p><c:out value="${inquiry.response}"></c:out></p>
               <form:form
-                action="/pet/edit/inquiry/${inquiry.id}"
+                action="/pet/edit/inquiry/${inquiryId}"
                 class="mt-2"
-                method="PUT"
+                method="POST"
                 modelAttribute="inquiry">
+                 <input type="hidden" name="_method" value="PUT" />
+              <!--  -->
+              
            
                 <!-- Response -->
                 <div class="mb-3">
@@ -168,6 +171,12 @@ pageEncoding="UTF-8"%>
   
                 <button class="btn">Respond</button>
               </form:form>
+              <!-- <form action="/pet/edit/inquiry/${inquiryId}/respond" method="POST" modelAttribute="response">
+                <div class="mb-3">
+                  <label for="response"> Response</label>
+                  <textarea name="response" id="response" cols="30" rows="10" placeholder="Type a message"></textarea>
+                </div>
+              </form> -->
             </div>
           </div>
         </div>

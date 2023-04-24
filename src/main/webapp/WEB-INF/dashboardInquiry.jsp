@@ -120,7 +120,6 @@ pageEncoding="UTF-8"%>
         </div> -->
         <!-- RIGHT COL -->
         <div class="mb-3">
-
           <div class="card form-card" style="padding: 1rem">
             <h2>Pet Inquiry Dasboard</h2>
             <table class="table">
