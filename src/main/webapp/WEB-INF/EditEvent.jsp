@@ -96,12 +96,7 @@ pageEncoding="UTF-8" %>
         <!-- NEW EVENT FORM column -->
         <div class="p-2 col-sm">
           <div class="card p-4 form-card">
-            <div class="d-flex align-items-top justify-content-between">
-              <h2>Edit '<c:out value="${eventName}"></c:out>' Event</h2>
-              <div>
-                <a class="btn" href="/events">Back to Events</a>
-              </div>
-            </div>
+            <h2>Edit '<c:out value="${eventName}"></c:out>' Event</h2>
             <hr />
             <form:form
               action="/event/${eventId}/edit"
@@ -166,8 +161,11 @@ pageEncoding="UTF-8" %>
                 class="text-danger"
                 path="eventDetails"
               ></form:errors>
-              <div>
-                <button class="btn">Create Event</button>
+              <div class="d-flex">
+                <button class="btn" style="margin-right: 10px">
+                  Create Event
+                </button>
+                <a href="/events/${eventId}" class="btn admin-btn">Cancel</a>
               </div>
             </form:form>
           </div>
@@ -231,7 +229,6 @@ pageEncoding="UTF-8" %>
           </form>
         </div>
       </div>
-
 
       <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
         <div>
