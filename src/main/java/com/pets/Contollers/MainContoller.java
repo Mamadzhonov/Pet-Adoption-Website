@@ -1,5 +1,7 @@
 package com.pets.Contollers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pets.Models.Event;
 import com.pets.Models.LoginUser;
 import com.pets.Models.User;
+import com.pets.Services.EventService;
 import com.pets.Services.UserService;
 
 @Controller
@@ -21,6 +25,8 @@ public class MainContoller {
 
 	@Autowired
 	private UserService userServ;
+	@Autowired
+	private EventService eventServ;
 
 //	@GetMapping("/")
 //	public String index() {
@@ -36,7 +42,11 @@ public class MainContoller {
 			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
 			return "redirect:/";
 		}
-
+		List<Event> allEvents = eventServ.all();
+		model.addAttribute("allEvents", allEvents);
+		// length of event list
+		Integer allEventsSubOne = allEvents.size() - 1;
+		model.addAttribute("allEventsSubOne", allEventsSubOne);
 		Long id = (Long) session.getAttribute("loggedUser");
 		User loggedUser = userServ.findById(id);
 		model.addAttribute("loggedUser", loggedUser);

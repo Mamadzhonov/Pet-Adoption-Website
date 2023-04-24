@@ -123,9 +123,7 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
     </div>
-    <!--  -->
     <!-- EVENT CAROUSEL  -->
-    <!-- will be adding more event info later on once I research more on carousel -->
     <div class="event-row p-3 mb-3">
       <div
         id="carouselExampleControls"
@@ -133,6 +131,11 @@ pageEncoding="UTF-8"%>
         data-bs-ride="false"
       >
         <div class="carousel-inner">
+          <!-- FOR LOOP - CAROUSEL -->
+          <c:forEach var="event" items="${allEvents}" varStatus="loop">
+            <c:choose>
+              <!-- WHEN IT'S THE FIRST ON LIST OF EVENTS -->
+            <c:when test="${loop.index == 0}">
           <div class="carousel-item active">
             <!-- EVENT -->
             <div class="event-card card">
@@ -144,63 +147,64 @@ pageEncoding="UTF-8"%>
                   />
                 <!-- MAIN CARD CONTENT -->
                 <div class="card-body">
-                  <h5 class="card-title mb-1">Event Name</h5>
+                  <h5 class="card-title mb-1"><c:out value="${event.eventName}"></c:out></h5>
                   <div class="d-flex align-items-baseline mb-1">
                     <i class="bi bi-calendar-fill" style="padding-top: 5px;padding-right: 10px; font-size: 1rem;"></i>
                     <h6 class="card-subtitle  text-body-secondary">
-                      Date
+                      <fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/>
                     </h6>
                   </div>
                   <div class="d-flex align-items-baseline mb-2">
                     <i class="bi bi-geo-alt-fill" style="padding-top: 5px;padding-right: 10px; font-size: 1rem;"></i>
                     <h6 class="card-subtitle  text-body-secondary">
-                      Location
+                      <c:out value="${event.location}"></c:out>
                     </h6>
                   </div>
                   <p class="card-text">
-                    Some quick example text to build on the card title and make up
-                    the bulk of the card's content.
+                    <c:out value="${event.eventDetails}"></c:out>
                   </p>
-                  <a href="#" class="btn">Event Details</a>
+                  <a href="/events/${event.id}" class="btn">Event Details</a>
                 </div>
               </div>
             </div>
           </div>
-          <div class="carousel-item">
-              <div class="event-card card">
-              <div class="d-flex">
-                  <img
-                    src="/images/event.png"
-                    class="card-img-top"
-                    alt="..."
-                  />
-                <!-- MAIN CARD CONTENT -->
-                <div class="card-body">
-                  <h5 class="card-title mb-1">Event Name2</h5>
+          </c:when>
+          <!-- WHEN IT'S AFTER THE FIRST -->
+          <c:otherwise>
+            <div class="carousel-item">
+                <div class="event-card card">
+                <div class="d-flex">
+                    <img
+                      src="/images/event.png"
+                      class="card-img-top"
+                      alt="..."
+                    />
+                  <!-- MAIN CARD CONTENT -->
+                  <div class="card-body">
+                  <h5 class="card-title mb-1"><c:out value="${event.eventName}"></c:out></h5>
                   <div class="d-flex align-items-baseline mb-1">
                     <i class="bi bi-calendar-fill" style="padding-top: 5px;padding-right: 10px; font-size: 1rem;"></i>
                     <h6 class="card-subtitle  text-body-secondary">
-                      Date
+                      <fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/>
                     </h6>
                   </div>
                   <div class="d-flex align-items-baseline mb-2">
                     <i class="bi bi-geo-alt-fill" style="padding-top: 5px;padding-right: 10px; font-size: 1rem;"></i>
                     <h6 class="card-subtitle  text-body-secondary">
-                      Location
+                      <c:out value="${event.location}"></c:out>
                     </h6>
                   </div>
                   <p class="card-text">
-                    Some quick example text to build on the card title and make up
-                    the bulk of the card's content.
+                    <c:out value="${event.eventDetails}"></c:out>
                   </p>
-                  <a href="#" class="btn">Event Details</a>
+                  <a href="/events/${event.id}" class="btn">Event Details</a>
+                </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="carousel-item">
-              <img src="..." class="d-block w-100" alt="..." />
-          </div>      
+          </c:otherwise>
+          </c:choose>
+        </c:forEach>     
         </div>
         <button
           class="carousel-control-prev"
