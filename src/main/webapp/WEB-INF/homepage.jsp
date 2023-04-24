@@ -134,7 +134,6 @@ pageEncoding="UTF-8"%>
           <!-- FOR LOOP - CAROUSEL -->
           <c:forEach var="event" items="${allEvents}" varStatus="loop">
             <c:choose>
-              <!-- WHEN IT'S THE FIRST ON LIST OF EVENTS -->
             <c:when test="${loop.index == 0}">
           <div class="carousel-item active">
             <!-- EVENT -->
@@ -169,7 +168,6 @@ pageEncoding="UTF-8"%>
             </div>
           </div>
           </c:when>
-          <!-- WHEN IT'S AFTER THE FIRST -->
           <c:otherwise>
             <div class="carousel-item">
                 <div class="event-card card">
