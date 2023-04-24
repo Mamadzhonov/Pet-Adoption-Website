@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Inquiry Dashboard</title>
+    <title>Pet Inquiry Detail/Respond</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -45,11 +45,10 @@ pageEncoding="UTF-8"%>
     <!-- PAGE CONTAINER -->
     <div class="p-3">
       <!-- NAV BAR -->
-     <div
+      <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
-      <!-- LOGO COLUMN -->
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mb-1 nav-links">
           <img
             src="/images/animalLogo_solid.png"
             alt=""
@@ -57,7 +56,6 @@ pageEncoding="UTF-8"%>
           />
           <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
         </div>
-        <!-- MIDDLE LINKS -->
         <div class="d-flex align-items-center ms-auto">
           <a href="/home" class="nav-link">Home</a>
           |
@@ -67,7 +65,7 @@ pageEncoding="UTF-8"%>
           |
           <a href="/events" class="nav-link">Upcoming Events</a>
         </div>
-        <!-- END: DROPDOWN MENU -->
+        <!-- navbar: end section -->
         <div class="dropdown" id="dropdown">
           <c:if test="${loggedUser.userType == 'user'}">
           <a 
@@ -88,10 +86,19 @@ pageEncoding="UTF-8"%>
           </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
+            <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <h6 class="dropdown-header">
+                User Type: <c:out value="${loggedUser.userType}"></c:out>
+              </h6>
+            </li>
+            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
+            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
+            <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
               <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
@@ -104,52 +111,67 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-     </div>
-     <!-- MAIN -->
-      <main class="p-3 mb-5" >
-        <div
-        class="d-flex align-items-start justify-content-between"
-      >
-      <!-- LEFT COL -->
-        <div class="col-3">
-             <img
-            src="/images/inquiry_dashboard.png"
-            alt=""
-            style="width: 100%"
-          />
+      <main class="p-3 mb-5">
+        <div class="d-flex align-items-center">
+          <!-- LEFT COLUMN -->
+          <div class="p-2 flex-fill">
+            <!-- <div class="card"> -->
+            <img
+              src="/images/new_pet.png"
+              alt=""
+              style="height: auto; width: 375px"
+            />
+            <!-- </div> -->
+          </div>
+          <div class="p-2 col-sm">
+            <div class="card p-4 form-card">
+              <h3>Pet Inquiry Detail</h3>
+              <hr />
+              <p>Inquirer Name: <c:out value="${inquiry.inquirer.userName}"></c:out></p>
+              <p>Pet Name: <c:out value="${inquiry.pet.name}"></c:out></p>
+              <p>Species: <c:out value="${inquiry.pet.species}"></c:out></p>
+              <p>Breed: <c:out value="${inquiry.pet.breed}"></c:out></p>
+              <p>Age: <c:out value="${inquiry.pet.age}"></c:out></p>
+              <p>Sex: <c:out value="${inquiry.pet.sex}"></c:out></p>
+              <p>Pickup: <c:out value="${inquiry.dateOfPickup}"></c:out></p>
+              <p>Dropoff: <c:out value="${inquiry.dateOfDropoff}"></c:out></p>
+              <p>Notes</p>
+              <p><em><c:out value="${inquiry.notes}"></c:out></em></p>
+              <p>Response</p>
+              <p><c:out value="${inquiry.response}"></c:out></p>
+              <form:form
+                action="/pet/edit/inquiry/${inquiry.id}"
+                class="mt-2"
+                method="PUT"
+                modelAttribute="inquiry">
+
+                
+                <!-- NOTES -->
+                <div class="mb-3">
+                  <form:label path="response" class="form-label"
+                    >Respond</form:label>
+                  <form:textarea
+                    path="response"
+                    class="form-control"
+                    style="height: 100px"
+                    placeholder="Type a message"
+                  ></form:textarea>
+                </div>
+                <form:errors
+                  path="response"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+       
+                <!-- DEFAULT THE RESPONDED FLAG TO NO  -->
+                <input type="hidden" id="responded" name="responded" value="Yes">
+
+                <button class="btn">Respond</button>
+              </form:form>
+            </div>
+          </div>
         </div>
-        <!-- RIGHT COL -->
-        <div class="mb-3 col-9 card form-card" style="padding: 1rem">
-          <h2>Pet Inquiry Dasboard</h2>
-          <table class="table">
-            <thead class="table-secondary">
-                <tr>
-                  <th>User Name</th>
-                  <th>Pet Name</th>
-                  <th>Adoption/Foster</th>
-                  <th>Pickup</th>
-                  <th>Dropoff</th>
-                  <th>Responded</th>
-                </tr>
-              </thead>
-              <tbody>
-                <c:forEach var="inquiry" items="${inquiries}">
-                <tr>
-                  <td><c:out value="${inquiry.inquirer.userName}"></c:out></td>
-                      <td><a href="/pet/inquire/${inquiry.id}" class="inquiry-link"><c:out value="${inquiry.pet.name}"></c:out></a></td>
-                      <td><c:out value="${inquiry.inquiryType}"></c:out></td>
-                      <td><c:out value="${inquiry.dateOfPickup}"></c:out></td>
-                      <td><c:out value="${inquiry.dateOfDropoff}"></c:out></td>
-                      <td><c:out value="${inquiry.responded}"></c:out></td>
-                </tr>
-                </c:forEach>
-              </tbody>
-          </table>
-        </div>
-      </div>
       </main>
     </div>
-    <!-- FOOTER -->
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-3">
@@ -165,7 +187,7 @@ pageEncoding="UTF-8"%>
               <a href="/home" class="nav-link p-0 text-muted">Home</a>
             </li>
             <li class="nav-item mb-2">
-              <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
+              <a href="/pet" class="nav-link p-0 text-muted">Pets</a>
             </li>
             <li class="nav-item mb-2">
               <a href="/events" class="nav-link p-0 text-muted"

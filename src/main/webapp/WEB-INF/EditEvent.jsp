@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8" %>
 <!-- c:out ; c:forEach etc. -->
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Formatting (dates) -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!-- form:form -->
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- for rendering errors on PUT routes -->
 <%@ page isErrorPage="true" %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Inquiry Dashboard</title>
+    <title>Home</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -41,15 +41,14 @@ pageEncoding="UTF-8"%>
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
     />
   </head>
+
   <body>
-    <!-- PAGE CONTAINER -->
-    <div class="p-3">
-      <!-- NAV BAR -->
-     <div
+    <!-- NAV BAR -->
+    <div class="top-half p-3">
+      <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
-      <!-- LOGO COLUMN -->
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center mb-1 nav-links">
           <img
             src="/images/animalLogo_solid.png"
             alt=""
@@ -57,99 +56,131 @@ pageEncoding="UTF-8"%>
           />
           <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
         </div>
-        <!-- MIDDLE LINKS -->
         <div class="d-flex align-items-center ms-auto">
-          <a href="/home" class="nav-link">Home</a>
+          <a href="/about" class="nav-link">Home</a>
           |
-          <a href="/pet?page=1" class="nav-link">Pets</a>
+          <a href="/about" class="nav-link">Pets</a>
           |
           <a href="/about" class="nav-link">About</a>
           |
           <a href="/events" class="nav-link">Upcoming Events</a>
         </div>
-        <!-- END: DROPDOWN MENU -->
+        <!-- navbar: end section -->
         <div class="dropdown" id="dropdown">
-          <c:if test="${loggedUser.userType == 'user'}">
-          <a 
+          <a
             class="btn dropdown-toggle"
             href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-          ></c:if>
-          <c:if test="${loggedUser.userType == 'admin'}">
-             <a
-            class="btn admin-btn dropdown-toggle dropdown-toggle-admin"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
           >
-          </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
+            <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
-          <ul class="dropdown-menu dropdown-menu-end">
-            <c:if test="${loggedUser.userType == 'admin'}">
-              <li><h6 class="dropdown-header">Admin Actions:</h6></li>
-              <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
-              <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
-              <li>
-                <a class="dropdown-item" href="/event/new">+ New Event</a>
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-            </c:if>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
+            <li><a class="dropdown-item" href="/pet/new">+ New Pet</a></li>
+            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-     </div>
-     <!-- MAIN -->
-      <main class="p-3 mb-5" >
-        <div
-        class="d-flex align-items-start justify-content-between"
-      >
-      <!-- LEFT COL -->
-        <div class="col-3">
-             <img
-            src="/images/inquiry_dashboard.png"
-            alt=""
-            style="width: 100%"
-          />
+      </div>
+    </div>
+
+    <!-- EDIT EVENT FORM -->
+    <main class="p-3 mb-5">
+      <div class="d-flex align-items-center justify-content-between flex-wrap">
+        <!-- NEW EVENT FORM column -->
+        <div class="p-2 col-sm">
+          <div class="card p-4 form-card">
+            <h2>Edit '<c:out value="${eventName}"></c:out>' Event</h2>
+            <hr />
+            <form:form
+              action="/event/edit/${eventId}"
+              method="POST"
+              modelAttribute="event"
+            >
+              <input type="hidden" name="_method" value="PUT" />
+              <!-- event name -->
+              <div class="mb-3">
+                <form:label path="eventName" class="form-label"
+                  >Event Name:</form:label
+                >
+                <form:input
+                  path="eventName"
+                  class="form-control"
+                  placeholder="Your event name..."
+                />
+              </div>
+              <!-- error: event name -->
+              <form:errors class="text-danger" path="eventName"></form:errors>
+              <!-- date of event -->
+              <div class="mb-3">
+                <form:label path="date" class="form-label"
+                  >Date of Event:</form:label
+                >
+                <form:input type="date" class="form-control" path="date" />
+              </div>
+              <!-- error: date -->
+              <div class="mb-3">
+                <form:errors
+                  path="date"
+                  class="py-1 alert alert-danger"
+                ></form:errors>
+              </div>
+              <!-- location -->
+              <div class="mb-3">
+                <form:label path="location" class="form-label"
+                  >Location</form:label
+                >
+                <form:input
+                  path="location"
+                  class="form-control"
+                  placeholder="Your event's location..."
+                />
+              </div>
+              <!-- error: location -->
+              <form:errors class="text-danger" path="location"></form:errors>
+              <!-- event details -->
+              <div class="mb-3">
+                <form:label path="eventDetails" class="form-label"
+                  >Event Details</form:label
+                >
+                <form:textarea
+                  path="eventDetails"
+                  class="form-control"
+                  rows="5"
+                  cols="33"
+                  placeholder="Write a short description for your event here..."
+                />
+              </div>
+              <form:errors
+                class="text-danger"
+                path="eventDetails"
+              ></form:errors>
+              <div class="d-flex">
+                <button class="btn" style="margin-right: 10px">
+                  Update Event
+                </button>
+                <a href="/events/${eventId}" class="btn admin-btn">Cancel</a>
+              </div>
+            </form:form>
+          </div>
         </div>
-        <!-- RIGHT COL -->
-        <div class="mb-3 col-9 card form-card" style="padding: 1rem">
-          <h2>Pet Inquiry Dasboard</h2>
-          <table class="table">
-            <thead class="table-secondary">
-                <tr>
-                  <th>User Name</th>
-                  <th>Pet Name</th>
-                  <th>Adoption/Foster</th>
-                  <th>Pickup</th>
-                  <th>Dropoff</th>
-                  <th>Responded</th>
-                </tr>
-              </thead>
-              <tbody>
-                <c:forEach var="inquiry" items="${inquiries}">
-                <tr>
-                  <td><c:out value="${inquiry.inquirer.userName}"></c:out></td>
-                      <td><a href="/pet/inquire/${inquiry.id}" class="inquiry-link"><c:out value="${inquiry.pet.name}"></c:out></a></td>
-                      <td><c:out value="${inquiry.inquiryType}"></c:out></td>
-                      <td><c:out value="${inquiry.dateOfPickup}"></c:out></td>
-                      <td><c:out value="${inquiry.dateOfDropoff}"></c:out></td>
-                      <td><c:out value="${inquiry.responded}"></c:out></td>
-                </tr>
-                </c:forEach>
-              </tbody>
-          </table>
+        <div class="p-2 flex-fill">
+          <!-- <div class="card"> -->
+          <img
+            src="/images/event_img.png"
+            alt=""
+            style="height: auto; width: 375px"
+          />
+          <!-- </div> -->
         </div>
       </div>
-      </main>
-    </div>
-    <!-- FOOTER -->
+    </main>
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-3">

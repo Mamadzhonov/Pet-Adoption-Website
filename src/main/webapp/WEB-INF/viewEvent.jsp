@@ -84,14 +84,6 @@
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-              <h6 class="dropdown-header">
-                User Type: <c:out value="${loggedUser.userType}"></c:out>
-              </h6>
-            </li>
-            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
-            <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
               <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
@@ -110,25 +102,62 @@
 	
 	<!-- Main Content -->
 	<main class="p-5 mb-5 min-vh-100">
-		<div class="d-flex justify-content-around align-items-stretch">
-			<!-- Left Column -->
-			<div class="col-5">
-				<h1 class="text-start"><c:out value="${event.eventName}"/></h1>
-				<div class="card form-card p-3">
-					<p><c:out value="${event.eventDetails}"/></p>
-				</div>
-			</div>
-			<!-- Right column -->
-			<div class="col-4">
-				<h3 class="text-start"><c:out value="${event.location}"/></h3>
-				<h4 class="text-start"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></h4>
-				<div class="card form-card">
-					<!-- Place for the map api potentially? -->
-				</div>
-			</div>
-		</div>
+    <div class="card form-card p-4">
+
+      <div class="d-flex justify-content-between align-items-top row-gapping">
+        <!-- Left Column -->
+        <div class="col px-0">
+          <!-- EVENT NAME -->
+          <h1 class="text-start"><c:out value="${event.eventName}"/></h1>
+          <!-- location row -->
+          <div class="d-flex align-items-baseline mb-1">
+            <i class="bi bi-geo-alt-fill" style="padding-right: 10px; font-size: 1.25rem;"></i>
+            <h6 style="font-weight: 300;"><c:out value="${event.location}"/></h6>
+          </div>
+          <!-- date of event row-->
+          <div class="d-flex align-items-baseline mb-1">
+            <i class="bi bi-calendar-fill" style="padding-right: 10px; font-size: 1.25rem;"></i>
+            <h6 style="font-weight: 300;"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></h6>
+          </div>
+          <!-- EVENT CREATOR -->
+          <div class="d-flex align-items-baseline mb-1">
+            <i class="bi bi-person-fill" style="padding-right: 10px; font-size: 1.25rem;"></i>
+            <h6 style="font-weight: 300;"><c:out value="${event.postedBy}"></c:out></h6>
+          </div>
+          <div class="card form-card p-3 mb-3">
+            <h6>About this event:</h6>
+            <p><c:out value="${event.eventDetails}"/></p>
+          </div>
+          <div class="card form-card p-3">
+            <h6>
+              Location Details:
+            </h6>
+            <!-- put map api code here! -->
+          </div>
+          <!-- button row for admins -->
+          <!-- ADMIN CONTROLS -->
+        </div>
+        <!-- Right column -->
+        <div>
+          
+          <div>
+            <c:if test="${loggedUser.userType == 'admin'}">
+              <div class="d-flex justify-content-end mb-3">
+                <a class="btn" href="/event/edit/${event.id}" style="margin-right: 10px;">Edit Event</a> </p>
+                <a class="btn admin-btn" href="/event/delete/${event.id}">Delete Event</a>
+              </div>
+            </c:if>
+             <img
+            src="/images/event.png"
+            class="img-thumbnail pet-profile"
+            alt="picture of dog at an adoption fair"
+            style="height:350px"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
 	</main>
-	
 	<!-- Footer -->
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
@@ -183,7 +212,7 @@
         <div>
           <p>{will be putting the main repo github link }</p>
         </div>
-        <div>© 2023 Pet Adoption Center</div>
+        <div>ï¿½ 2023 Pet Adoption Center</div>
       </div>
     </div>
 </body>

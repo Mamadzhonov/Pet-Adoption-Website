@@ -31,4 +31,16 @@ public class EventService {
         return eventRepo.save(event);
     }
 
+    public List<Event> allEvents() {
+        return eventRepo.findAll();
+    }
+
+    public void deleteById(Long id){
+        eventRepo.deleteById(id);
+    }
+    
+    public Event update(Event event) {
+    	return eventRepo.save(event);
+    }
+
 }

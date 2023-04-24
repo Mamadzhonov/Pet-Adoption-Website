@@ -46,7 +46,7 @@ pageEncoding="UTF-8"%>
     <div class="p-3">
       <!-- NAV BAR -->
       <div
-        class="d-flex flex-wrap justify-content-between align-items-center mb-3"
+        class="d-flex flex-wrap justify-content-between align-items-center mb-4"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
           <img
@@ -86,7 +86,6 @@ pageEncoding="UTF-8"%>
           </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
-            <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
@@ -96,8 +95,6 @@ pageEncoding="UTF-8"%>
                 User Type: <c:out value="${loggedUser.userType}"></c:out>
               </h6>
             </li>
-            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
             <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
@@ -111,13 +108,14 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-      <main class="p-3 mb-5">
+    </div>
+      <main class="mb-5" style="padding-left:0.5rem; padding: 1rem;">
         <div class="d-flex align-items-center">
           <!-- LEFT COLUMN -->
           <div class="p-2 flex-fill">
             <!-- <div class="card"> -->
             <img
-              src="/images/new_pet.png"
+              src="/images/inquiry_img.png"
               alt=""
               style="height: auto; width: 375px"
             />
@@ -130,24 +128,24 @@ pageEncoding="UTF-8"%>
               <hr />
               <p>I am interested in</p>
               <form:form
-                action="/inquiry/add"
+                action="/pet/add/inquiry"
                 class="mt-2"
                 method="POST"
                 modelAttribute="newInquiry">
               <!-- ADOPT/FOSTER -->
                 <div class="mb-3">
-                  <form:label path="name" class="form-label"
-                    >Pet Name:</form:label
-                  >
-                  <input type="radio" id="adopting" name="inquiryType" value="Adopting">
-					<label for="Adopting">Adopting</label><br>
-				  <input type="radio" id="Fostering" name="inquiryType" value="Fostering">
-					<label for="Fostering">Fostering</label><br>                    
+
+                 
+                 
+                 <input type="radio" id="inquiryType"  name="inquiryType" value="Adopting">
+				<label for="inquiryType">Adopting</label><br>
+				<input type="radio" id="inquiryType" name="inquiryType" value="Fostering">
+				<label for="inquiryType">Fostering</label><br>                   
                   
                 </div>
                 <!-- ERROR: INQUIRY TYPE -->
                 <form:errors
-                  path="inquiry_type"
+                  path="inquiryType"
                   class="py-1 alert alert-danger"
                 ></form:errors>
                 <!-- DATE OF PICKUP -->
@@ -200,6 +198,9 @@ pageEncoding="UTF-8"%>
                 ></form:errors>
                 <!-- PET ID OF THE PET BEING FOSTERED OR ADOPTED -->
                 <input type="hidden" id="pet" name="pet" value="${pet.id}">
+                
+                <!-- USER ID OF THE USER THAT IS INQUIRING -->
+                <input type="hidden" id="inquirer_id" name="inquirer_id" value="${loggedUser.id}">
 
                 <!-- DEFAULT THE RESPONDED FLAG TO NO  -->
                 <input type="hidden" id="responded" name="responded" value="No">
