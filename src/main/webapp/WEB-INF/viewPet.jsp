@@ -115,23 +115,32 @@ pageEncoding="UTF-8"%>
         <!-- LEFT COLUMN -->
         <div class="p-2 col-sm">
           <!-- might be a nice touch to add the species icon next to the name -->
-          <div class="card p-4 form-card mb-3">
-            <div class="d-flex align-items-center mb-2">
+          <div class="card p-3 form-card mb-3">
+            <div class="d-flex align-items-center justify-content-between mb-2">
               <!-- PET IMAGE -->
-              <img
-                src="/images/${pet.species}_icon.png"
-                alt=""
-                style="height: 35px"
-              />
-              <h1 class="mx-2 mb-0"><c:out value="${pet.name}"></c:out></h1>
+              <div class="d-flex align-items-center justify-content-between">
+                <img
+                  src="/images/${pet.species}_icon.png"
+                  alt=""
+                  style="height: 35px"
+                />
+                <h1 class="mx-2 mb-0"><c:out value="${pet.name}"></c:out></h1>
+              </div>
+              <!-- only appears if user is NOT an admin -->
+              <c:if test="${loggedUser.userType == 'user'}">
+                <!-- PET INQUIRY BTN -->
+                 <div>
+                  <a href="" class="btn">Interested in this pet?</a>
+                </div>
+              </c:if>
             </div>
             <hr />
             <h6>Species: <c:out value="${pet.species}"></c:out></h6>
             <h6>breed: {breed}</h6>
             <h6>Gender: {sex}</h6>
             <h6>Status: {status}</h6>
-            <c:if test="${loggedUser.userType == 'admin'}"></c:if>
-            <div>
+            <c:if test="${loggedUser.userType == 'admin'}">
+              <div>
               <hr />
               <h6>Admin Actions:</h6>
               <div class="d-flex">
@@ -144,8 +153,11 @@ pageEncoding="UTF-8"%>
                 <a href="/" class="btn admin-btn">Delete Pet</a>
               </div>
             </div>
+            </c:if>
+            
+
           </div>
-          <div class="card p-4 form-card">
+          <div class="card p-3 form-card">
             <h3>About this pet:</h3>
             <hr />
             <!-- <a href="https://www.flaticon.com/free-icons/dog" title="dog icons">Dog icons created by Freepik - Flaticon</a> -->
@@ -162,7 +174,7 @@ pageEncoding="UTF-8"%>
             class="img-thumbnail pet-profile mb-3"
             alt="..."
           />
-          <div class="card p-4 form-card">
+          <div class="card p-3 form-card">
             <h3>Location</h3>
             <!-- leaving space for location, if we need it -->
             <!-- can always take this out if we need to -->
