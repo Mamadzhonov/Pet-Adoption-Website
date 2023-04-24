@@ -46,7 +46,7 @@ pageEncoding="UTF-8"%>
     <div class="p-3">
       <!-- NAV BAR -->
       <div
-        class="d-flex flex-wrap justify-content-between align-items-center mb-3"
+        class="d-flex flex-wrap justify-content-between align-items-center mb-4"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
           <img
@@ -86,7 +86,6 @@ pageEncoding="UTF-8"%>
           </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
-            <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
@@ -96,8 +95,6 @@ pageEncoding="UTF-8"%>
                 User Type: <c:out value="${loggedUser.userType}"></c:out>
               </h6>
             </li>
-            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
             <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
@@ -111,13 +108,14 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-      <main class="p-3 mb-5">
+    </div>
+      <main class="mb-5" style="padding-left:0.5rem; padding: 1rem;">
         <div class="d-flex align-items-center">
           <!-- LEFT COLUMN -->
           <div class="p-2 flex-fill">
             <!-- <div class="card"> -->
             <img
-              src="/images/new_pet.png"
+              src="/images/inquiry_img.png"
               alt=""
               style="height: auto; width: 375px"
             />
