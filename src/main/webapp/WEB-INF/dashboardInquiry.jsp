@@ -108,43 +108,46 @@ pageEncoding="UTF-8"%>
      <!-- MAIN -->
       <main class="p-3 mb-5" >
         <div
-        class="d-flex align-items-start justify-content-between"
+        class="d-flex align-items-center"
       >
       <!-- LEFT COL -->
-        <div class="col-3">
+        <!-- <div class="col-3">
              <img
             src="/images/inquiry_dashboard.png"
             alt=""
             style="width: 100%"
           />
-        </div>
+        </div> -->
         <!-- RIGHT COL -->
-        <div class="mb-3 col-9 card form-card" style="padding: 1rem">
-          <h2>Pet Inquiry Dasboard</h2>
-          <table class="table">
-            <thead class="table-secondary">
-                <tr>
-                  <th>User Name</th>
-                  <th>Pet Name</th>
-                  <th>Adoption/Foster</th>
-                  <th>Pickup</th>
-                  <th>Dropoff</th>
-                  <th>Responded</th>
-                </tr>
-              </thead>
-              <tbody>
-                <c:forEach var="inquiry" items="${inquiries}">
-                <tr>
-                  <td><c:out value="${inquiry.inquirer.userName}"></c:out></td>
-                      <td><a href="/pet/inquire/${inquiry.id}" class="inquiry-link"><c:out value="${inquiry.pet.name}"></c:out></a></td>
-                      <td><c:out value="${inquiry.inquiryType}"></c:out></td>
-                      <td><c:out value="${inquiry.dateOfPickup}"></c:out></td>
-                      <td><c:out value="${inquiry.dateOfDropoff}"></c:out></td>
-                      <td><c:out value="${inquiry.responded}"></c:out></td>
-                </tr>
-                </c:forEach>
-              </tbody>
-          </table>
+        <div class="mb-3">
+
+          <div class="card form-card" style="padding: 1rem">
+            <h2>Pet Inquiry Dasboard</h2>
+            <table class="table">
+              <thead class="table-secondary">
+                  <tr>
+                    <th>User Name</th>
+                    <th>Pet Name</th>
+                    <th>Adoption/Foster</th>
+                    <th>Pickup</th>
+                    <th>Dropoff</th>
+                    <th>Responded</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <c:forEach var="inquiry" items="${inquiries}">
+                  <tr>
+                    <td><c:out value="${inquiry.inquirer.userName}"></c:out></td>
+                        <td><a href="/pet/inquire/${inquiry.id}" class="inquiry-link"><c:out value="${inquiry.pet.name}"></c:out></a></td>
+                        <td><c:out value="${inquiry.inquiryType}"></c:out></td>
+                        <td><c:out value="${inquiry.dateOfPickup}"></c:out></td>
+                        <td><c:out value="${inquiry.dateOfDropoff}"></c:out></td>
+                        <td><c:out value="${inquiry.responded}"></c:out></td>
+                  </tr>
+                  </c:forEach>
+                </tbody>
+            </table>
+          </div>
         </div>
       </div>
       </main>

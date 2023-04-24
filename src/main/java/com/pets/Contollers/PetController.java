@@ -295,7 +295,7 @@ public class PetController {
 		return "redirect:/pet?page=1";
 	}
 	
-	
+//	
 	//SHOW THE INQUIRY DETAIL 
 	@GetMapping("/inquire/{inquiryId}")
 	public String showInquiryDetails(Model model, HttpSession session, @PathVariable("inquiryId")  Long inquiryId, RedirectAttributes redirect) {
