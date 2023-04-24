@@ -179,28 +179,39 @@
 		<!-- Pet Cards -->
 		<div class="row">
 			<c:forEach var="pet" items="${petList}">
-				<div class="g-col-6 mx-1 mb-2">
-					<div class="card h-100" style="width: 18rem;">
+        <div class="g-col-6 mx-1 mb-2">
+          <a href="/pet/${pet.id}" class="pet-card">
+          <div class="card form-card pet-card h-100 p-2" style="width: 18rem;">
+            <!-- PET PROFILE PIC -->
 		  				<img
 				            src="/images/${pet.species}.png"
-				            class="img-thumbnail pet-profile mb-3 card-img-top"
+				            class="img-thumbnail pet-profile card-img-top"
 				            alt="Pet Image"
 				          />
-		  				<div class="card-body">
-		  				<div class="row px-2">
+              <!-- CARD BODY -->
+		  				<div class="card-body" style="padding: 15px; padding-bottom: 10px;" >
+                <!-- NAME ROW -->
+		  				<div class="d-flex align-items-center mb-2">
 		  					<img
 				                src="/images/${pet.species}_icon.png"
 				                alt=""
-				                style="height: 20px"
+				                style="height: 1.25rem; padding-right: 5px;"
 				              />
-		  					<h5 class="card-title mx-1"><a href="/pet/${pet.id}"><c:out value="${pet.name}"/></a></h5>
+		  					<h5 class="card-title mx-1 mb-0 pt-1"><a href="/pet/${pet.id}" class="inquiry-link"><c:out value="${pet.name}"/></a></h5>
 		  				</div>
-		  				<div class="row px-2">
-		    				<p class="card-subtitle card-text mx-1"><small><c:out value="${pet.age}"/> y.o. <c:out value="${pet.sex}"/></small></p>
-		    				<p class="card-subtitle card-text"><small><c:out value="${pet.breed}"/></small></p>
-		  				</div>
+                <div class="d-flex align-items-center mb-2">
+                  <h6 class="my-0" style="margin-right: 10px;">Age:</h6>
+                  <p class=" my-0 form-label-filter" style="font-size: 15px;">
+                      <c:out value="${pet.age}"/> y.o. <c:out value="${pet.sex}"/>
+                  </p>
+                </div>
+                <div class="d-flex">
+                  <h6 style="margin-right: 10px;">Breed:</h6>
+                  <p class="my-0 form-label-filter" style="font-size: 15px;"><c:out value="${pet.breed}"/></p>
+                </div>
 					</div>
-					</div>
+        </div>
+      </a>
 				</div>
 			</c:forEach>
 			</div>

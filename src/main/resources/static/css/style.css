@@ -151,3 +151,6 @@ th {
 .inquiry-link:hover {
 	color: #FFA400;
 }
+.pet-card:hover {
+	box-shadow: 16px 16px 17px rgba(175, 126, 67, 0.1);
+}
