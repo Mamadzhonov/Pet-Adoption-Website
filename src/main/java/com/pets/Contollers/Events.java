@@ -25,7 +25,8 @@ public class Events {
     private UserService userServ;
     @Autowired
     private EventService eventServ;
-
+    
+    // UPCOMING EVENTS
     @GetMapping("/events")
     public String events(Model model, HttpSession session, RedirectAttributes redirect) {
 
@@ -42,7 +43,9 @@ public class Events {
         model.addAttribute("events", eventServ.all());
         return "Events.jsp";
     }
-
+    
+    
+    // CREATE EVENT
     @GetMapping("/event/new")
     public String event(Model model, HttpSession session, RedirectAttributes redirect) {
         if (session.getAttribute("loggedUser") == null) {
@@ -74,64 +77,11 @@ public class Events {
         Long id = (Long) session.getAttribute("loggedUser");
         User loggedUser = userServ.findById(id);
         model.addAttribute("loggedUser", loggedUser);
-
         eventNew.setPostedBy(loggedUser.getUserName());
         eventServ.create(eventNew);
         return "redirect:/events";
     }
     
-//	VIEW EVENT PAGE
-//   
-    @GetMapping("/event/{eventId}/edit")
-    public String editEvent(@PathVariable("eventId") Long eventId, Model model, HttpSession session, RedirectAttributes redirect) {
-    	   if (session.getAttribute("loggedUser") == null) {
-               redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
-               return "redirect:/";
-        }
-    	   Long id = (Long) session.getAttribute("loggedUser");
-       User loggedUser = userServ.findById(id);
-        model.addAttribute("loggedUser", loggedUser);
-    	   	Event event = eventServ.findById(eventId);
-    	   	model.addAttribute("eventId", eventId);
-    	   	model.addAttribute("eventName", eventServ.findById(eventId).getEventName());
-        model.addAttribute("event", event);
-    		return "EditEvent.jsp";
-    }
-    
-    @PutMapping("/event/{eventId}/edit")
-    public String updateEvent(@Valid @ModelAttribute("event") Event event, BindingResult result, Model model, HttpSession session, RedirectAttributes redirect, @PathVariable("eventId") Long eventId) {
-    	if (result.hasErrors()) {
-    		 Long id = (Long) session.getAttribute("loggedUser");
-    	     User loggedUser = userServ.findById(id);
-    	     model.addAttribute("loggedUser", loggedUser);
-    	    	 model.addAttribute("eventId", eventId);
-    	    	 model.addAttribute("eventName", eventServ.findById(eventId).getEventName());
-    	    	 return "EditEvent.jsp";
-    		}
-    		event.setId(eventId);
-    		eventServ.update(event);
-    		return "redirect:/event/" + eventId;
-    }
-    
-//	VIEW EVENT PAGE
-    @GetMapping("/event/{id}")
-    public String eventDetails(@PathVariable("id") Long id, HttpSession session, Model model,
-            RedirectAttributes redirect) {
-
-        if (session.getAttribute("loggedUser") == null) {
-            redirect.addFlashAttribute("login", "Need to login to access this page");
-            return "redirect:/";
-        }
-
-        Long userLoggedId = (Long) session.getAttribute("loggedUser");
-        User loggedUser = userServ.findById(userLoggedId);
-        model.addAttribute("loggedUser", loggedUser);
-
-        model.addAttribute("eventById", eventServ.findById(id));
-        return "viewEvent.jsp";
-        // Not sure which return line is needed
-        // return "redirect:/events";
-    }
     
 //	VIEW EVENT PAGE
     @GetMapping("/events/{id}")
@@ -144,13 +94,12 @@ public class Events {
 		Long id = (Long) session.getAttribute("loggedUser");
 		User loggedUser = userServ.findById(id);
 		model.addAttribute("loggedUser", loggedUser);
-		
 		Event event = eventServ.findById(eventId);
 		model.addAttribute("event", event);
 		return "viewEvent.jsp"; 
     }
     
-
+    // EDIT EVENT
     @GetMapping("/event/edit/{id}")
     public String edit(@Valid @PathVariable("id") Long id, Model model, HttpSession session,
             RedirectAttributes redirect) {
@@ -169,7 +118,7 @@ public class Events {
         return "EditEvent.jsp";
     }
 
-    @PostMapping("/event/edit/{id}")
+    @PutMapping("/event/edit/{id}")
     public String update(@Valid @ModelAttribute("updatedForm") Event updatedEvent,
             BindingResult result, @PathVariable("id") Long id, Model model, HttpSession session) {
 
@@ -190,9 +139,11 @@ public class Events {
         updatedEvent.setId(id);
         // updating the event
         eventServ.update(updatedEvent);
-        return "redirect:/events";
+        return "redirect:/events/" + id;
     }
-
+    
+    
+    // DELETE EVENT
     @GetMapping("/event/delete/{id}")
     public String getMethodName(@PathVariable("id") Long id) {
         eventServ.deleteById(id);
