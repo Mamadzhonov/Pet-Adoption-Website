@@ -1,9 +1,11 @@
 package com.pets.Contollers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +15,29 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiController {
 	@GetMapping("/apiKey")
 	public List<String> mapTest() {
-		Path keyFilePath = Paths.get("D:/CodingDojo/Assignments/Projects/Pet Adoption Site/Pet-Adoption-Website/src/main/resources/static/map_key.txt");
-		List<String> fileLines = null;
+		System.out.println("We're trying here");
+		
+		File keyFile = new File("src/main/resources/static/map_key.txt");
+		FileInputStream inStream = null;
+		
 		
 		try {
-			fileLines = Files.readAllLines(keyFilePath);
+			inStream = new FileInputStream(keyFile.getAbsoluteFile());
+		} catch(FileNotFoundException e) {
+			System.err.println("Couldn't file key file. Error: " + e.getMessage());
+		}
+		byte[] lines = null;
+		
+		
+		try {
+			lines = inStream.readAllBytes();
 		} catch(IOException e) {
 			System.err.println("Couldn't read api file. Error: " + e.getMessage());
 		}
-		System.out.println(fileLines.get(0));	
-		return fileLines;
+		List<String> response = new ArrayList<String>();
+		response.add(new String(lines));
+		
+		System.out.println("Key: " + response.get(0));
+		return response;
 	}
 }
