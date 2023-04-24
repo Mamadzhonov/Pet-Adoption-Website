@@ -43,7 +43,7 @@
 	<div class="top-half p-3">
       <!-- NAV BAR -->
       <div
-        class="d-flex flex-wrap justify-content-between align-items-center mb-3"
+        class="d-flex flex-wrap justify-content-between align-items-center mb-2"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
           <img
@@ -88,14 +88,6 @@
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-              <h6 class="dropdown-header">
-                User Type: <c:out value="${loggedUser.userType}"></c:out>
-              </h6>
-            </li>
-            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
-            <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
               <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
@@ -114,59 +106,61 @@
 	
 	<!-- Body/Main Content -->
 	<!-- Available Pets Header -->
-	<div>
-		<h1>Our Available Pets:</h1>
-	</div>
 	<!-- Header End -->
-	<main class="p-3 mb-5">
+	<main class="p-4 mb-5">
+    <div>
+      <h1>Our Available Pets:</h1>
+    </div>
 	<div class="d-flex align-items-stretch">
 	
 	<!-- Left Column -->
-	<div class="p-2 col-sm-2">
+	<div class="p-2 col-sm-3">
 		<!-- Filter Box -->
-			<div class="card form-card p-4 mb-3">
+			<div class="card form-card p-3 mb-3">
 			<form action="/pet/filter" method="POST" class="">
 			  <fieldset class="d-flex mb-2">
 			    <legend class="">Filter</legend>
 			    <div class="">
 			    <!-- Species Filter -->
+          <label class="form-label">Species:</label>
 			      <div class="">
 			        <input class="" type="checkbox" name="cat" id="catCheckboxFilter" <c:if test="${filterList.remove('cat')}">checked</c:if>>
-			        <label class="form-label" for="catCheckboxFilter">
+			        <label class="form-label-filter" for="catCheckboxFilter">
 			          Cats
 			        </label>
 			      </div>
 			      <div class="">
 			        <input class="" type="checkbox" name="dog" id="dogCheckboxFilter" <c:if test="${filterList.remove('dog')}">checked</c:if>>
-			        <label class="form-label" for="dogCheckboxFilter">
+			        <label class="form-label-filter" for="dogCheckboxFilter">
 			          Dogs
 			        </label>
 			      </div>
 			      <div class="">
 			        <input class="" type="checkbox" name="bird" id="birdCheckboxFilter" <c:if test="${filterList.remove('bird')}">checked</c:if>>
-			        <label class="form-label" for="birdCheckboxFilter">
+			        <label class="form-label-filter" for="birdCheckboxFilter">
 			          Birds
 			        </label>
 			      </div>
 			      <div class="">
 			        <input class="" type="checkbox" name="reptile" id="reptileCheckboxFilter" <c:if test="${filterList.remove('reptile')}">checked</c:if>>
-			        <label class="form-label" for="reptileCheckboxFilter">
+			        <label class="form-label-filter" for="reptileCheckboxFilter">
 			          Reptiles
 			        </label>
 			      </div>
 			      <!-- Age Filter  -->
 				  <label class="form-label">Age Range:</label>
-			      <div class="d-flex row mb-2">
-				      <div class="col-sm">
+			      <div class="d-flex mb-2 row-gapping flex-wrap">
+				      <div class="col-sm px-0">
 				        <input class="form-control" type="number" name="low-age" id="lowAgeFilter" placeholder="0" value="${lowAge}">
 				      </div>
-				      <div class="col-sm">
+				      <div class="col-sm px-0">
 				        <input class="form-control" type="number" name="high-age" id="highAgeFilter" placeholder="10" value="${highAge}">
 				      </div>
 			      </div>
 				<!-- Gender Filter -->
-			      <div class="col-sm">
-					<select class="form-select" id="sexFilter" name="sex">
+         <label class="form-label">Gender:</label>
+			      <div class="col-sm px-0 mb-2">
+					<select class="select p-2" id="sexFilter" name="sex">
 						<option value="">Pick a gender...</option>
 						<option value="Female" <c:if test="${sexFilter == 'Female'}">selected</c:if>>Female</option>
 						<option value="Male" <c:if test="${sexFilter == 'Male'}">selected</c:if>>Male</option>
@@ -284,7 +278,7 @@
         <div>
           <p>{will be putting the main repo github link }</p>
         </div>
-        <div>© 2023 Pet Adoption Center</div>
+        <div>ï¿½ 2023 Pet Adoption Center</div>
       </div>
     </div>
 

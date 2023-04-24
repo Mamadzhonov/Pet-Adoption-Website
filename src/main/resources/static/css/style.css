@@ -114,6 +114,9 @@ ul, li {
 	border: 2.5px solid #FFA400;
 	border-radius:10px;
 }
+.form-label-filter {
+	font-weight: 300;
+}
 .admin {
 	border: 2.5px solid #c65a3f;
 }

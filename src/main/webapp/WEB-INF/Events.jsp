@@ -77,14 +77,6 @@
 
 
           <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-              <h6 class="dropdown-header">
-                User Type: <c:out value="${loggedUser.userType}"></c:out>
-              </h6>
-            </li>
-            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
-            <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
               <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
