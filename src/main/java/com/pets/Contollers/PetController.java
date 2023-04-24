@@ -138,8 +138,7 @@ public class PetController {
 		model.addAttribute("loggedUser", loggedUser);
 		newPet.setUser(loggedUser);
 		petService.savePet(newPet);
-//		return "redirect:/pet?page=1";
-		return "redirect:/home";
+		return "redirect:/pet?page=1";
 	}
 	
 	// EDIT PET FORM
@@ -277,7 +276,7 @@ public class PetController {
 		return "redirect:/pet?page=1";
 	}
 	
-	
+//	
 	//SHOW THE INQUIRY DETAIL 
 	@GetMapping("/inquire/{inquiryId}")
 	public String showInquiryDetails(Model model, HttpSession session, @PathVariable("inquiryId")  Long inquiryId, RedirectAttributes redirect) {
@@ -290,7 +289,7 @@ public class PetController {
 		model.addAttribute("loggedUser", loggedUser);
 		Inquiry inquiry = inquiryServ.findById(inquiryId); 
 		model.addAttribute("inquiry", inquiry);
-		return "respondInquiry.jsp";//Put the jsp file here when complete.
+		return "respondInquiry.jsp";
 	}
 
 	// SHOW THE INQUIRY DASHBOARD
@@ -332,6 +331,18 @@ public class PetController {
 			return "redirect:/inquire/dashboard";
 		}
 	}
+	
+	
+	// TEST INQUIRY RESPONSE ROUTE
+//	@PostMapping("/edit/inquiry/{inquiryId}/respond")
+//	public String respondToInquiry(@RequestParam(value="response") String response, @PathVariable("inquiryId") Long inquiryId) {
+//		Inquiry inquiry = inquiryServ.findById(inquiryId);
+//		inquiry.setResponse(response);
+//		inquiry.setId(inquiryId);
+//		inquiry.setResponded("yes");
+//		inquiryServ.update(inquiry);
+//		return "redirect:/inquire/dashboard";
+//	}
 
 
 	
