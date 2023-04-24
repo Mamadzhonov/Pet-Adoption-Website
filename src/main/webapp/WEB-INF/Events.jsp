@@ -80,6 +80,7 @@
                           <th scope="col">Date</th>
                           <th scope="col">Location</th>
                           <th scope="col">Event Details</th>
+                          <th scope="col">Posted By</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -99,6 +100,9 @@
                               </td> 
                                 <td>
                                   <c:out value="${event.eventDetails}"></c:out>
+                              </td>
+                                <td>
+                                  <c:out value="${event.postedBy}"></c:out>
                               </td>
                           </tr>
                       </c:forEach>

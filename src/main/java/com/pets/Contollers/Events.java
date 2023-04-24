@@ -1,6 +1,7 @@
 package com.pets.Contollers;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,18 +59,24 @@ public class Events {
     }
 
     @PostMapping("/event/new")
-    public String createEvent(@ModelAttribute("newEvent") Event eventNew, BindingResult result, HttpSession session,
+    public String createEvent(@ModelAttribute("newEvent") Event eventNew, BindingResult result, Model model,
+            HttpSession session,
             RedirectAttributes redirect) {
         if (result.hasErrors()) {
             System.out.println(result);
             return "redirect:/event/new";
         }
 
-        if (session.getAttribute("userId") == null) {
+        if (session.getAttribute("loggedUser") == null) {
             redirect.addFlashAttribute("login", "Need to login to edit this post");
             return "redirect:/";
         }
 
+        Long id = (Long) session.getAttribute("loggedUser");
+        User loggedUser = userServ.findById(id);
+        model.addAttribute("loggedUser", loggedUser);
+
+        eventNew.setPostedBy(loggedUser.getUserName());
         eventServ.create(eventNew);
 
         return "redirect:/events";
@@ -90,6 +97,48 @@ public class Events {
 
         model.addAttribute("eventById", eventServ.findById(id));
         return "EventDetail.jsp";
+    }
+
+    @GetMapping("/event/edit/{id}")
+    public String edit(@Valid @PathVariable("id") Long id, Model model, HttpSession session,
+            RedirectAttributes redirect) {
+        if (session.getAttribute("loggedUser") == null) {
+            redirect.addFlashAttribute("login", "Need to login to edit this post");
+            return "redirect:/";
+        }
+        model.addAttribute("updatedForm", new Event());
+
+        Long userLoggedId = (Long) session.getAttribute("loggedUser");
+        User loggedUser = userServ.findById(userLoggedId);
+        model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("eventById", eventServ.findById(id));
+
+        model.addAttribute("updateForm", eventServ.findById(id));
+
+        return "EditEvent.jsp";
+    }
+
+    @PostMapping("/event/edit/{id}")
+    public String update(@Valid @ModelAttribute("updatedForm") Event updatedEvent,
+            BindingResult result, @PathVariable("id") Long id, Model model, HttpSession session) {
+
+        if (result.hasErrors()) {
+            return "EditEvent.jsp";
+        }
+
+        Long idN = (Long) session.getAttribute("loggedUser");
+        User loggedUser = userServ.findById(idN);
+        updatedEvent.setPostedBy(loggedUser.getUserName());
+        eventServ.update(updatedEvent);
+
+        eventServ.update(updatedEvent);
+        return "redirect:/events";
+    }
+
+    @GetMapping("/event/delete/{id}")
+    public String getMethodName(@PathVariable("id") Long id) {
+        eventServ.deleteById(id);
+        return "redirect:/events";
     }
 
 }

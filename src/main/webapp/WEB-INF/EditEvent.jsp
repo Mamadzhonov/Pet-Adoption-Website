@@ -80,28 +80,34 @@
                             <a class="text-info" href="/events">Back to Events</a>
                         </div>
 
-                        <form:form action="/event/edit/${updatedForm.id}" method="POST" modelAttribute="updatedForm">
+                        <form:form action="/event/edit/${updateForm.id}" method="POST" modelAttribute="updatedForm">
 
                             <div class="col-md-5 mb-3">
-                                <form:label path="title">Title</form:label>
-                                <form:input path="title" class="form-control" placeholder="Title" />
-                                <form:errors class="text-danger" path="title"></form:errors>
+                                <form:label path="eventName">Event Name: </form:label>
+                                <form:input path="eventName" class="form-control" value="${eventById.eventName}" />
+                                <form:errors class="text-danger" path="eventName"></form:errors>
                             </div>
 
                             <div class="col-md-5 mb-3">
-                                <form:label path="network">Network</form:label>
-                                <form:input path="network" class="form-control" />
-                                <form:errors path="network" class="text-danger"></form:errors>
+                                <form:label path="date">Date: </form:label>
+                                <form:input path="date" class="form-control" type="date" value="${eventById.date}"/>
+                                <form:errors path="date" class="text-danger"></form:errors>
                             </div>
 
                             <div class="col-md-5 mb-3">
-                                <form:label path="description">Description</form:label>
-                                <form:textarea path="description" class="form-control" />
-                                <form:errors path="description" class="text-danger"></form:errors>
+                                <form:label path="location">Location: </form:label>
+                                <form:input path="location" class="form-control" value="${eventById.location}" />
+                                <form:errors path="location" class="text-danger"></form:errors>
+                            </div>
+
+                            <div class="col-md-5 mb-3">
+                                <form:label path="eventDetails">Description</form:label>
+                                <form:textarea path="eventDetails" class="form-control"  value="${eventById.eventDetails}"/>
+                                <form:errors path="eventDetails" class="text-danger"></form:errors>
                             </div>
                             <button class="btn btn-success">Submit</button>
-                            <a class="btn btn-primary" href="/shows">Cancel</a>
-                            <a class="btn btn-danger" href="/show/delete/${updatedForm.id}">Delete</a>
+                            <a class="btn btn-primary" href="/events">Cancel</a>
+                            <a class="btn btn-danger" href="/event/delete/${updatedForm.id}">Delete</a>
 
                         </form:form>
 

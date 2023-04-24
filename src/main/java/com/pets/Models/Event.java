@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -31,6 +34,9 @@ public class Event {
     @NotEmpty
     private String location;
 
+    private String postedBy;
+
+
     @NotEmpty
     private String eventDetails;
 
@@ -44,10 +50,33 @@ public class Event {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User users;
+
+
     public Event() {
     };
+    
+    
+    public User getUsers() {
+		return users;
+	}
 
-    public Long getId() {
+	public void setUsers(User users) {
+		this.users = users;
+	}
+
+    public String getPostedBy() {
+        return this.postedBy;
+    }
+
+    public void setPostedBy(String postedBy) {
+        this.postedBy = postedBy;
+    }
+
+	public Long getId() {
         return id;
     }
 
