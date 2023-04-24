@@ -200,7 +200,7 @@ pageEncoding="UTF-8"%>
                 <input type="hidden" id="pet" name="pet" value="${pet.id}">
                 
                 <!-- USER ID OF THE USER THAT IS INQUIRING -->
-                <input type="hidden" id="inquirer_id" name="inquirer_id" value="${loggedUser.id}">
+                <input type="hidden" id="inquirer" name="inquirer" value="${loggedUser.id}">
 
                 <!-- DEFAULT THE RESPONDED FLAG TO NO  -->
                 <input type="hidden" id="responded" name="responded" value="No">
