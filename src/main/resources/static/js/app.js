@@ -37,6 +37,6 @@ async function getMapsImageSrc(location) {
 	
 	const response = await fetch("https://maps.googleapis.com/maps/api/staticmap?center="+location+"&zoom=14&size=500x500&key="+apiKey[0]);
 	
-	let mapImg = document.getElementByClass("google-map");
+	var mapImg = document.getElementById("google-map");
 	mapImg.src = response.url;
 }
