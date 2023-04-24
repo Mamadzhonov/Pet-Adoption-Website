@@ -103,7 +103,8 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-      <main class="p-3 mb-5">
+        </div>
+      <main class="p-3 px-4 mx-4 mb-5">
         <div class="d-flex align-items-center">
           <!-- LEFT COLUMN -->
           <div class="p-2 flex-fill">
@@ -117,21 +118,27 @@ pageEncoding="UTF-8"%>
           </div>
           <div class="p-2 col-sm">
             <div class="card p-4 form-card">
-              <h3>Pet Inquiry Detail</h3>
-              <hr />
-              <p>Inquirer Name: <c:out value="${inquiry.inquirer.userName}"></c:out></p>
-              <p>Pet Name: <c:out value="${inquiry.pet.name}"></c:out></p>
-              <p>Type: <c:out value="${inquiry.inquiryType}"></c:out></p>
-              <p>Species: <c:out value="${inquiry.pet.species}"></c:out></p>
-              <p>Breed: <c:out value="${inquiry.pet.breed}"></c:out></p>
-              <p>Age: <c:out value="${inquiry.pet.age}"></c:out></p>
-              <p>Sex: <c:out value="${inquiry.pet.sex}"></c:out></p>
-              <p>Pickup: <c:out value="${inquiry.dateOfPickup}"></c:out></p>
-              <p>Dropoff: <c:out value="${inquiry.dateOfDropoff}"></c:out></p>
-              <p>Notes</p>
-              <p><em><c:out value="${inquiry.notes}"></c:out></em></p>
-              <p>Response</p>
-              <p><c:out value="${inquiry.response}"></c:out></p>
+              <h3 class="mb-0">Pet Inquiry Detail</h3>
+              <hr class="my-3">
+              <p>Inquirer Name: <c:out value=" ${inquiry.inquirer.userName}"></c:out></p>
+              <p>Pet Name: <c:out value=" ${inquiry.pet.name}"></c:out></p>
+              <p>Type: <c:out value=" ${inquiry.inquiryType}"></c:out></p>
+              <p>Species: <c:out value=" ${inquiry.pet.species}"></c:out></p>
+              <p>Breed: <c:out value=" ${inquiry.pet.breed}"></c:out></p>
+              <p>Age: <c:out value=" ${inquiry.pet.age}"></c:out></p>
+              <p>Sex: <c:out value=" ${inquiry.pet.sex}"></c:out></p>
+              <p>Pickup: <fmt:formatDate pattern=" MMMM dd, yyyy" value="${inquiry.dateOfPickup}"/> </p>
+              <p>Dropoff: <fmt:formatDate pattern=" MMMM dd, yyyy" value="${inquiry.dateOfDropoff}"/> </p>
+              <hr style="margin:10px 0px 5px 0px">
+                <p class="mb-2"> Notes</p>
+                  <div class="card form-card p-3 mb-2">
+                    <p class="m-0 p-0"><em><c:out value="${inquiry.notes}"></c:out></em></p>
+                  </div>
+                <p class="mb-2">Response</p>
+                <div class="card form-card p-3">
+  
+                  <p class="m-0 p-0"><c:out value="${inquiry.response}"></c:out></p>
+                </div>
               <form:form
                 action="/pet/edit/inquiry/${inquiryId}"
                 class="mt-2"
@@ -178,9 +185,10 @@ pageEncoding="UTF-8"%>
         </div>
       </main>
     </div>
-    <div class="footer px-4 pt-5 mt-5">
+   <!-- Footer -->
+    <div class="footer px-4" style="margin-top:115px;">
       <div class="d-flex flex-wrap justify-content-between">
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column mb-1">
           <h5>
             <img
               src="/images/animalLogo_solid.png"
@@ -193,7 +201,7 @@ pageEncoding="UTF-8"%>
               <a href="/home" class="nav-link p-0 text-muted">Home</a>
             </li>
             <li class="nav-item mb-2">
-              <a href="/pet" class="nav-link p-0 text-muted">Pets</a>
+              <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
             </li>
             <li class="nav-item mb-2">
               <a href="/events" class="nav-link p-0 text-muted"
@@ -205,7 +213,7 @@ pageEncoding="UTF-8"%>
             </li>
           </ul>
         </div>
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column">
           <form>
             <h5>Subscribe to our newsletter</h5>
             <p>Monthly digest of what's new and exciting from us.</p>
@@ -226,12 +234,15 @@ pageEncoding="UTF-8"%>
           </form>
         </div>
       </div>
-
-      <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
-        <div>
-          <p>{will be putting the main repo github link }</p>
-        </div>
-        <div>© 2023 Pet Adoption Center</div>
+      <hr class="my-2">
+      <div class="d-flex align-items-baseline btn-gapping mb-3">
+<a
+                  href="https://github.com/Mamadzhonov/Pet-Adoption-Website"
+                  class="p-0 nav-link"
+                  style="font-size: 1.5rem"
+                  ><i class="bi bi-github"></i 
+                ></a>
+        <p class="mb-0 ms-2">Visit our GitHub repo!</p> 
       </div>
     </div>
   </body>

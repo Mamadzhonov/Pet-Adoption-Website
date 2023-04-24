@@ -45,6 +45,7 @@ pageEncoding="UTF-8"%>
     <!-- PAGE CONTAINER -->
     <div class="p-3">
       <!-- NAV BAR -->
+      <!-- NAVBAR -->
       <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
@@ -86,19 +87,10 @@ pageEncoding="UTF-8"%>
           </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
-            <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-              <h6 class="dropdown-header">
-                User Type: <c:out value="${loggedUser.userType}"></c:out>
-              </h6>
-            </li>
-            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
-            <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
               <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
@@ -111,7 +103,7 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-        </div>
+    </div>
       <main class="p-3 mb-5">
         <div class="d-flex align-items-center">
           <!-- LEFT COLUMN -->
@@ -293,15 +285,16 @@ pageEncoding="UTF-8"%>
       </main>
     </div>
     <!-- FOOTER -->
-    <div class="footer px-4 pt-5 mt-5">
+    <!-- Footer -->
+    <div class="footer px-4" style="margin-top:115px;">
       <div class="d-flex flex-wrap justify-content-between">
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column mb-1">
           <h5>
             <img
               src="/images/animalLogo_solid.png"
               alt=""
               style="height: 30px; padding-right: 10px; padding-bottom: 3px"
-            />Pet Adform:option
+            />Pet Adoption
           </h5>
           <ul class="nav flex-column">
             <li class="nav-item mb-2">
@@ -320,7 +313,7 @@ pageEncoding="UTF-8"%>
             </li>
           </ul>
         </div>
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column">
           <form>
             <h5>Subscribe to our newsletter</h5>
             <p>Monthly digest of what's new and exciting from us.</p>
@@ -341,12 +334,15 @@ pageEncoding="UTF-8"%>
           </form>
         </div>
       </div>
-
-      <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
-        <div>
-          <p>{will be putting the main repo github link }</p>
-        </div>
-        <div>© 2023 Pet Adoption Center</div>
+      <hr class="my-2">
+      <div class="d-flex align-items-baseline btn-gapping mb-3">
+<a
+                  href="https://github.com/Mamadzhonov/Pet-Adoption-Website"
+                  class="p-0 nav-link"
+                  style="font-size: 1.5rem"
+                  ><i class="bi bi-github"></i 
+                ></a>
+        <p class="mb-0 ms-2">Visit our GitHub repo!</p> 
       </div>
     </div>
   </body>
