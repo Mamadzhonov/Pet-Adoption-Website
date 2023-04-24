@@ -110,25 +110,50 @@
 	
 	<!-- Main Content -->
 	<main class="p-5 mb-5 min-vh-100">
-		<div class="d-flex justify-content-around align-items-stretch">
-			<!-- Left Column -->
-			<div class="col-5">
-				<h1 class="text-start"><c:out value="${event.eventName}"/></h1>
-				<div class="card form-card p-3">
-					<p><c:out value="${event.eventDetails}"/></p>
-				</div>
-			</div>
-			<!-- Right column -->
-			<div class="col-4">
-				<h3 class="text-start"><c:out value="${event.location}"/></h3>
-				<h4 class="text-start"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></h4>
-				<div class="card form-card">
-					<!-- Place for the map api potentially? -->
-				</div>
-			</div>
-		</div>
+    <div class="card form-card p-3">
+
+      <div class="d-flex justify-content-around align-items-stretch">
+        <!-- Left Column -->
+        <div class="col">
+          <h1 class="text-start"><c:out value="${event.eventName}"/></h1>
+          <!-- location row -->
+          <div class="d-flex align-items-baseline mb-1">
+            <i class="bi bi-geo-alt-fill" style="padding-right: 10px; font-size: 1.25rem;"></i>
+            <h6 class="" style="font-weight: 300;"><c:out value="${event.location}"/></h6>
+          </div>
+          <!-- date of event -->
+          <div class="d-flex align-items-baseline mb-1">
+            <i class="bi bi-calendar-fill" style="padding-right: 10px; font-size: 1.25rem;"></i>
+            <h6 class="" style="font-weight: 300;"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></h6>
+          </div>
+          <div class="card form-card p-3 mb-3">
+            <h6>About this event:</h6>
+            <p><c:out value="${event.eventDetails}"/></p>
+          </div>
+          <!-- <div class="card form-card"> -->
+            <!-- put map api code here! -->
+          <!-- </div> -->
+          <!-- button row for admins -->
+          <!-- ADMIN CONTROLS -->
+          <c:if test="${loggedUser.userType == 'admin'}">
+            <div class="d-flex ">
+              <a class="btn" href="/event/edit/${eventById.id}" style="margin-right: 10px;">Edit Event</a> </p>
+              <a class="btn admin-btn" href="/event/delete/${eventById.id}">Delete Event</a>
+            </div>
+          </c:if>
+        </div>
+        <!-- Right column -->
+        <div class="col">
+          <div>
+             <img
+            src="/images/event.png"
+            class="img-thumbnail pet-profile"
+            alt="picture of dog at an adoption fair"/>
+          </div>
+        </div>
+      </div>
+    </div>
 	</main>
-	
 	<!-- Footer -->
     <div class="footer px-4 pt-5 mt-5">
       <div class="d-flex flex-wrap justify-content-between">
@@ -183,7 +208,7 @@
         <div>
           <p>{will be putting the main repo github link }</p>
         </div>
-        <div>© 2023 Pet Adoption Center</div>
+        <div>ï¿½ 2023 Pet Adoption Center</div>
       </div>
     </div>
 </body>

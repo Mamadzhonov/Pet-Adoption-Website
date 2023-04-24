@@ -128,7 +128,7 @@ public class Events {
         model.addAttribute("loggedUser", loggedUser);
 
         model.addAttribute("eventById", eventServ.findById(id));
-        return "EventDetail.jsp";
+        return "viewEvent.jsp";
         // Not sure which return line is needed
         // return "redirect:/events";
     }
