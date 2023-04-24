@@ -30,7 +30,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
 </head>
 
-<body>
+<body onLoad="setAllMapsImageSrc()">
 <div class="top-half p-3">
 <!-- NAV BAR -->
 	<div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
@@ -94,46 +94,63 @@
         <!-- NAVBAR ENDS -->
         
 	<!-- Upcoming Events Header -->
-    <div>
-	<h1>Upcoming Events</h1>        
-    </div>
-    <main class="p-3 mb-5">
-    <div class="d-flex align-items-stretch">
-    <!-- Left Column -->    
-	<div class="p-2 col-sm-3">
-             <img
-            src="/images/event_list_img.png"
-            alt=""
-            style="width: 100%"
-          />
-	</div>
-	
-	<!-- Right Column -->
-	<div class="p-2 col-sm ml-4">
+  <main class="p-3 mx-4 mb-5">
+    <div class="d-flex align-items-start row-gapping">
+      <!-- Left Column -->    
+      <div class="mr-3 col-sm-3">
+        <img
+        src="/images/event_list_img.png"
+        alt=""
+        style="width: 100%"
+        />
+      </div>
+      
+      <!-- Right Column -->
+      <div>
+      <h1 class="mb-3" style="margin-left: -10px;">Upcoming Events</h1>        
 	<!-- Event Cards -->
-	<div class="row">
+	<div class="row mt-3 row-gapping">
 		<c:forEach var="event" items="${events}">
-			<div class="g-col-6 mx-1 mb-2">
-				<div class="card h-100 form-card" style="width: 18rem;">
-	  				<div class="card-body">
-	  					<h5 class="card-title mx-1"><a href="/events/${event.id}"><c:out value="${event.eventName}"/></a></h5>
-	  				</div>
-	  				<div class="px-2">
-	    				<p class="card-text"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></p>
-	    				<p class="card-text"><c:out value="${event.location}"/></p>
-	  				</div>
+      <div class="g-col-6 mx-1 mb-2">
+          <a href="/events/${event.id}" class="pet-card">
+          <div class="card form-card pet-card h-100 p-2" style="width: 18rem;">
+            <!-- PET PROFILE PIC -->
+		  				<img
+				            class="google-map img-thumbnail pet-profile card-img-top"
+				            alt="${event.location}"
+				          />
+              <!-- CARD BODY -->
+		  				<div class="card-body" style="padding: 10px; padding-bottom: 10px;" >
+                <!-- NAME ROW -->
+		  				<div class="d-flex align-items-center mb-2">
+		  					<h5 class="card-title mx-1 mb-0 pt-1"><a href="/events/${event.id}" class="inquiry-link"><c:out value="${event.eventName}"/></a></h5>
+		  				</div>
+                <div class="d-flex align-items-center mb-2 btn-gapping">
+                  <i class="bi bi-calendar-fill"></i>
+                  <p class=" my-0 form-label-filter" style="font-size: 15px;">
+                <fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/>
+                  </p>
+                </div>
+                <div class="d-flex align-items-center mb-2 btn-gapping">
+                  <i class="bi bi-geo-alt-fill"></i>
+                  <p class=" my-0 form-label-filter" style="font-size: 15px;">
+                <c:out value="${event.location}"></c:out>
+                  </p>
+                </div>
+					</div>
+        </div>
+      </a>
 				</div>
-			</div>
 		</c:forEach>
 	</div>
 	<!-- Event Card End  -->
 	</div>
 </div>
 </main>
-<!-- FOOTER -->
-    <div class="footer px-4 pt-5 mt-5">
+<!-- Footer -->
+    <div class="footer px-4" style="margin-top:115px;">
       <div class="d-flex flex-wrap justify-content-between">
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column mb-1">
           <h5>
             <img
               src="/images/animalLogo_solid.png"
@@ -158,7 +175,7 @@
             </li>
           </ul>
         </div>
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column">
           <form>
             <h5>Subscribe to our newsletter</h5>
             <p>Monthly digest of what's new and exciting from us.</p>
@@ -179,12 +196,15 @@
           </form>
         </div>
       </div>
-
-      <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
-        <div>
-          <p>{will be putting the main repo github link }</p>
-        </div>
-        <div>© 2023 Pet Adoption Center</div>
+      <hr class="my-2">
+      <div class="d-flex align-items-baseline btn-gapping mb-3">
+<a
+                  href="https://github.com/Mamadzhonov/Pet-Adoption-Website"
+                  class="p-0 nav-link"
+                  style="font-size: 1.5rem"
+                  ><i class="bi bi-github"></i 
+                ></a>
+        <p class="mb-0 ms-2">Visit our GitHub repo!</p> 
       </div>
     </div>
 
