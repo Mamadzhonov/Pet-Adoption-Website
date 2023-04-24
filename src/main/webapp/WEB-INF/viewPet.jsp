@@ -129,7 +129,7 @@ pageEncoding="UTF-8"%>
                 <!-- PET INQUIRY BTN -->
                  <div>
                   <a href="/pet/add/inquiry/${pet.id}" class="btn">Interested in this pet?</a>
-                </div>lar
+                </div>
               </c:if>
             </div>
             <hr class="my-1 mb-3"/>
