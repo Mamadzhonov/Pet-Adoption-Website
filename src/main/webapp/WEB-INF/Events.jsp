@@ -100,17 +100,37 @@
         </div>
         </div>
         </div>
+        <!-- NAVBAR ENDS -->
         
-<h1>Upcoming Events</h1>        
-<!-- Event Cards -->
-	<div class="d-flex row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+	<!-- Upcoming Events Header -->
+    <div>
+	<h1>Upcoming Events</h1>        
+    </div>
+    <main class="p-3 mb-5">
+    <div class="d-flex align-items-stretch">
+    <!-- Left Column -->    
+	<div class="p-2 col-sm-2">
+		<div class="card form-card p-4 mb-3">
+			<img
+				src=""
+				class="img-thumbnail pet-profile mb-3"
+				alt="Image"
+			/>
+			<p>Image here, delete this sentence later</p>
+		</div>
+	</div>
+	
+	<!-- Right Column -->
+	<div class="p-2 col-sm ml-4">
+	<!-- Event Cards -->
+	<div class="row">
 		<c:forEach var="event" items="${events}">
-			<div class="col">
+			<div class="g-col-6 mx-1 mb-2">
 				<div class="card h-100 form-card" style="width: 18rem;">
 	  				<div class="card-body">
-	  					<h5 class="card-title mx-2"><a href="/events/${event.id}"><c:out value="${event.eventName}"/></a></h5>
+	  					<h5 class="card-title mx-1"><a href="/events/${event.id}"><c:out value="${event.eventName}"/></a></h5>
 	  				</div>
-	  				<div>
+	  				<div class="px-2">
 	    				<p class="card-text"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></p>
 	    				<p class="card-text"><c:out value="${event.location}"/></p>
 	  				</div>
@@ -118,7 +138,67 @@
 			</div>
 		</c:forEach>
 	</div>
+	<!-- Event Card End  -->
+	</div>
+</div>
+</main>
+<!-- FOOTER -->
+    <div class="footer px-4 pt-5 mt-5">
+      <div class="d-flex flex-wrap justify-content-between">
+        <div class="d-flex flex-column mb-3">
+          <h5>
+            <img
+              src="/images/animalLogo_solid.png"
+              alt=""
+              style="height: 30px; padding-right: 10px; padding-bottom: 3px"
+            />Pet Adoption
+          </h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="/home" class="nav-link p-0 text-muted">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/events" class="nav-link p-0 text-muted"
+                >Upcoming Events</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/about" class="nav-link p-0 text-muted">About</a>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex flex-column mb-3">
+          <form>
+            <h5>Subscribe to our newsletter</h5>
+            <p>Monthly digest of what's new and exciting from us.</p>
+            <div class="d-flex flex-column justify-content-between">
+              <label for="newsletter1" class="visually-hidden"
+                >Email address</label
+              >
+              <div class="d-flex justify-content-between row-gapping">
+                <input
+                  id="newsletter1"
+                  type="text"
+                  class="form-control"
+                  placeholder="Email address"
+                />
+                <button class="btn" type="button">Subscribe</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
 
+      <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
+        <div>
+          <p>{will be putting the main repo github link }</p>
+        </div>
+        <div>© 2023 Pet Adoption Center</div>
+      </div>
+    </div>
 
 </body>
 </html>
