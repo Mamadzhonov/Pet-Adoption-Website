@@ -81,7 +81,7 @@
                         </div>
 
                         <div>
-                            <p>Date:  <c:out value="${eventById.eventName}"></c:out>
+                            <p>Date: <c:out value="${eventById.eventName}"></c:out>
                             </p>
                             <p>Description: <c:out value="${eventById.date}"></c:out>
                             </p>
@@ -92,8 +92,8 @@
                         <hr>
                         <div style="display: flex;  justify-content: flex-end;">
                             </p>
-                            <a class="btn btn-info" href="/event/edit/${event.id}">Edit Event</a> </p>
-                            <a class="btn btn-info" href="/event/edit/${event.id}">Delete Event</a>
+                            <a class="btn btn-info" href="/event/edit/${eventById.id}">Edit Event</a> </p>
+                            <a class="btn btn-info" href="/event/delete/${eventById.id}">Delete Event</a>
                         </div>
 
 

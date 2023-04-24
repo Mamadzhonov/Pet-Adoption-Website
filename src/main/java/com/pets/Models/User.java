@@ -54,7 +54,19 @@ public class User {
 
     private Date updatedAt;
 
-    public Long getId() {
+
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private List<Event> events;
+
+    public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	public Long getId() {
         return id;
     }
 

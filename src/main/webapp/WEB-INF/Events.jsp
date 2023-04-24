@@ -81,6 +81,7 @@
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
+
           <ul class="dropdown-menu dropdown-menu-end">
             <li>
               <h6 class="dropdown-header">
@@ -137,6 +138,9 @@
                               </td> 
                                 <td>
                                   <c:out value="${event.eventDetails}"></c:out>
+                              </td>
+                                <td>
+                                  <c:out value="${event.postedBy}"></c:out>
                               </td>
                           </tr>
                       </c:forEach>
