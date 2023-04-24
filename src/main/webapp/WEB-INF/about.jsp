@@ -90,12 +90,6 @@ pageEncoding="UTF-8"%>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
-            <li>
-              <h6 class="dropdown-header">
-                User Type: <c:out value="${loggedUser.userType}"></c:out>
-              </h6>
-            </li>
-            <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
               <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
@@ -110,7 +104,7 @@ pageEncoding="UTF-8"%>
         </div>
     </div>
       <!-- MAIN PAGE CONTENT -->
-      <main>
+      <main class="px-5 pb-5 mx-5 mb-5">
         <div>
           <div class="p-3">
             <h1>About This Project</h1>
@@ -119,6 +113,8 @@ pageEncoding="UTF-8"%>
               <div class="card form-card col-sm p-3">
                 <!-- LEFT COLUMN -->
                 <h4>Project summary</h4>
+                <hr style="margin:10px 0px">
+                <!-- need to update project summary -->
                 <p>
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                   Facilis blanditiis voluptatem nesciunt est dolorum
@@ -140,11 +136,99 @@ pageEncoding="UTF-8"%>
               <!-- RIGHT COL -->
               <div class="card form-card p-3">
                 <h4>Members:</h4>
-                <p class="text-center p-0 m-0">{member name here}</p>
-                <p class="text-center p-0 m-0">{member name here}</p>
-                <p class="text-center p-0 m-0">{member name here}</p>
-                <p class="text-center p-0 m-0">{member name here}</p>
-                <p class="text-center p-0 m-0">{member name here}</p>
+                <hr style="margin:10px 0px 5px 0px">
+                <!-- MEMBER ROW -->
+                <div class="mb-1 d-flex row-gapping align-items-center justify-content-between">
+                  <div>
+                    <h6 class="p-0 m-0">Stephen Brown</h6>
+                  </div>
+                  <div class="d-flex row-gapping">
+                    <!-- github -->
+                    <a href="https://github.com/Stephen-Brown-MIS" class="nav-link py-0 px-0">
+  
+                      <i class="bi bi-github" style="font-size:1.8rem"></i>
+                    </a>
+                    <!-- linkedIn -->
+                    <a href="https://www.linkedin.com/in/stephen-brown-mis/" class="nav-link py-0 px-0">
+  
+                      <i class="bi bi-linkedin" style="font-size:1.8rem"></i>
+                    </a>
+                  </div>
+                </div>
+               <hr style="margin:10px 0px 5px 0px">
+                <!-- MEMBER ROW -->
+                <div class="mb-1 d-flex row-gapping align-items-center justify-content-between">
+                  <div>
+                    <h6 class="p-0 m-0">Krystle Spearing</h6>
+                  </div>
+                  <div class="d-flex row-gapping">
+                    <!-- github -->
+                    <a href="https://github.com/spearingk" class="nav-link py-0 px-0">
+  
+                      <i class="bi bi-github" style="font-size:1.8rem"></i>
+                    </a>
+                    <!-- still need -->
+                    <a href="#" class="nav-link py-0 px-0">
+  
+                      <i class="bi bi-linkedin" style="font-size:1.8rem"></i>
+                    </a>
+                  </div>
+                </div>
+                <hr style="margin:10px 0px 5px 0px">
+                <!-- MEMBER ROW -->
+                <div class="mb-1 d-flex row-gapping align-items-center justify-content-between">
+                  <div>
+                    <h6 class="p-0 m-0">Christina Cruz</h6>
+                  </div>
+                  <div class="d-flex row-gapping">
+                    <!-- github -->
+                    <a href="https://github.com/ChristinaAshCruz" class="nav-link py-0 px-0">
+  
+                      <i class="bi bi-github" style="font-size:1.8rem"></i>
+                    </a>
+                    <!-- linkedin -->
+                    <a href="https://www.linkedin.com/in/christina-ashley-cruz/" class="nav-link py-0 px-0">
+  
+                      <i class="bi bi-linkedin" style="font-size:1.8rem"></i>
+                    </a>
+                  </div>
+                </div>
+                <hr style="margin:10px 0px 5px 0px">
+                <!-- MEMBER ROW -->
+                <div class="mb-1 d-flex row-gapping align-items-center justify-content-between">
+                  <div>
+                    <h6 class="p-0 m-0">Abdulaziz Mamadzhonov</h6>
+                  </div>
+                  <div class="d-flex row-gapping">
+                    <!-- github -->
+                    <a href="https://github.com/Mamadzhonov" class="nav-link py-0 px-0">
+  
+                      <i class="bi bi-github" style="font-size:1.8rem"></i>
+                    </a>
+                    <!-- <a href="" class="nav-link py-0 px-0">
+  
+                      <i class="bi bi-linkedin" style="font-size:1.8rem"></i>
+                    </a> -->
+                  </div>
+                </div>
+                <hr style="margin:10px 0px 5px 0px">
+                <!-- MEMBER ROW -->
+                <div class="mb-1 d-flex row-gapping align-items-center justify-content-between">
+                  <div>
+                    <h6 class="p-0 m-0">Ian Hearne</h6>
+                  </div>
+                  <div class="d-flex row-gapping">
+                    <a href="https://github.com/Hokusai12" class="nav-link py-0 px-0">
+  
+                      <i class="bi bi-github" style="font-size:1.8rem"></i>
+                    </a>
+                    <!-- linkedin -->
+                    <a href="https://www.linkedin.com/in/ian-hearne/" class="nav-link py-0 px-0">
+  
+                      <i class="bi bi-linkedin" style="font-size:1.8rem"></i>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="card form-card p-3">
@@ -162,62 +246,65 @@ pageEncoding="UTF-8"%>
           </div>
         </div>
       </main>
-      <!-- FOOTER -->
-      <div class="footer fixed-bottom px-4">
-        <div class="d-flex flex-wrap justify-content-between">
-          <div class="d-flex flex-column mb-3">
-            <h5>
-              <img
-                src="/images/animalLogo_solid.png"
-                alt=""
-                style="height: 30px; padding-right: 10px; padding-bottom: 3px"
-              />Pet Adoption
-            </h5>
-            <ul class="nav flex-column">
-              <li class="nav-item mb-2">
-                <a href="/home" class="nav-link p-0 text-muted">Home</a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="/events" class="nav-link p-0 text-muted"
-                  >Upcoming Events</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="/about" class="nav-link p-0 text-muted">About</a>
-              </li>
-            </ul>
-          </div>
-          <div class="d-flex flex-column mb-3">
-            <form>
-              <h5>Subscribe to our newsletter</h5>
-              <p>Monthly digest of what's new and exciting from us.</p>
-              <div class="d-flex flex-column justify-content-between">
-                <label for="newsletter1" class="visually-hidden"
-                  >Email address</label
-                >
-                <div class="d-flex justify-content-between row-gapping">
-                  <input
-                    id="newsletter1"
-                    type="text"
-                    class="form-control"
-                    placeholder="Email address"
-                  />
-                  <button class="btn" type="button">Subscribe</button>
-                </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer px-4" style="margin-top:115px;">
+      <div class="d-flex flex-wrap justify-content-between">
+        <div class="d-flex flex-column mb-1">
+          <h5>
+            <img
+              src="/images/animalLogo_solid.png"
+              alt=""
+              style="height: 30px; padding-right: 10px; padding-bottom: 3px"
+            />Pet Adoption
+          </h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="/home" class="nav-link p-0 text-muted">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/events" class="nav-link p-0 text-muted"
+                >Upcoming Events</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/about" class="nav-link p-0 text-muted">About</a>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex flex-column">
+          <form>
+            <h5>Subscribe to our newsletter</h5>
+            <p>Monthly digest of what's new and exciting from us.</p>
+            <div class="d-flex flex-column justify-content-between">
+              <label for="newsletter1" class="visually-hidden"
+                >Email address</label
+              >
+              <div class="d-flex justify-content-between row-gapping">
+                <input
+                  id="newsletter1"
+                  type="text"
+                  class="form-control"
+                  placeholder="Email address"
+                />
+                <button class="btn" type="button">Subscribe</button>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
-
-        <div class="d-flex justify-content-between py-4 mb-0 border-top">
-          <div>
-            <p>{will be putting the main repo github link }</p>
-          </div>
-          <div>© 2023 Pet Adoption Center</div>
-        </div>
+      </div>
+      <hr class="my-2">
+      <div class="d-flex align-items-baseline btn-gapping mb-3">
+<a
+                  href="https://github.com/Mamadzhonov/Pet-Adoption-Website"
+                  class="p-0 nav-link"
+                  style="font-size: 1.5rem"
+                  ><i class="bi bi-github"></i 
+                ></a>
+        <p class="mb-0 ms-2">Visit our GitHub repo!</p> 
       </div>
     </div>
   </body>

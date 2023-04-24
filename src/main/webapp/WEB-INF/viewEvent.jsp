@@ -35,7 +35,7 @@
     />
 <title>View Event</title>
 </head>
-<body>
+<body onLoad="setAllMapsImageSrc()">
 	<div class="top-half p-3">
       <!-- NAV BAR -->
       <div
@@ -101,67 +101,66 @@
 	</div>
 	
 	<!-- Main Content -->
-	<main class="p-5 mb-5 min-vh-100">
-    <div class="card form-card p-4">
-
-      <div class="d-flex justify-content-between align-items-top row-gapping">
-        <!-- Left Column -->
-        <div class="col px-0">
-          <!-- EVENT NAME -->
-          <h1 class="text-start"><c:out value="${event.eventName}"/></h1>
-          <!-- location row -->
-          <div class="d-flex align-items-baseline mb-1">
-            <i class="bi bi-geo-alt-fill" style="padding-right: 10px; font-size: 1.25rem;"></i>
-            <h6 style="font-weight: 300;"><c:out value="${event.location}"/></h6>
-          </div>
-          <!-- date of event row-->
-          <div class="d-flex align-items-baseline mb-1">
-            <i class="bi bi-calendar-fill" style="padding-right: 10px; font-size: 1.25rem;"></i>
-            <h6 style="font-weight: 300;"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></h6>
-          </div>
-          <!-- EVENT CREATOR -->
-          <div class="d-flex align-items-baseline mb-1">
-            <i class="bi bi-person-fill" style="padding-right: 10px; font-size: 1.25rem;"></i>
-            <h6 style="font-weight: 300;"><c:out value="${event.postedBy}"></c:out></h6>
-          </div>
-          <div class="card form-card p-3 mb-3">
-            <h6>About this event:</h6>
-            <p><c:out value="${event.eventDetails}"/></p>
-          </div>
-          <div class="card form-card p-3">
-            <h6>
-              Location Details:
-            </h6>
-            <!-- put map api code here! -->
-          </div>
-          <!-- button row for admins -->
-          <!-- ADMIN CONTROLS -->
-        </div>
-        <!-- Right column -->
-        <div>
-          
-          <div>
-            <c:if test="${loggedUser.userType == 'admin'}">
-              <div class="d-flex justify-content-end mb-3">
-                <a class="btn" href="/event/edit/${event.id}" style="margin-right: 10px;">Edit Event</a> </p>
-                <a class="btn admin-btn" href="/event/delete/${event.id}">Delete Event</a>
+  <main class="px-5 pb-5 mx-5 mb-5">
+    <div class="card form-card p-3">
+        <div class="d-flex flex-wrap mb-3">
+            <div class="card-body" style="padding-top: 0px; padding: 0px .5rem"> 
+              <div
+                class="d-flex justify-content-between align-items-start mb-2 flex-wrap btn-gapping"
+              >
+              <!-- HEADER DIV -->
+                <div class="flex-grow-1">
+                  <h1 class="card-title">
+                    <c:out value="${event.eventName}"></c:out>
+                  </h1>
+                  <!-- POSTED BY -->
+                  <div class="d-flex row-gapping">
+                    <i class="bi bi-person-fill"></i>
+                    <h5 style="font-weight: 300;"><c:out value="${event.postedBy}"></c:out></h5>
+                  </div>
+                  <!-- DATE OF EVENT -->
+                  <div class="d-flex row-gapping">
+                    <i class="bi bi-calendar-fill"></i>
+                    <h5 style="font-weight: 300;"><fmt:formatDate pattern="MMMM dd, yyyy" value="${event.date}"/></h5>
+                  </div>
+                  <!-- LOCATION -->
+                  <div class="d-flex row-gapping">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <h5 style="font-weight: 300;"><c:out value="${event.location}"></c:out></h5>
+                  </div>
+                </div>
+                <!-- EDIT DELETE ROW -->
+                <div class="d-flex btn-gapping mb-2">
+                  <a href="/event/edit/${event.id}" class="btn">Edit</a>
+                  <a href="/event/delete/${event.id}" class="btn admin-btn">Delete</a>
+                </div>
               </div>
-            </c:if>
-             <img
-            src="/images/event.png"
-            class="img-thumbnail pet-profile"
-            alt="picture of dog at an adoption fair"
-            style="height:350px"
-            />
+              <!-- ABOUT SECTION -->
+            </div>
+            <div class="card form-card p-3">
+              <h5>
+                About this Event:
+              </h5>
+              <p class="mb-0"><c:out value="${event.eventDetails}"></c:out></p>
+            </div>
+          </div>
+        <!-- list row -->
+        <div class="row gx-3 ">
+          <!-- column -->
+          <div class="col-md-6 d-flex align-items-stretch">
+              <img class="google-map img-thumbnail pet-profile" alt="${event.location}">
+          </div>
+          <!-- column -->
+          <div class="col-md-6 d-flex align-items-stretch">
+              <img src="/images/event.png" class="img-thumbnail pet-profile">
           </div>
         </div>
       </div>
-    </div>
-	</main>
+  </main>
 	<!-- Footer -->
-    <div class="footer px-4 pt-5 mt-5">
+    <div class="footer px-4" style="margin-top:115px;">
       <div class="d-flex flex-wrap justify-content-between">
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column mb-1">
           <h5>
             <img
               src="/images/animalLogo_solid.png"
@@ -186,7 +185,7 @@
             </li>
           </ul>
         </div>
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column">
           <form>
             <h5>Subscribe to our newsletter</h5>
             <p>Monthly digest of what's new and exciting from us.</p>
@@ -207,12 +206,15 @@
           </form>
         </div>
       </div>
-
-      <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
-        <div>
-          <p>{will be putting the main repo github link }</p>
-        </div>
-        <div>� 2023 Pet Adoption Center</div>
+      <hr class="my-2">
+      <div class="d-flex align-items-baseline btn-gapping mb-3">
+<a
+                  href="https://github.com/Mamadzhonov/Pet-Adoption-Website"
+                  class="p-0 nav-link"
+                  style="font-size: 1.5rem"
+                  ><i class="bi bi-github"></i 
+                ></a>
+        <p class="mb-0 ms-2">Visit our GitHub repo!</p> 
       </div>
     </div>
 </body>
