@@ -110,11 +110,11 @@
 	
 	<!-- Main Content -->
 	<main class="p-5 mb-5 min-vh-100">
-    <div class="card form-card p-3">
+    <div class="card form-card p-4">
 
-      <div class="d-flex justify-content-around align-items-stretch">
+      <div class="d-flex justify-content-between align-items-top row-gapping">
         <!-- Left Column -->
-        <div class="col">
+        <div class="col px-0">
           <h1 class="text-start"><c:out value="${event.eventName}"/></h1>
           <!-- location row -->
           <div class="d-flex align-items-baseline mb-1">
@@ -130,25 +130,31 @@
             <h6>About this event:</h6>
             <p><c:out value="${event.eventDetails}"/></p>
           </div>
-          <!-- <div class="card form-card"> -->
+          <div class="card form-card p-3">
+            <h6>
+              Location Details:
+            </h6>
             <!-- put map api code here! -->
-          <!-- </div> -->
+          </div>
           <!-- button row for admins -->
           <!-- ADMIN CONTROLS -->
-          <c:if test="${loggedUser.userType == 'admin'}">
-            <div class="d-flex ">
-              <a class="btn" href="/event/edit/${eventById.id}" style="margin-right: 10px;">Edit Event</a> </p>
-              <a class="btn admin-btn" href="/event/delete/${eventById.id}">Delete Event</a>
-            </div>
-          </c:if>
         </div>
         <!-- Right column -->
-        <div class="col">
+        <div>
+          
           <div>
+            <c:if test="${loggedUser.userType == 'admin'}">
+              <div class="d-flex justify-content-end mb-3">
+                <a class="btn" href="/event/edit/${event.id}" style="margin-right: 10px;">Edit Event</a> </p>
+                <a class="btn admin-btn" href="/event/delete/${event.id}">Delete Event</a>
+              </div>
+            </c:if>
              <img
             src="/images/event.png"
             class="img-thumbnail pet-profile"
-            alt="picture of dog at an adoption fair"/>
+            alt="picture of dog at an adoption fair"
+            style="height:350px"
+            />
           </div>
         </div>
       </div>

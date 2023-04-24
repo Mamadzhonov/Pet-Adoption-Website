@@ -158,15 +158,13 @@ public class Events {
             redirect.addFlashAttribute("login", "Need to login to edit this post");
             return "redirect:/";
         }
-        model.addAttribute("updatedForm", new Event());
-
+//        model.addAttribute("updatedForm", new Event());
         Long userLoggedId = (Long) session.getAttribute("loggedUser");
         User loggedUser = userServ.findById(userLoggedId);
         model.addAttribute("loggedUser", loggedUser);
-        model.addAttribute("eventById", eventServ.findById(id));
-
-        model.addAttribute("updateForm", eventServ.findById(id));
-
+        model.addAttribute("event", eventServ.findById(id));
+        model.addAttribute("eventId", id);
+        model.addAttribute("eventName", eventServ.findById(id).getEventName());
         return "EditEvent.jsp";
     }
 
@@ -175,14 +173,20 @@ public class Events {
             BindingResult result, @PathVariable("id") Long id, Model model, HttpSession session) {
 
         if (result.hasErrors()) {
+        	Long userLoggedId = (Long) session.getAttribute("loggedUser");
+            User loggedUser = userServ.findById(userLoggedId);
+            model.addAttribute("loggedUser", loggedUser);
+            model.addAttribute("eventId", id);
+            model.addAttribute("eventName", eventServ.findById(id).getEventName());
             return "EditEvent.jsp";
         }
-
-        Long idN = (Long) session.getAttribute("loggedUser");
-        User loggedUser = userServ.findById(idN);
+        Long userLoggedId = (Long) session.getAttribute("loggedUser");
+        User loggedUser = userServ.findById(userLoggedId);
+//        setting event creator to current user
         updatedEvent.setPostedBy(loggedUser.getUserName());
-        eventServ.update(updatedEvent);
-
+        // setting event id to previous id
+        updatedEvent.setId(id);
+        // updating the event
         eventServ.update(updatedEvent);
         return "redirect:/events";
     }
