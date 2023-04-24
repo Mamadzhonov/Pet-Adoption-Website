@@ -267,8 +267,18 @@ public class PetController {
 
 	//POST TO THE ADD INQUIRY
 	@PostMapping("/add/inquiry") 
-	public String saveInquiry(@Valid @ModelAttribute("newInquiry") Inquiry newInquiry, BindingResult result) {		
-		
+	public String saveInquiry(@Valid @ModelAttribute("newInquiry") Inquiry newInquiry, BindingResult result,
+									RedirectAttributes redirect, HttpSession session, Model model) {		
+//-->
+		if (session.getAttribute("loggedUser") == null) {
+			redirect.addFlashAttribute("permitionIssue", "Need to login to access Home page");
+			return "redirect:/login";
+		}
+
+		Long id = (Long) session.getAttribute("loggedUser");
+		User loggedUser = userServ.findById(id);
+		model.addAttribute("loggedUser", loggedUser);
+//-->		
 		if(result.hasErrors()) {
 			return "addInquiry.jsp";
 		}

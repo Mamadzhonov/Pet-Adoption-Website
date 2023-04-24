@@ -137,7 +137,7 @@ pageEncoding="UTF-8"%>
 
                  
                  
-                 <input type="radio" id="inquiryType"  name="inquiryType" value="Adopting">
+                 <input type="radio" id="inquiryType"  name="inquiryType" value="Adopting" checked="checked">
 				<label for="inquiryType">Adopting</label><br>
 				<input type="radio" id="inquiryType" name="inquiryType" value="Fostering">
 				<label for="inquiryType">Fostering</label><br>                   
