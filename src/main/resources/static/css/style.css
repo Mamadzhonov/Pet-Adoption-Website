@@ -154,3 +154,12 @@ th {
 .pet-card:hover {
 	box-shadow: 16px 16px 17px rgba(175, 126, 67, 0.1);
 }
+.event-card {
+	flex-direction: row;
+	border-radius: 15px;
+	border:3px solid #31A200;
+}
+.event-card img {
+	border-radius: 12px 0px 0px 12px; 
+	width:30%;
+}
