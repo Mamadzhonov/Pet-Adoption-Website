@@ -72,7 +72,6 @@
           </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
-            <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 

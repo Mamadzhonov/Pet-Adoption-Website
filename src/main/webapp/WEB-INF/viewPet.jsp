@@ -42,6 +42,7 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div class="p-3">
+      <!-- NAV BAR -->
      <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
@@ -83,7 +84,6 @@ pageEncoding="UTF-8"%>
           </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
-            <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
@@ -93,8 +93,6 @@ pageEncoding="UTF-8"%>
                 User Type: <c:out value="${loggedUser.userType}"></c:out>
               </h6>
             </li>
-            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
             <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
@@ -115,23 +113,32 @@ pageEncoding="UTF-8"%>
         <!-- LEFT COLUMN -->
         <div class="p-2 col-sm">
           <!-- might be a nice touch to add the species icon next to the name -->
-          <div class="card p-4 form-card mb-3">
-            <div class="d-flex align-items-center mb-2">
+          <div class="card p-3 form-card mb-3">
+            <div class="d-flex align-items-center justify-content-between mb-2">
               <!-- PET IMAGE -->
-              <img
-                src="/images/${pet.species}_icon.png"
-                alt=""
-                style="height: 35px"
-              />
-              <h1 class="mx-2 mb-0"><c:out value="${pet.name}"></c:out></h1>
+              <div class="d-flex align-items-center justify-content-between">
+                <img
+                  src="/images/${pet.species}_icon.png"
+                  alt=""
+                  style="height: 35px"
+                />
+                <h1 class="mx-2 mb-0"><c:out value="${pet.name}"></c:out></h1>
+              </div>
+              <!-- only appears if user is NOT an admin -->
+              <c:if test="${loggedUser.userType == 'user'}">
+                <!-- PET INQUIRY BTN -->
+                 <div>
+                  <a href="/pet/add/inquiry/${pet.id}" class="btn">Interested in this pet?</a>
+                </div>
+              </c:if>
             </div>
             <hr />
             <h6>Species: <c:out value="${pet.species}"></c:out></h6>
-            <h6>breed: {breed}</h6>
-            <h6>Gender: {sex}</h6>
-            <h6>Status: {status}</h6>
-            <c:if test="${loggedUser.userType == 'admin'}"></c:if>
-            <div>
+            <h6>Breed: <c:out value="${pet.breed}"></c:out></h6>
+            <h6>Gender: <c:out value="${pet.sex}"></c:out></h6>
+            <h6>Status: <c:out value="${pet.petStatus}"></c:out></h6>
+            <c:if test="${loggedUser.userType == 'admin'}">
+              <div>
               <hr />
               <h6>Admin Actions:</h6>
               <div class="d-flex">
@@ -144,8 +151,11 @@ pageEncoding="UTF-8"%>
                 <a href="/" class="btn admin-btn">Delete Pet</a>
               </div>
             </div>
+            </c:if>
+            
+
           </div>
-          <div class="card p-4 form-card">
+          <div class="card p-3 form-card">
             <h3>About this pet:</h3>
             <hr />
             <!-- <a href="https://www.flaticon.com/free-icons/dog" title="dog icons">Dog icons created by Freepik - Flaticon</a> -->
@@ -162,69 +172,70 @@ pageEncoding="UTF-8"%>
             class="img-thumbnail pet-profile mb-3"
             alt="..."
           />
-          <div class="card p-4 form-card">
-            <h3>Location</h3>
+          <!-- <div class="card p-3 form-card"> -->
+            <!-- <h3>Location</h3> -->
             <!-- leaving space for location, if we need it -->
             <!-- can always take this out if we need to -->
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </main>
-    <div class="footer px-4 pt-5 mt-5">
-      <div class="d-flex flex-wrap justify-content-between">
-        <div class="d-flex flex-column mb-3">
-          <h5>
-            <img
-              src="/images/animalLogo_solid.png"
-              alt=""
-              style="height: 30px; padding-right: 10px; padding-bottom: 3px"
-            />Pet Adoption
-          </h5>
-          <ul class="nav flex-column">
-            <li class="nav-item mb-2">
-              <a href="/home" class="nav-link p-0 text-muted">Home</a>
-            </li>
-            <li class="nav-item mb-2">
-              <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
-            </li>
-            <li class="nav-item mb-2">
-              <a href="/events" class="nav-link p-0 text-muted"
-                >Upcoming Events</a
-              >
-            </li>
-            <li class="nav-item mb-2">
-              <a href="/about" class="nav-link p-0 text-muted">About</a>
-            </li>
-          </ul>
-        </div>
-        <div class="d-flex flex-column mb-3">
-          <form>
-            <h5>Subscribe to our newsletter</h5>
-            <p>Monthly digest of what's new and exciting from us.</p>
-            <div class="d-flex flex-column justify-content-between">
-              <label for="newsletter1" class="visually-hidden"
-                >Email address</label
-              >
-              <div class="d-flex justify-content-between row-gapping">
-                <input
-                  id="newsletter1"
-                  type="text"
-                  class="form-control"
-                  placeholder="Email address"
-                />
-                <button class="btn" type="button">Subscribe</button>
-              </div>
-            </div>
-          </form>
-        </div>
+  </div>
+  <div class="footer px-4 pt-5 mt-5">
+    <div class="d-flex flex-wrap justify-content-between">
+      <div class="d-flex flex-column mb-3">
+        <h5>
+          <img
+            src="/images/animalLogo_solid.png"
+            alt=""
+            style="height: 30px; padding-right: 10px; padding-bottom: 3px"
+          />Pet Adoption
+        </h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a href="/home" class="nav-link p-0 text-muted">Home</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="/events" class="nav-link p-0 text-muted"
+              >Upcoming Events</a
+            >
+          </li>
+          <li class="nav-item mb-2">
+            <a href="/about" class="nav-link p-0 text-muted">About</a>
+          </li>
+        </ul>
       </div>
-
-      <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
-        <div>
-          <p>{will be putting the main repo github link }</p>
-        </div>
-        <div>© 2023 Pet Adoption Center</div>
+      <div class="d-flex flex-column mb-3">
+        <form>
+          <h5>Subscribe to our newsletter</h5>
+          <p>Monthly digest of what's new and exciting from us.</p>
+          <div class="d-flex flex-column justify-content-between">
+            <label for="newsletter1" class="visually-hidden"
+              >Email address</label
+            >
+            <div class="d-flex justify-content-between row-gapping">
+              <input
+                id="newsletter1"
+                type="text"
+                class="form-control"
+                placeholder="Email address"
+              />
+              <button class="btn" type="button">Subscribe</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
+
+    <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
+      <div>
+        <p>{will be putting the main repo github link }</p>
+      </div>
+      <div>� 2023 Pet Adoption Center</div>
+    </div>
+  </div>
   </body>
 </html>

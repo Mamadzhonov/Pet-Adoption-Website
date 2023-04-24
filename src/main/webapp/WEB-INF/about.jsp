@@ -41,6 +41,7 @@ pageEncoding="UTF-8"%>
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css"
     />
   </head>
+  
   <body>
     <div class="d-flex flex-column justify-content-between p-3">
       <!-- NAVBAR -->
@@ -85,7 +86,6 @@ pageEncoding="UTF-8"%>
           </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
-            <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
@@ -95,8 +95,6 @@ pageEncoding="UTF-8"%>
                 User Type: <c:out value="${loggedUser.userType}"></c:out>
               </h6>
             </li>
-            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
             <li><hr class="dropdown-divider" /></li>
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
@@ -110,6 +108,7 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
+    </div>
       <!-- MAIN PAGE CONTENT -->
       <main>
         <div>
