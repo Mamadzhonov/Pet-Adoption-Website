@@ -205,7 +205,6 @@ pageEncoding="UTF-8"%>
                 <!-- DEFAULT THE RESPONDED FLAG TO NO  -->
                 <input type="hidden" id="responded" name="responded" value="No">
 
-
                 <button class="btn">Submit</button>
               </form:form>
             </div>

@@ -342,7 +342,7 @@ public class PetController {
 		} else {
 			// making sure that this updated inquiry has the same id
 			inquiry.setId(inquiryId);
-			// also making sure pet.user stays the same as before
+			// also making sure inquiry.user stays the same as before
 			Inquiry thisInquiry = inquiryServ.findById(inquiryId);
 //			inquiry.setUser(thisInquiry.getUser());
 			// saving inquiry into db
