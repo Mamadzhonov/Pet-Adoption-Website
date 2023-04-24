@@ -158,19 +158,6 @@ public class MainContoller {
 		session.setAttribute("loggedUser", user.getId());
 		return "redirect:/home";
 	}
-//	@GetMapping("/register")
-//	public String registration(Model model, HttpSession session, RedirectAttributes redirect) {
-//		model.addAttribute("newUser", new User());
-//		return "Registration.jsp";
-//	}
-//	
-	
-//	@GetMapping("/login")
-//	public String getLoginPage(Model model) {
-//		model.addAttribute("newLogin", new LoginUser());
-//		return "Login.jsp";
-//	}
-//
 	
 	// INQUIRY DASHBOARD
 	@GetMapping("/inquire/dashboard")

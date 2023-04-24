@@ -156,8 +156,7 @@ public class PetController {
 		model.addAttribute("loggedUser", loggedUser);
 		newPet.setUser(loggedUser);
 		petService.savePet(newPet);
-//		return "redirect:/pet?page=1";
-		return "redirect:/home";
+		return "redirect:/pet?page=1";
 	}
 	
 	// EDIT PET FORM

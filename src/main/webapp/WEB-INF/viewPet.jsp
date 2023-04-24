@@ -44,7 +44,7 @@ pageEncoding="UTF-8"%>
     <div class="p-3">
       <!-- NAV BAR -->
      <div
-        class="d-flex flex-wrap justify-content-between align-items-center mb-3"
+        class="d-flex flex-wrap justify-content-between align-items-center mb-4"
       >
         <div class="d-flex align-items-center mb-1 nav-links">
           <img

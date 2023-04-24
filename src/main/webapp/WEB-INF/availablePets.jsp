@@ -107,7 +107,7 @@
 	<!-- Body/Main Content -->
 	<!-- Available Pets Header -->
 	<!-- Header End -->
-	<main class="p-4 mb-5">
+	<main class="p-4 px-5 mb-5">
     <div>
       <h1>Our Available Pets:</h1>
     </div>
