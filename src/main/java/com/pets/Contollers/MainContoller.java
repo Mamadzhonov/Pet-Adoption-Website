@@ -1,5 +1,12 @@
 package com.pets.Contollers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -209,4 +216,11 @@ public class MainContoller {
 
 		return "about.jsp";
 	}
+	
+	@GetMapping("/test")
+	public String test(Model model){
+		model.addAttribute("event", eventServ.findById(Long.valueOf(3)));
+		return "test.jsp";
+	}
+	
 }

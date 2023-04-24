@@ -30,4 +30,13 @@ async function getDogImage() {
     `
 }
 
-
+async function getMapsImageSrc(location) {	
+	const apiKeyResponse = await fetch("/apiKey");
+	const apiKey = await apiKeyResponse.json();
+	console.log(apiKey);
+	
+	const response = await fetch("https://maps.googleapis.com/maps/api/staticmap?center="+location+"&zoom=14&size=500x500&key="+apiKey[0]);
+	
+	let mapImg = document.getElementByClass("google-map");
+	mapImg.src = response.url;
+}
