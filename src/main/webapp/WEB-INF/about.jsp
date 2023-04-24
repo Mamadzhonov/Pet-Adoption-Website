@@ -140,11 +140,10 @@ pageEncoding="UTF-8"%>
               <!-- RIGHT COL -->
               <div class="card form-card p-3">
                 <h4>Members:</h4>
-                <p class="text-center p-0 m-0">{member name here}</p>
-                <p class="text-center p-0 m-0">{member name here}</p>
-                <p class="text-center p-0 m-0">{member name here}</p>
-                <p class="text-center p-0 m-0">{member name here}</p>
-                <p class="text-center p-0 m-0">{member name here}</p>
+                <div class="mb-1 d-flex row-gapping">
+                  <p class="p-0 m-0">Stephen Brown</p> 
+                  <i class="bi bi-github" style=""></i>
+                </div>
               </div>
             </div>
             <div class="card form-card p-3">

@@ -97,6 +97,9 @@ select {
 .row-gapping{
 	gap:15px;
 }
+.btn-gapping{
+	gap:8px;
+}
 ul, li {
 	list-style-type: none;
 }
