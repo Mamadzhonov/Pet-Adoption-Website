@@ -121,6 +121,7 @@ pageEncoding="UTF-8"%>
               <hr />
               <p>Inquirer Name: <c:out value="${inquiry.inquirer.userName}"></c:out></p>
               <p>Pet Name: <c:out value="${inquiry.pet.name}"></c:out></p>
+              <p>Type: <c:out value="${inquiry.inquiryType}"></c:out></p>
               <p>Species: <c:out value="${inquiry.pet.species}"></c:out></p>
               <p>Breed: <c:out value="${inquiry.pet.breed}"></c:out></p>
               <p>Age: <c:out value="${inquiry.pet.age}"></c:out></p>
@@ -134,11 +135,8 @@ pageEncoding="UTF-8"%>
               <form:form
                 action="/pet/edit/inquiry/${inquiryId}"
                 class="mt-2"
-                method="POST"
+                method="PUT"
                 modelAttribute="inquiry">
-                 <input type="hidden" name="_method" value="PUT" />
-              <!--  -->
-              
            
                 <!-- Response -->
                 <div class="mb-3">
@@ -158,8 +156,14 @@ pageEncoding="UTF-8"%>
        
                 <!-- DEFAULT THE RESPONDED FLAG TO NO  -->
                 <input type="hidden" id="responded" name="responded" value="Yes">
-  
-      		
+  				<!-- BLOCK TO CARRY THE INQUIRY DATA FORWARD  -->
+  				<input type="hidden" id="inquiryType" name="inquiryType" value="${inquiry.inquiryType}">
+  				<input type="hidden" id="dateOfDropoff" name="dateOfDropoff" value="${inquiry.dateOfDropoff}">
+				<input type="hidden" id="dateOfPickup" name="dateOfPickup" value="${inquiry.dateOfPickup}">
+				<input type="hidden" id="notes" name="notes" value="${inquiry.notes}">
+				<input type="hidden" id="inquirer" name="inquirer" value="${inquiry.inquirer.id}">
+				<input type="hidden" id="pet" name="pet" value="${inquiry.pet.id}">
+  				<!-- BLOCK TO CARRY THE INQUIRY DATA FORWARD  -->
   
                 <button class="btn">Respond</button>
               </form:form>
