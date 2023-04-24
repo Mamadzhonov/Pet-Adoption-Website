@@ -270,10 +270,11 @@ pageEncoding="UTF-8"%>
         </div>
       </main>
     </div>
-    <!-- FOOTER -->
-    <div class="footer px-4 pt-5 mt-5">
+    </div>
+    <!-- Footer -->
+    <div class="footer px-4" style="margin-top:115px;">
       <div class="d-flex flex-wrap justify-content-between">
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column mb-1">
           <h5>
             <img
               src="/images/animalLogo_solid.png"
@@ -298,7 +299,7 @@ pageEncoding="UTF-8"%>
             </li>
           </ul>
         </div>
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column">
           <form>
             <h5>Subscribe to our newsletter</h5>
             <p>Monthly digest of what's new and exciting from us.</p>
@@ -319,12 +320,15 @@ pageEncoding="UTF-8"%>
           </form>
         </div>
       </div>
-
-      <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
-        <div>
-          <p>{will be putting the main repo github link }</p>
-        </div>
-        <div>© 2023 Pet Adoption Center</div>
+      <hr class="my-2">
+      <div class="d-flex align-items-baseline btn-gapping mb-3">
+<a
+                  href="https://github.com/Mamadzhonov/Pet-Adoption-Website"
+                  class="p-0 nav-link"
+                  style="font-size: 1.5rem"
+                  ><i class="bi bi-github"></i 
+                ></a>
+        <p class="mb-0 ms-2">Visit our GitHub repo!</p> 
       </div>
     </div>
   </body>

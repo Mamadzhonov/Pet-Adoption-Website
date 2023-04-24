@@ -112,7 +112,7 @@ pageEncoding="UTF-8"%>
       >
         <div class="col-4">
           <h3 class="mb-2">Adopt and give a pet a second chance.</h3>
-          <a href="/pet" class="btn">Adopt a pet today!</a>
+          <a href="/pet?page=1" class="btn">Adopt a pet today!</a>
         </div>
         <div class="mb-3 col-8 p-2 text-center">
           <img
@@ -234,67 +234,69 @@ pageEncoding="UTF-8"%>
         </div>
         <div class="col-5">
           <h3>Fostering can bring more love into your home today!</h3>
-          <a href="/pet" class="btn">Interested in fostering?</a>
+          <a href="/pet?page=1" class="btn">Interested in fostering?</a>
         </div>
       </div>
-      <div class="footer px-4 mt-3">
-        <div class="d-flex flex-wrap justify-content-between">
-          <div class="d-flex flex-column mb-3">
-            <h5>
-              <img
-                src="/images/animalLogo_solid.png"
-                alt=""
-                style="height: 30px; padding-right: 10px; padding-bottom: 3px"
-              />Pet Adoption
-            </h5>
-            <ul class="nav flex-column">
-              <li class="nav-item mb-2">
-                <a href="/home" class="nav-link p-0 text-muted">Home</a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="/events" class="nav-link p-0 text-muted"
-                  >Upcoming Events</a
-                >
-              </li>
-              <li class="nav-item mb-2">
-                <a href="/about" class="nav-link p-0 text-muted">About</a>
-              </li>
-            </ul>
-          </div>
-          <div class="d-flex flex-column mb-3">
-            <form>
-              <h5>Subscribe to our newsletter</h5>
-              <p>Monthly digest of what's new and exciting from us.</p>
-              <div class="d-flex flex-column justify-content-between">
-                <label for="newsletter1" class="visually-hidden"
-                  >Email address</label
-                >
-                <div class="d-flex justify-content-between row-gapping">
-                  <input
-                    id="newsletter1"
-                    type="text"
-                    class="form-control"
-                    placeholder="Email address"
-                  />
-                  <button class="btn" type="button">Subscribe</button>
-                </div>
+      <!-- Footer -->
+    <div class="footer px-4" style="margin-top:115px;">
+      <div class="d-flex flex-wrap justify-content-between">
+        <div class="d-flex flex-column mb-1">
+          <h5>
+            <img
+              src="/images/animalLogo_solid.png"
+              alt=""
+              style="height: 30px; padding-right: 10px; padding-bottom: 3px"
+            />Pet Adoption
+          </h5>
+          <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+              <a href="/home" class="nav-link p-0 text-muted">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/pet?page=1" class="nav-link p-0 text-muted">Pets</a>
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/events" class="nav-link p-0 text-muted"
+                >Upcoming Events</a
+              >
+            </li>
+            <li class="nav-item mb-2">
+              <a href="/about" class="nav-link p-0 text-muted">About</a>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex flex-column">
+          <form>
+            <h5>Subscribe to our newsletter</h5>
+            <p>Monthly digest of what's new and exciting from us.</p>
+            <div class="d-flex flex-column justify-content-between">
+              <label for="newsletter1" class="visually-hidden"
+                >Email address</label
+              >
+              <div class="d-flex justify-content-between row-gapping">
+                <input
+                  id="newsletter1"
+                  type="text"
+                  class="form-control"
+                  placeholder="Email address"
+                />
+                <button class="btn" type="button">Subscribe</button>
               </div>
-            </form>
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-between pt-4 mb-0 border-top">
-          <div>
-            <p class="mt-0 mb-3 py-0">
-              {will be putting the main repo github link }
-            </p>
-          </div>
-          <div>© 2023 Pet Adoption Center</div>
+            </div>
+          </form>
         </div>
       </div>
+      <hr class="my-2">
+      <div class="d-flex align-items-baseline btn-gapping mb-3">
+<a
+                  href="https://github.com/Mamadzhonov/Pet-Adoption-Website"
+                  class="p-0 nav-link"
+                  style="font-size: 1.5rem"
+                  ><i class="bi bi-github"></i 
+                ></a>
+        <p class="mb-0 ms-2">Visit our GitHub repo!</p> 
+      </div>
+    </div>
     </div>
   </body>
 </html>

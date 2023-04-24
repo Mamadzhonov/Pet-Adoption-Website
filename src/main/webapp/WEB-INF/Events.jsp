@@ -32,16 +32,18 @@
 
 <body onLoad="setAllMapsImageSrc()">
 <div class="top-half p-3">
-<!-- NAV BAR -->
-	<div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
-		<div class="d-flex align-items-center mb-1 nav-links">
-			<img
-				src="/images/animalLogo_solid.png"
-				alt=""
-				style="height: 30px; padding-right: 10px; padding-bottom: 3px"
-			/>
-			<h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
-		</div>
+	 <!-- NAVBAR -->
+      <div
+        class="d-flex flex-wrap justify-content-between align-items-center mb-1"
+      >
+        <div class="d-flex align-items-center mb-1 nav-links">
+          <img
+            src="/images/animalLogo_solid.png"
+            alt=""
+            style="height: 30px; padding-right: 10px; padding-bottom: 3px"
+          />
+          <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
+        </div>
         <div class="d-flex align-items-center ms-auto">
           <a href="/home" class="nav-link">Home</a>
           |
@@ -75,7 +77,6 @@
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
-
           <ul class="dropdown-menu dropdown-menu-end">
             <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
@@ -89,7 +90,7 @@
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-        </div>
+    </div>
         </div>
         <!-- NAVBAR ENDS -->
         
@@ -109,7 +110,7 @@
       <div>
       <h1 class="mb-3" style="margin-left: -10px;">Upcoming Events</h1>        
 	<!-- Event Cards -->
-	<div class="row mt-3 row-gapping">
+	<div class="row mt-3 row-gapping flex-wrap">
 		<c:forEach var="event" items="${events}">
       <div class="g-col-6 mx-1 mb-2">
           <a href="/events/${event.id}" class="pet-card">

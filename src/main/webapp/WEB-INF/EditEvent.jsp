@@ -45,6 +45,7 @@ pageEncoding="UTF-8" %>
   <body>
     <!-- NAV BAR -->
     <div class="top-half p-3">
+      <!-- NAVBAR -->
       <div
         class="d-flex flex-wrap justify-content-between align-items-center mb-3"
       >
@@ -57,9 +58,9 @@ pageEncoding="UTF-8" %>
           <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
         </div>
         <div class="d-flex align-items-center ms-auto">
-          <a href="/about" class="nav-link">Home</a>
+          <a href="/home" class="nav-link">Home</a>
           |
-          <a href="/about" class="nav-link">Pets</a>
+          <a href="/pet?page=1" class="nav-link">Pets</a>
           |
           <a href="/about" class="nav-link">About</a>
           |
@@ -67,27 +68,42 @@ pageEncoding="UTF-8" %>
         </div>
         <!-- navbar: end section -->
         <div class="dropdown" id="dropdown">
-          <a
+          <c:if test="${loggedUser.userType == 'user'}">
+          <a 
             class="btn dropdown-toggle"
             href="#"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+          ></c:if>
+          <c:if test="${loggedUser.userType == 'admin'}">
+             <a
+            class="btn admin-btn dropdown-toggle dropdown-toggle-admin"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
+          </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
-            <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/api">Temp: API testing</a></li>
-            <li><a class="dropdown-item" href="/pet/new">+ New Pet</a></li>
-            <li><a class="dropdown-item" href="/user/edit">Edit Profile</a></li>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <c:if test="${loggedUser.userType == 'admin'}">
+              <li><h6 class="dropdown-header">Admin Actions:</h6></li>
+              <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
+              <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
+              <li>
+                <a class="dropdown-item" href="/event/new">+ New Event</a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+            </c:if>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-      </div>
+    </div>
     </div>
 
     <!-- EDIT EVENT FORM -->
@@ -181,9 +197,10 @@ pageEncoding="UTF-8" %>
         </div>
       </div>
     </main>
-    <div class="footer px-4 pt-5 mt-5">
+    <!-- Footer -->
+    <div class="footer px-4" style="margin-top: 115px">
       <div class="d-flex flex-wrap justify-content-between">
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column mb-1">
           <h5>
             <img
               src="/images/animalLogo_solid.png"
@@ -208,7 +225,7 @@ pageEncoding="UTF-8" %>
             </li>
           </ul>
         </div>
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column">
           <form>
             <h5>Subscribe to our newsletter</h5>
             <p>Monthly digest of what's new and exciting from us.</p>
@@ -229,12 +246,15 @@ pageEncoding="UTF-8" %>
           </form>
         </div>
       </div>
-
-      <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
-        <div>
-          <p>{will be putting the main repo github link }</p>
-        </div>
-        <div>© 2023 Pet Adoption Center</div>
+      <hr class="my-2" />
+      <div class="d-flex align-items-baseline btn-gapping mb-3">
+        <a
+          href="https://github.com/Mamadzhonov/Pet-Adoption-Website"
+          class="p-0 nav-link"
+          style="font-size: 1.5rem"
+          ><i class="bi bi-github"></i
+        ></a>
+        <p class="mb-0 ms-2">Visit our GitHub repo!</p>
       </div>
     </div>
   </body>
