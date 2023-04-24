@@ -108,15 +108,12 @@
     <main class="p-3 mb-5">
     <div class="d-flex align-items-stretch">
     <!-- Left Column -->    
-	<div class="p-2 col-sm-2">
-		<div class="card form-card p-4 mb-3">
-			<img
-				src=""
-				class="img-thumbnail pet-profile mb-3"
-				alt="Image"
-			/>
-			<p>Image here, delete this sentence later</p>
-		</div>
+	<div class="p-2 col-sm-3">
+             <img
+            src="/images/event_list_img.png"
+            alt=""
+            style="width: 100%"
+          />
 	</div>
 	
 	<!-- Right Column -->
