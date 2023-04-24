@@ -43,10 +43,10 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <!-- PAGE CONTAINER -->
-    <div class="p-3">
+    <div class="p-3 ">
       <!-- NAV BAR -->
      <div
-        class="d-flex flex-wrap justify-content-between align-items-center mb-3"
+        class="d-flex flex-wrap justify-content-between align-items-center mb-3 pb-3"
       >
       <!-- LOGO COLUMN -->
         <div class="d-flex align-items-center">
@@ -106,10 +106,7 @@ pageEncoding="UTF-8"%>
         </div>
      </div>
      <!-- MAIN -->
-      <main class="p-3 mb-5" >
-        <div
-        class="d-flex align-items-center"
-      >
+      <main class="mx-5 px-3" >
       <!-- LEFT COL -->
         <!-- <div class="col-3">
              <img
@@ -121,8 +118,8 @@ pageEncoding="UTF-8"%>
         <!-- RIGHT COL -->
         <div class="mb-3">
           <div class="card form-card" style="padding: 1rem">
-            <h2>Pet Inquiry Dasboard</h2>
-            <table class="table">
+            <h2 class="mb-3">Pet Inquiry Dasboard</h2>
+            <table class="table text-center">
               <thead class="table-secondary">
                   <tr>
                     <th>User Name</th>
@@ -139,8 +136,8 @@ pageEncoding="UTF-8"%>
                     <td><c:out value="${inquiry.inquirer.userName}"></c:out></td>
                         <td><a href="/pet/inquire/${inquiry.id}" class="inquiry-link"><c:out value="${inquiry.pet.name}"></c:out></a></td>
                         <td><c:out value="${inquiry.inquiryType}"></c:out></td>
-                        <td><c:out value="${inquiry.dateOfPickup}"></c:out></td>
-                        <td><c:out value="${inquiry.dateOfDropoff}"></c:out></td>
+                        <td><fmt:formatDate pattern="M/dd/yy" value="${inquiry.dateOfPickup}"/></td>
+                        <td><fmt:formatDate pattern="M/dd/yy" value="${inquiry.dateOfDropoff}"/></td>
                         <td><c:out value="${inquiry.responded}"></c:out></td>
                   </tr>
                   </c:forEach>
@@ -151,10 +148,10 @@ pageEncoding="UTF-8"%>
       </div>
       </main>
     </div>
-    <!-- FOOTER -->
-    <div class="footer px-4 pt-5 mt-5">
+    <!-- Footer -->
+    <div class="footer fixed-bottom px-4" style="margin-top:115px;">
       <div class="d-flex flex-wrap justify-content-between">
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column mb-1">
           <h5>
             <img
               src="/images/animalLogo_solid.png"
@@ -179,7 +176,7 @@ pageEncoding="UTF-8"%>
             </li>
           </ul>
         </div>
-        <div class="d-flex flex-column mb-3">
+        <div class="d-flex flex-column">
           <form>
             <h5>Subscribe to our newsletter</h5>
             <p>Monthly digest of what's new and exciting from us.</p>
@@ -200,12 +197,15 @@ pageEncoding="UTF-8"%>
           </form>
         </div>
       </div>
-
-      <div class="d-flex justify-content-between pt-4 mb-2 mt-1 border-top">
-        <div>
-          <p>{will be putting the main repo github link }</p>
-        </div>
-        <div>© 2023 Pet Adoption Center</div>
+      <hr class="my-2">
+      <div class="d-flex align-items-baseline btn-gapping mb-3">
+<a
+                  href="https://github.com/Mamadzhonov/Pet-Adoption-Website"
+                  class="p-0 nav-link"
+                  style="font-size: 1.5rem"
+                  ><i class="bi bi-github"></i 
+                ></a>
+        <p class="mb-0 ms-2">Visit our GitHub repo!</p> 
       </div>
     </div>
   </body>

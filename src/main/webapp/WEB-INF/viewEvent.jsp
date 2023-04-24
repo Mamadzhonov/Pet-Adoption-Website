@@ -102,8 +102,8 @@
 	
 	<!-- Main Content -->
   <main class="px-5 pb-5 mx-5 mb-5">
-    <div class="card form-card p-3">
-        <div class="d-flex flex-wrap mb-3">
+    <div class="card form-card p-3 row-gapping">
+        <div class="d-flex flex-wrap row-gapping">
             <div class="card-body" style="padding-top: 0px; padding: 0px .5rem"> 
               <div
                 class="d-flex justify-content-between align-items-start mb-2 flex-wrap btn-gapping"
@@ -137,12 +137,12 @@
               </div>
               <!-- ABOUT SECTION -->
             </div>
-            <div class="card form-card p-3">
-              <h5>
-                About this Event:
-              </h5>
-              <p class="mb-0"><c:out value="${event.eventDetails}"></c:out></p>
-            </div>
+          </div>
+          <div class="card form-card p-3">
+            <h5>
+              About this Event:
+            </h5>
+            <p class="mb-0"><c:out value="${event.eventDetails}"></c:out></p>
           </div>
         <!-- list row -->
         <div class="row gx-3 ">

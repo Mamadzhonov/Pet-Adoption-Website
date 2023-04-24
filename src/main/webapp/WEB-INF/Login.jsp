@@ -1,9 +1,8 @@
-<%@ page isErrorPage="true" %>
-  <%@ page language="java" contentType="text/html;
-charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-      <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-        <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page isErrorPage="true" %> <%@ page language="java" contentType="text/html;
+charset=UTF-8" pageEncoding="UTF-8" %> <%@ taglib
+uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <%@ taglib prefix="fmt"
+uri="http://java.sun.com/jsp/jstl/fmt" %> <%@ taglib prefix="form"
+uri="http://www.springframework.org/tags/form" %>
 
 <!-- <link
   rel="stylesheet"
@@ -29,36 +28,47 @@ charset=UTF-8" pageEncoding="UTF-8" %>
 
 <link rel="stylesheet" href="/css/style.css" />
           <!-- FONTS -->
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-          <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;800&display=swap"
-            rel="stylesheet" />
-          <!--  -->
-          <!DOCTYPE html>
-          <html>
-          <body>
-            <h1 class="text-primary">Log in</h1>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;300;400;500;800&display=swap"
+  rel="stylesheet"
+/>
+<!--  -->
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1 class="text-primary">Log in</h1>
 
-            <div style="text-align: center">
-              <p class="text-danger">
-                <c:out value="${permitionIssue}"></c:out>
-              </p>
-            </div>
+    <div style="text-align: center">
+      <p class="text-danger">
+        <c:out value="${permitionIssue}"></c:out>
+      </p>
+    </div>
 
-            <form:form action="/login" method="POST" modelAttribute="newLogin">
-              <div class="col-md-5 mb-3">
-                <form:label path="email">Emails</form:label>
-                <form:input path="email" class="form-control" type="email" placeholder="Email" />
-                <form:errors class="text-danger" path="email"></form:errors>
-              </div>
+    <form:form action="/login" method="POST" modelAttribute="newLogin">
+      <div class="col-md-5 mb-3">
+        <form:label path="email">Emails</form:label>
+        <form:input
+          path="email"
+          class="form-control"
+          type="email"
+          placeholder="Email"
+        />
+        <form:errors class="text-danger" path="email"></form:errors>
+      </div>
 
-              <div class="col-md-5 mb-3">
-                <form:label path="password">Password</form:label>
-                <form:input path="password" class="form-control" placeholder="Password" type="password" />
-                <form:errors class="text-danger" path="password"></form:errors>
-              </div>
-              <button>Log in</button>
-            </form:form>
-          </body>
-
-          </html>
+      <div class="col-md-5 mb-3">
+        <form:label path="password">Password</form:label>
+        <form:input
+          path="password"
+          class="form-control"
+          placeholder="Password"
+          type="password"
+        />
+        <form:errors class="text-danger" path="password"></form:errors>
+      </div>
+      <button>Log in</button>
+    </form:form>
+  </body>
+</html>
