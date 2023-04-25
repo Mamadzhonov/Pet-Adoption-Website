@@ -111,6 +111,7 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
+        </div>
       <main class="p-3 mb-5">
         <div class="d-flex align-items-center">
           <!-- LEFT COLUMN -->

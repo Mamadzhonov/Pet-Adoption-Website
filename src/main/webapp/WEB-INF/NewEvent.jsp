@@ -132,7 +132,12 @@ pageEncoding="UTF-8"%>
                               <form:input path="eventName" class="form-control" placeholder="Your event name..." />
                           </div>
                           <!-- error: event name -->
-                          <form:errors class="text-danger" path="eventName"></form:errors>
+                          <div class="mb-3">
+                            <form:errors
+                              path="eventName"
+                              class="py-1 alert alert-danger"
+                            ></form:errors>
+                          </div>
                           <!-- date of event -->
                           <div class="mb-3">
                               <form:label path="date" class="form-label">Date of Event:</form:label>
@@ -144,24 +149,34 @@ pageEncoding="UTF-8"%>
                           </div>
                           <!-- error: date -->
                           <div class="mb-3">
-                  <form:errors
-                    path="date"
-                    class="py-1 alert alert-danger"
-                  ></form:errors>
-                </div>
+                            <form:errors
+                              path="date"
+                              class="py-1 alert alert-danger"
+                            ></form:errors>
+                          </div>
                           <!-- location -->
                           <div class="mb-3">
                               <form:label path="location" class="form-label">Location</form:label>
                               <form:input path="location" class="form-control" placeholder="Your event's location..." />
                           </div>
                           <!-- error: location -->
-                          <form:errors class="text-danger" path="location"></form:errors>
+                          <div class="mb-3">
+                            <form:errors
+                              path="location"
+                              class="py-1 alert alert-danger"
+                            ></form:errors>
+                          </div>
                           <!-- event details -->
                           <div class="mb-3">
                               <form:label path="eventDetails" class="form-label">Event Details</form:label>
                               <form:textarea path="eventDetails" class="form-control" rows="5" cols="33" placeholder="Write a short description for your event here..."/>
                           </div>
-                          <form:errors class="text-danger" path="eventDetails"></form:errors>
+                          <div class="mb-3">
+                            <form:errors
+                              path="eventDetails"
+                              class="py-1 alert alert-danger"
+                            ></form:errors>
+                          </div>
                           <div>
                               <button class="btn">Create Event</button>
                           </div>
@@ -182,7 +197,7 @@ pageEncoding="UTF-8"%>
         
     </div>
     <!-- Footer -->
-    <div class="footer px-4" style="margin-top:115px;">
+    <div class="footer px-4" style="margin-top:150px;">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-1">
           <h5>
