@@ -79,7 +79,6 @@ public class Events {
             redirect.addFlashAttribute("login", "Need to login to edit this post");
             return "redirect:/";
         }
-
         eventNew.setPostedBy(loggedUser.getUserName());
         eventServ.create(eventNew);
         return "redirect:/events";
@@ -122,7 +121,7 @@ public class Events {
     }
 
     @PutMapping("/event/edit/{id}")
-    public String update(@Valid @ModelAttribute("updatedForm") Event updatedEvent,
+    public String update(@Valid @ModelAttribute("event") Event updatedEvent,
             BindingResult result, @PathVariable("id") Long id, Model model, HttpSession session) {
 
         if (result.hasErrors()) {

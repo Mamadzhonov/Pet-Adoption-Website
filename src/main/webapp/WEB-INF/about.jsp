@@ -104,7 +104,7 @@ pageEncoding="UTF-8"%>
         </div>
     </div>
       <!-- MAIN PAGE CONTENT -->
-      <main class="px-5 pb-5 mx-5 mb-5">
+      <main class="px-4 mb-5" style="max-width: 1500px; margin: 0 auto">
         <div>
           <div class="p-3">
             <h1>About This Project</h1>
@@ -115,6 +115,7 @@ pageEncoding="UTF-8"%>
                 <h4>Project summary</h4>
                 <hr style="margin:10px 0px">
                 <!-- need to update project summary -->
+                <div style="font-weight: 300;">
                 <p>
 				Welcome to our Pet Adoption site! We are a small group of aspiring web developers 
 				with a passion for helping the community and a desire to help homeless animals find 
@@ -133,6 +134,7 @@ pageEncoding="UTF-8"%>
                 We sincerely hope you enjoy your time exploring our website and look forward to hearing from 
                 you if you have any questions!
                 </p>
+              </div>
                 <div class="d-flex align-items-center">
                   <!-- GITHUB REPO LINK -->
                   <a
@@ -260,7 +262,7 @@ pageEncoding="UTF-8"%>
       </main>
     </div>
     <!-- Footer -->
-    <div class="footer px-4" style="margin-top:115px;">
+    <div class="footer px-4 pt-5" style="margin-top:160px;">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-1">
           <h5>

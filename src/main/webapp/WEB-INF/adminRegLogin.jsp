@@ -46,7 +46,7 @@ uri="http://www.springframework.org/tags/form" %>
   </head>
 
   <body class="p-3">
-    <div class="d-flex align-items-center ml-3 mb-0">
+    <div class="d-flex align-items-center ml-3 mb-4">
       <img
         src="/images/animalLogo_solid.png"
         alt=""
@@ -55,25 +55,25 @@ uri="http://www.springframework.org/tags/form" %>
       <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
     </div>
     <!--  -->
-    <!-- error code -->
-    <p class="text-danger">
-      <c:out value="${emailExist}"></c:out>
-    </p>
-    <p class="text-danger">
-      <c:out value="${permitionIssue}"></c:out>
-    </p>
     <!--  -->
     <!--  -->
     <!-- REG/ LOGIN ROW -->
-    <div class="d-flex">
+    <div class="d-flex justify-content-start">
       <!-- Registration COLUMN -->
-      <div class="col">
+      <div class="col" style="max-width: 1200px">
         <div class="card form-card admin p-3">
           <div class="d-flex flex-wrap justify-content-between align-items-top">
             <h2>Admin Registration</h2>
             <a href="/" class="">Log in</a>
           </div>
           <hr />
+          <!-- error code -->
+          <p class="text-danger m-0 mb-1">
+            <c:out value="${emailExist}"></c:out>
+          </p>
+          <p class="text-danger m-0 mb-1">
+            <c:out value="${permitionIssue}"></c:out>
+          </p>
           <form:form
             action="/admin/register"
             method="POST"
@@ -151,7 +151,7 @@ uri="http://www.springframework.org/tags/form" %>
               path="userType"
               value="admin"
             ></form:input>
-            <div class="d-flex justify-content-between flex-wrap">
+            <div class="d-flex justify-content-between flex-wrap btn-gapping">
               <button class="btn admin-btn">Register</button>
               <a href="/" class="btn">Registering as a user?</a>
             </div>
