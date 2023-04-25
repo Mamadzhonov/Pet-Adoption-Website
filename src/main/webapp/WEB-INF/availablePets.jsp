@@ -107,8 +107,8 @@
 	<!-- Body/Main Content -->
 	<!-- Available Pets Header -->
 	<!-- Header End -->
-	<main class="p-4 px-5 mb-5">
-    <div>
+	<main class="p-4 px-5 mb-5" style="max-width: 1500px; margin: 0 auto">
+    <div class="mb-2 pl-2">
       <h1>Our Available Pets:</h1>
     </div>
 	<div class="d-flex align-items-stretch">
@@ -119,7 +119,7 @@
 			<div class="card form-card p-3 mb-3">
 			<form action="/pet/filter" method="POST" class="">
 			  <fieldset class="d-flex mb-2">
-			    <legend class="">Filter</legend>
+			    <legend class="" style="font-weight: 500;">Filter</legend>
 			    <div class="">
 			    <!-- Species Filter -->
           <label class="form-label">Species:</label>
@@ -177,7 +177,7 @@
 		<!-- Right Column -->
 		<div class="p-2 col-sm ml-4">
 		<!-- Pet Cards -->
-		<div class="row">
+		<div class="row btn-gapping">
 			<c:forEach var="pet" items="${petList}">
         <div class="g-col-6 mx-1 mb-2">
           <a href="/pet/${pet.id}" class="pet-card">

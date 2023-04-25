@@ -26,17 +26,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
-    @Size(min = 4, message = "Username must be more then 4 characters!")
+    @NotEmpty(message="Username is required!")
+    @Size(min = 4, message="Username must be more then 4 characters!")
     private String userName;
     
     @Email
     private String email;
-    @NotEmpty
-    @Size(min = 5, message = "Password must be more then 5 characters!")
+    
+    @NotEmpty(message="Password is required!")
+    @Size(min = 5, message ="Password must be more then 5 characters!")
     private String password;
+    
     @Transient
     private String confirmPW;
+    
     // admin + user signifier
     private String userType;
     

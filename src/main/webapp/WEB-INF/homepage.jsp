@@ -108,7 +108,7 @@ pageEncoding="UTF-8"%>
       </div>
       <!--  ADOPTION BLOCK -->
       <div
-        class="d-flex align-items-center justify-content-between px-3 pb-3 pt-0"
+        class="d-flex align-items-center justify-content-between px-3 pb-3 pt-0" style="max-width: 1500px; margin: 0 auto"
       >
         <div class="col-4">
           <h3 class="mb-2">Adopt and give a pet a second chance.</h3>
@@ -129,6 +129,7 @@ pageEncoding="UTF-8"%>
         id="carouselExampleControls"
         class="carousel slide px-4"
         data-bs-ride="false"
+        style="max-width: 1500px; margin: 0 auto"
       >
         <div class="carousel-inner">
           <!-- FOR LOOP - CAROUSEL -->
@@ -224,15 +225,15 @@ pageEncoding="UTF-8"%>
     </div>
     <!-- BOTTOM HALF CONTAINER AFTER CAROUSEL -->
     <div class="bottom-half pt-3 pb-0 mb-0">
-      <div class="d-flex align-items-center justify-content-between mb-4 pb-4">
-        <div class="col-7 p-3">
+      <div class="d-flex align-items-center justify-content-between mb-4 pb-4" style="max-width: 1500px; margin: 0 auto" >
+        <div class="col-8 text-center px-0">
           <img
             src="/images/foster_landingPage.png"
             alt=""
-            style="width: 100%"
+            style="width: 100%; margin: 0 auto;"
           />
         </div>
-        <div class="col-5">
+        <div class="col-4 px-3">
           <h3>Fostering can bring more love into your home today!</h3>
           <a href="/pet?page=1" class="btn">Interested in fostering?</a>
         </div>

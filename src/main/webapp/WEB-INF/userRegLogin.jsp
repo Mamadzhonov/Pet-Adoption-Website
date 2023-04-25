@@ -46,7 +46,8 @@ uri="http://www.springframework.org/tags/form" %>
   </head>
 
   <body class="p-3">
-    <div class="d-flex align-items-center ml-3 mb-0">
+    <!-- LOGO HEADER -->
+    <div class="d-flex align-items-center ml-3 mb-4">
       <img
         src="/images/animalLogo_solid.png"
         alt=""
@@ -54,24 +55,22 @@ uri="http://www.springframework.org/tags/form" %>
       />
       <h3 id="logo" class="my-0 flex-grow-1 pt-0 ms-2">Pet Adoption</h3>
     </div>
-    <!--  -->
-    <!-- error code -->
-    <p class="text-danger">
-      <c:out value="${emailExist}"></c:out>
-    </p>
-
-    <p class="text-danger">
-      <c:out value="${permitionIssue}"></c:out>
-    </p>
-    <!--  -->
-    <!--  -->
     <!-- REG/ LOGIN ROW -->
-    <div class="d-flex">
+    <div class="d-flex flex-wrap row-gapping">
       <!-- Registration COLUMN -->
-      <div class="col">
+      <div class="col px-0">
         <div class="card form-card p-3">
           <h2>Register</h2>
           <hr />
+          <!-- ERROR VALIDATIONS FOR EMAIL -->
+          <div>
+            <p class="text-danger">
+              <c:out value="${emailExist}"></c:out>
+            </p>
+            <p class="text-danger">
+              <c:out value="${permitionIssue}"></c:out>
+            </p>
+          </div>
           <form:form action="/register" method="POST" modelAttribute="newUser">
             <div class="mb-3">
               <form:label path="userName">Username:</form:label>
@@ -140,7 +139,7 @@ uri="http://www.springframework.org/tags/form" %>
               ></form:errors>
             </div>
             <form:input type="hidden" path="userType" value="user"></form:input>
-            <div class="d-flex justify-content-between flex-wrap">
+            <div class="d-flex justify-content-between flex-wrap btn-gapping">
               <button class="btn">Register</button>
               <a href="/admin/register-login" class="btn admin-btn"
                 >Registering as an Admin?</a
@@ -150,10 +149,15 @@ uri="http://www.springframework.org/tags/form" %>
         </div>
       </div>
       <!-- LOGIN COLUMN -->
-      <div class="col">
+      <div class="col px-0">
         <div class="card form-card p-3">
           <h2>Log in</h2>
           <hr />
+          <div>
+            <p class="text-danger">
+              <c:out value="${loginIssue}"></c:out>
+            </p>
+          </div>
           <form:form action="/login" method="POST" modelAttribute="newLogin">
             <div class="mb-3">
               <form:label path="email">Email:</form:label>
