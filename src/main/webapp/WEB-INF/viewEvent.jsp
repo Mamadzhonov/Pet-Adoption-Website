@@ -129,11 +129,13 @@
                     <h5 style="font-weight: 300;"><c:out value="${event.location}"></c:out></h5>
                   </div>
                 </div>
-                <!-- EDIT DELETE ROW -->
-                <div class="d-flex btn-gapping mb-2">
-                  <a href="/event/edit/${event.id}" class="btn">Edit</a>
-                  <a href="/event/delete/${event.id}" class="btn admin-btn">Delete</a>
-                </div>
+                <c:if test="${loggedUser.userType == 'admin'}">
+                  <!-- EDIT DELETE ROW -->
+                  <div class="d-flex btn-gapping mb-2">
+                    <a href="/event/edit/${event.id}" class="btn">Edit</a>
+                    <a href="/event/delete/${event.id}" class="btn admin-btn">Delete</a>
+                  </div>
+                </c:if>
               </div>
               <!-- ABOUT SECTION -->
             </div>

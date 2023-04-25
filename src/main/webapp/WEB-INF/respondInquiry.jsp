@@ -171,8 +171,11 @@ pageEncoding="UTF-8"%>
 				<input type="hidden" id="inquirer" name="inquirer" value="${inquiry.inquirer.id}">
 				<input type="hidden" id="pet" name="pet" value="${inquiry.pet.id}">
   				<!-- BLOCK TO CARRY THE INQUIRY DATA FORWARD  -->
-  
-                <button class="btn">Respond</button>
+                <div class="d-flex btn-gapping">
+
+                  <button class="btn">Respond</button>
+                  <a href="/inquire/dashboard" class="btn admin-btn">Cancel</a>
+                </div>
               </form:form>
               <!-- <form action="/pet/edit/inquiry/${inquiryId}/respond" method="POST" modelAttribute="response">
                 <div class="mb-3">
