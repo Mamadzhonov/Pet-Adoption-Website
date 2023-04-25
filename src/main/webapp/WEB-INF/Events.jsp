@@ -95,16 +95,16 @@
         <!-- NAVBAR ENDS -->
         
 	<!-- Upcoming Events Header -->
-  <main class="p-3 mx-4 mb-5">
-    <div class="d-flex align-items-start row-gapping">
+  <main class="px-4 mb-5 mt-2" style="max-width: 1500px; margin: 0 auto">
+    <div class="d-flex align-content-end row-gapping">
       <!-- Left Column -->    
-      <div class="mr-3 col-sm-3">
+      <!-- <div class="mr-3 col-sm-4 text-center">
         <img
         src="/images/event_list_img.png"
         alt=""
-        style="width: 100%"
+        style="width: 100%; max-width: 560px"
         />
-      </div>
+      </div> -->
       
       <!-- Right Column -->
       <div>
