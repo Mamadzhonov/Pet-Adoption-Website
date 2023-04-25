@@ -1,6 +1,7 @@
 HELP.md
 .gitignore
 **/application.properties
+**/src/main/resources/static/map_key.txt
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
