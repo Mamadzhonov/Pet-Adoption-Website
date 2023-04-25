@@ -86,11 +86,11 @@ pageEncoding="UTF-8"%>
           </c:if>
             <!-- user icon -->
             <i class="bi bi-person-fill me-3"></i>
-            <!-- will be replacing with {user.name} -->
             <c:out value="${loggedUser.userName}"></c:out>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end">
+            <c:if test="${loggedUser.userType == 'admin'}">
               <li><h6 class="dropdown-header">Admin Actions:</h6></li>
               <li><a class="dropdown-item" href="/inquire/dashboard">Inquiry Dashboard</a></li>
               <li><a class="dropdown-item" href="/pet/add">+ New Pet</a></li>
@@ -102,7 +102,7 @@ pageEncoding="UTF-8"%>
             <li><a class="dropdown-item" href="/logout">Logout</a></li>
           </ul>
         </div>
-        </div>
+    </div>
       <main class="p-3 mx-auto" style="max-width:1500px">
         <div class="d-flex align-items-center">
           <!-- LEFT COLUMN -->
