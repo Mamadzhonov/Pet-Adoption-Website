@@ -123,6 +123,7 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
     </div>
+   
     <!-- EVENT CAROUSEL  -->
     <div class="event-row p-3 mb-3">
       <div
@@ -133,6 +134,25 @@ pageEncoding="UTF-8"%>
       >
         <div class="carousel-inner">
           <!-- FOR LOOP - CAROUSEL -->
+          <!-- if there are currently no events-->
+            <c:if test="${allEvents.size() == 0}">
+            <div class="carousel-item active">
+            <div class="event-card card">
+              <div class="d-flex">
+                  <img
+                    src="/images/event.png"
+                    class="card-img-top"
+                    alt="..."
+                  />
+                <!-- MAIN CARD CONTENT -->
+                <div class="card-body d-flex align-items-center">
+                  <h1 class="card-title mb-1">New events coming soon...</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+            </c:if>
+            <c:if test="${allEvents.size() != 0}">
           <c:forEach var="event" items="${allEvents}" varStatus="loop">
             <c:choose>
             <c:when test="${loop.index == 0}">
@@ -203,7 +223,8 @@ pageEncoding="UTF-8"%>
             </div>
           </c:otherwise>
           </c:choose>
-        </c:forEach>     
+        </c:forEach>
+        </c:if>
         </div>
         <button
           class="carousel-control-prev"
