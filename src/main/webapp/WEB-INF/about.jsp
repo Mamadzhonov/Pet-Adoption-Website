@@ -167,8 +167,8 @@ pageEncoding="UTF-8"%>
   
                       <i class="bi bi-github" style="font-size:1.8rem"></i>
                     </a>
-                    <!-- still need -->
-                    <a href="#" class="nav-link py-0 px-0">
+                    <!-- linkedIn -->
+                    <a href="https://www.linkedin.com/in/krystle-spearing-0a0874217/" class="nav-link py-0 px-0">
   
                       <i class="bi bi-linkedin" style="font-size:1.8rem"></i>
                     </a>
