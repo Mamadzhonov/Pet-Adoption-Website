@@ -107,19 +107,19 @@
 	<!-- Body/Main Content -->
 	<!-- Available Pets Header -->
 	<!-- Header End -->
-	<main class="p-4 px-5 mb-5" style="max-width: 1500px; margin: 0 auto">
+	<main class="p-4 px-5 mb-5">
     <div class="mb-2 pl-2">
       <h1>Our Available Pets:</h1>
     </div>
-	<div class="d-flex align-items-stretch">
+	<div class="d-flex align-items-stretch flex-wrap">
 	
 	<!-- Left Column -->
-	<div class="p-2 col-sm-3">
+	<div class="p-2 col-sm-3" style="min-width: 300px; max-width:450px">
 		<!-- Filter Box -->
 			<div class="card form-card p-3 mb-3">
 			<form action="/pet/filter" method="POST" class="">
 			  <fieldset class="d-flex mb-2">
-			    <legend class="" style="font-weight: 500;">Filter</legend>
+			    <legend class="" style="font-weight: 500;"><i class="bi bi-funnel px-1"></i>Filter</legend>
 			    <div class="">
 			    <!-- Species Filter -->
           <label class="form-label">Species:</label>
@@ -148,6 +148,7 @@
 			        </label>
 			      </div>
 			      <!-- Age Filter  -->
+            <hr>
 				  <label class="form-label">Age Range:</label>
 			      <div class="d-flex mb-2 row-gapping flex-wrap">
 				      <div class="col-sm px-0">
@@ -158,6 +159,7 @@
 				      </div>
 			      </div>
 				<!-- Gender Filter -->
+        <hr>
          <label class="form-label">Gender:</label>
 			      <div class="col-sm px-0 mb-2">
 					<select class="select p-2" id="sexFilter" name="sex">
@@ -178,6 +180,20 @@
 		<div class="p-2 col-sm ml-4">
 		<!-- Pet Cards -->
 		<div class="row btn-gapping">
+      <!-- if there are no pets in db -->
+      <c:if test="${petList.size() == 0}">
+        <div class="card form-card p-3">
+          <div class="d-flex align-items-start row-gapping">
+            <i class="bi bi-bookmark-heart-fill" style="font-size:3.75rem"></i>
+            <div>
+
+              <h3>All of our pets are either adopted or being fostered!</h3>
+              <h6 style="font-weight: 300;">We'll update our website when we have a pet in need of a home...</h6>
+            </div>
+          </div>
+        </div>
+      </c:if>
+      <!-- PET FOR LOOP -->
 			<c:forEach var="pet" items="${petList}">
         <div class="g-col-6 mx-1 mb-2">
           <a href="/pet/${pet.id}" class="pet-card">

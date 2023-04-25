@@ -6,6 +6,7 @@ body {
 	display:flex;
 	flex-direction: column;
 	min-height: 100vh;
+	font-size: 1.1rem;
 }
 main {
 	display: flex;
@@ -111,7 +112,7 @@ ul, li {
 .form-control, select{
 	font-family: 'Unbounded', cursive;
 	font-weight: 300;
-	font-size: 13px;
+	font-size: 18px;
 }
 .form-card{
 	border: 2.5px solid #FFA400;

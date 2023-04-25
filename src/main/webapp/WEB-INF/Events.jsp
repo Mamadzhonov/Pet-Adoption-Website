@@ -95,22 +95,19 @@
         <!-- NAVBAR ENDS -->
         
 	<!-- Upcoming Events Header -->
-  <main class="px-4 mb-5 mt-2" style="max-width: 1500px; margin: 0 auto">
+  <main class="px-4 mb-5 mt-2 mx-4" style="max-width: 3000px;">
     <div class="d-flex align-content-end row-gapping">
-      <!-- Left Column -->    
-      <!-- <div class="mr-3 col-sm-4 text-center">
-        <img
-        src="/images/event_list_img.png"
-        alt=""
-        style="width: 100%; max-width: 560px"
-        />
-      </div> -->
-      
-      <!-- Right Column -->
       <div>
-      <h1 class="mb-3" style="margin-left: -10px;">Upcoming Events</h1>        
+      <h1 class="mb-3" style="margin-left: -10px;">Upcoming Events</h1>
+              
 	<!-- Event Cards -->
 	<div class="row mt-3 row-gapping flex-wrap">
+    <c:if test="${events.size() == 0}">
+      <div class="card form-card p-3">
+        <h1>We'll be hosting an event soon...</h1>
+        <h5>Come back and visit to see more updates!</h5>
+      </div>
+    </c:if>
 		<c:forEach var="event" items="${events}">
       <div class="g-col-6 mx-1 mb-2">
           <a href="/events/${event.id}" class="pet-card">
