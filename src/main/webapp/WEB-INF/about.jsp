@@ -116,10 +116,22 @@ pageEncoding="UTF-8"%>
                 <hr style="margin:10px 0px">
                 <!-- need to update project summary -->
                 <p>
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Facilis blanditiis voluptatem nesciunt est dolorum
-                  perspiciatis rem labore ex et officia adipisci libero nostrum
-                  eos a accusantium nisi, vitae doloribus sed.
+				Welcome to our Pet Adoption site! We are a small group of aspiring web developers 
+				with a passion for helping the community and a desire to help homeless animals find 
+				that purrfect home. Together we put together this pet rescue and adoption site in April 2023. 
+				We wanted to create a user-friendly experience as well as show the web development skills 
+				we have learned during our time as students. 
+                </p>
+                <p>
+                This website is a full-stack Java application and implements full CRUD database features 
+                as well as several relationships within the database to create a fully functioning site. 
+                We have worked with filtering and pagination as seen on our available pets page, and made 
+                use of Google Maps API on our event pages! Users can even send our admins messages by 
+                inquiring about any available pet that attracts their interest.
+                </p>
+                <p>
+                We sincerely hope you enjoy your time exploring our website and look forward to hearing from 
+                you if you have any questions!
                 </p>
                 <div class="d-flex align-items-center">
                   <!-- GITHUB REPO LINK -->
