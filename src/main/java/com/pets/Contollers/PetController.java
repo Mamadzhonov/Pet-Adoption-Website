@@ -241,6 +241,13 @@ public class PetController {
 		return "viewPet.jsp";
 	}
 	
+    // DELETE PET
+    @GetMapping("/delete/{petId}")
+    public String getMethodName(@PathVariable("petId") Long petId) {
+        petService.deleteById(petId);
+        return "redirect:/pet?page=1";
+    }
+	
 	
 	//----------		Inquiry Mappings		----------//
 

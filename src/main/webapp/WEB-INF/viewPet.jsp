@@ -142,7 +142,7 @@ pageEncoding="UTF-8"%>
                   style="margin-right: 15px"
                   >Edit Pet</a
                 >
-                <a href="/" class="btn admin-btn">Delete Pet</a>
+                <a href="/pet/delete/${petId}" class="btn admin-btn">Delete Pet</a>
               </div>
             </div>
             </c:if>
