@@ -27,7 +27,7 @@ uri="http://www.springframework.org/tags/form" %>
 ></script>
 
 <link rel="stylesheet" href="/css/style.css" />
-          <!-- FONTS -->
+<-- FONTS -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -48,7 +48,7 @@ uri="http://www.springframework.org/tags/form" %>
 
     <form:form action="/login" method="POST" modelAttribute="newLogin">
       <div class="col-md-5 mb-3">
-        <form:label path="email">Emails</form:label>
+        <form:label path="email">Email:</form:label>
         <form:input
           path="email"
           class="form-control"
@@ -59,7 +59,7 @@ uri="http://www.springframework.org/tags/form" %>
       </div>
 
       <div class="col-md-5 mb-3">
-        <form:label path="password">Password</form:label>
+        <form:label path="password">Password:</form:label>
         <form:input
           path="password"
           class="form-control"
