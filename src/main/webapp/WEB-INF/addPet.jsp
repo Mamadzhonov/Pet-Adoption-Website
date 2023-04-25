@@ -264,7 +264,7 @@ pageEncoding="UTF-8"%>
     </div>
     </div>
     <!-- Footer -->
-    <div class="footer px-4 fixed-bottom">
+    <div class="footer px-4" style="margin-top:115px;">
       <div class="d-flex flex-wrap justify-content-between">
         <div class="d-flex flex-column mb-1">
           <h5>
