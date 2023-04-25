@@ -29,8 +29,7 @@ public class Event {
     @NotEmpty(message = "Name is required")
     private String eventName;
 
-
-    @NotNull(message="Date of event required")
+    @NotNull(message = "Date of event required")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
@@ -39,8 +38,8 @@ public class Event {
 
     private String postedBy;
 
-
     @NotEmpty
+    @Column(length = 1000)
     private String eventDetails;
 
     @Column(nullable = true, length = 64)
@@ -53,23 +52,20 @@ public class Event {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User users;
 
-
     public Event() {
     };
-    
-    
-    public User getUsers() {
-		return users;
-	}
 
-	public void setUsers(User users) {
-		this.users = users;
-	}
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
+    }
 
     public String getPostedBy() {
         return this.postedBy;
@@ -79,7 +75,7 @@ public class Event {
         this.postedBy = postedBy;
     }
 
-	public Long getId() {
+    public Long getId() {
         return id;
     }
 
