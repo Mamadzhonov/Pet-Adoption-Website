@@ -132,7 +132,12 @@ pageEncoding="UTF-8" %>
                 />
               </div>
               <!-- error: event name -->
-              <form:errors class="text-danger" path="eventName"></form:errors>
+              <div class="mb-3">
+                <form:errors
+                    path="eventName"
+                    class="py-1 alert alert-danger"
+                ></form:errors>
+              </div>
               <!-- date of event -->
               <div class="mb-3">
                 <form:label path="date" class="form-label"
@@ -159,7 +164,12 @@ pageEncoding="UTF-8" %>
                 />
               </div>
               <!-- error: location -->
-              <form:errors class="text-danger" path="location"></form:errors>
+              <div class="mb-3">
+                <form:errors
+                    path="location"
+                    class="py-1 alert alert-danger"
+                ></form:errors>
+              </div>
               <!-- event details -->
               <div class="mb-3">
                 <form:label path="eventDetails" class="form-label"
@@ -173,10 +183,12 @@ pageEncoding="UTF-8" %>
                   placeholder="Write a short description for your event here..."
                 />
               </div>
-              <form:errors
-                class="text-danger"
-                path="eventDetails"
-              ></form:errors>
+              <div class="mb-3">
+                <form:errors
+                    path="eventDetails"
+                    class="py-1 alert alert-danger"
+                ></form:errors>
+              </div>
               <div class="d-flex">
                 <button class="btn" style="margin-right: 10px">
                   Update Event

@@ -61,19 +61,13 @@ public class Events {
     }
 
     @PostMapping("/event/new")
-    public String createEvent(@ModelAttribute("newEvent") Event eventNew, BindingResult result, Model model,
-            HttpSession session,
-            RedirectAttributes redirect) {
-
-          if (result.hasErrors()) {
-            return "NewEvent.jsp";
+    public String createEvent(@Valid @ModelAttribute("newEvent") Event eventNew, BindingResult result, Model model, HttpSession session) {
+        if(result.hasErrors()) {
+            Long id = (Long) session.getAttribute("loggedUser");
+            User loggedUser = userServ.findById(id);
+            model.addAttribute("loggedUser", loggedUser);
+        	return "NewEvent.jsp";
         }
-
-        if (session.getAttribute("loggedUser") == null) {
-            redirect.addFlashAttribute("login", "Need to login to edit this post");
-            return "redirect:/";
-        }
-
         Long id = (Long) session.getAttribute("loggedUser");
         User loggedUser = userServ.findById(id);
         model.addAttribute("loggedUser", loggedUser);
@@ -119,7 +113,7 @@ public class Events {
     }
 
     @PutMapping("/event/edit/{id}")
-    public String update(@Valid @ModelAttribute("updatedForm") Event updatedEvent,
+    public String update(@Valid @ModelAttribute("event") Event updatedEvent,
             BindingResult result, @PathVariable("id") Long id, Model model, HttpSession session) {
 
         if (result.hasErrors()) {
