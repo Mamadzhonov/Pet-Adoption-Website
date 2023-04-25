@@ -80,7 +80,7 @@ uri="http://www.springframework.org/tags/form" %>
             modelAttribute="newUser"
           >
             <div class="mb-3">
-              <form:label path="userName">User Name</form:label>
+              <form:label path="userName">Username:</form:label>
               <form:input
                 path="userName"
                 class="form-control"
@@ -88,10 +88,15 @@ uri="http://www.springframework.org/tags/form" %>
               />
             </div>
             <!-- error: userName -->
-            <form:errors class="text-danger" path="userName"></form:errors>
+            <div class="mb-3">
+              <form:errors
+                path="userName"
+                class="py-1 mb-3 alert alert-danger"
+              ></form:errors>
+            </div>
             <!-- email -->
             <div class="mb-3">
-              <form:label path="email">Emails</form:label>
+              <form:label path="email">Email:</form:label>
               <form:input
                 path="email"
                 class="form-control"
@@ -100,10 +105,15 @@ uri="http://www.springframework.org/tags/form" %>
               />
             </div>
             <!-- error: email -->
-            <form:errors class="text-danger" path="email"></form:errors>
+            <div class="mb-3">
+              <form:errors
+                path="email"
+                class="py-1 mb-3 alert alert-danger"
+              ></form:errors>
+            </div>
             <!-- PASSWORD -->
             <div class="mb-3">
-              <form:label path="password">Password</form:label>
+              <form:label path="password">Password:</form:label>
               <form:input
                 path="password"
                 class="form-control"
@@ -112,10 +122,15 @@ uri="http://www.springframework.org/tags/form" %>
               />
             </div>
             <!-- error: password -->
-            <form:errors class="text-danger" path="password"></form:errors>
+            <div class="mb-3">
+              <form:errors
+                path="password"
+                class="py-1 mb-3 alert alert-danger"
+              ></form:errors>
+            </div>
             <!-- CONFIRM PASSWORD -->
             <div class="mb-3">
-              <form:label path="confirmPW">Confirm Password</form:label>
+              <form:label path="confirmPW">Confirm Password:</form:label>
               <form:input
                 path="confirmPW"
                 class="form-control"
@@ -124,7 +139,12 @@ uri="http://www.springframework.org/tags/form" %>
               />
             </div>
             <!-- error: confirmPW -->
-            <form:errors class="text-danger" path="confirmPW"></form:errors>
+            <div class="mb-3">
+              <form:errors
+                path="confirmPW"
+                class="py-1 mb-3 alert alert-danger"
+              ></form:errors>
+            </div>
             <!-- HIDDEN INPUT: userType == admin -->
             <form:input
               type="hidden"
